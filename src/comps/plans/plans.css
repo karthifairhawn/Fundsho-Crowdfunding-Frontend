@@ -11,21 +11,22 @@ html {
     padding: 0 25px 25px;
     position: relative;
     width: 100%;
+    
   }
   
   .background::after {
     content: '';
-    background: #60a9ff;
-    background: -moz-linear-gradient(top, #60a9ff 0%, #4394f4 100%);
-    background: -webkit-linear-gradient(top, #60a9ff 0%,#4394f4 100%);
-    background: linear-gradient(to bottom, #60a9ff 0%,#4394f4 100%);
+    background: #5d5e5f;
+    background: -moz-linear-gradient(top, #252525 0%, #191b1d 100%);
+    background: -webkit-linear-gradient(top, #252525 0%,#191b1d 100%);
+    background: linear-gradient(to bottom, #252525 0%,#191b1d 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#60a9ff', endColorstr='#4394f4',GradientType=0 );
-    height: 350px;
+    height: 100vh;
     left: 0;
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 0;
   }
   
   @media (min-width: 900px) {
@@ -34,15 +35,15 @@ html {
     }
   }
   
-  .container {
+  .container-plans {
     margin: 0 auto;
-    padding: 50px 0 0;
+    padding: 30px 0 0;
     max-width: 960px;
     width: 100%;
   }
   
   .panel {
-    background-color: #fff;
+    background-color: #22262b;
     border-radius: 10px;
     padding: 15px 25px;
     position: relative;
@@ -92,16 +93,19 @@ html {
   .pricing-img {
     margin-bottom: 25px;
     max-width: 100%;
+    border-radius: 50%;
+    border: 5px solid #6c932a;
   }
   
   .pricing-header {
-    color: #888;
+    color: #fff;
     font-weight: 600;
+    font-size:30px;
     letter-spacing: 1px;
   }
   
   .pricing-features {
-    color: #016FF9;
+    color: #fff;
     font-weight: 600;
     letter-spacing: 1px;
     margin: 50px 0 25px;
@@ -119,34 +123,38 @@ html {
   }
   
   .pricing-price {
-    color: #016FF9;
+    color: #fff;
     display: block;
     font-size: 32px;
     font-weight: 700;
   }
   
   .pricing-button {
-    border: 1px solid #9dd1ff;
+    border: 1px solid #fff;
     border-radius: 10px;
-    color: #348EFE;
+    color: #fff;
     display: inline-block;
     margin: 25px 0;
     padding: 15px 35px;
     text-decoration: none;
     transition: all 150ms ease-in-out;
+    opacity: 0.8;
   }
   
   .pricing-button:hover,
   .pricing-button:focus {
-    background-color: #e1f1ff;
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
+    font-size: 16px;
+    transition: font-size 0.2s ease-in-out;
   }
   
   .pricing-button.is-featured {
-    background-color: #48aaff;
-    color: #fff;
+    background-color: #6c932a;    
   }
   
   .pricing-button.is-featured:hover,
   .pricing-button.is-featured:active {
-    background-color: #269aff;
+    opacity:1;
+    transition: opacity 0.6s ease;
   }

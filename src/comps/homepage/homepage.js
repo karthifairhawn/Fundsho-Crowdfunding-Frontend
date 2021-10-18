@@ -18,14 +18,14 @@ class Homepage extends React.Component {
 
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
+        const container_home = document.getElementById('container-home');
     
         signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
+            container_home.classList.add("right-panel-active");
         });
     
         signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
+            container_home.classList.remove("right-panel-active");
         }); 
     }
 
@@ -36,7 +36,7 @@ class Homepage extends React.Component {
         return (
         
             <div className="home-container" onLoad={() => this.login_form()}>
-                <div className="container" id="container">
+                <div className="container-home" id="container-home">
                     <div className="form-container sign-up-container">
                         <form action="#">
                             <h1>Create Account</h1>
