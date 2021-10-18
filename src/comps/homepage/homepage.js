@@ -1,10 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './homepage.css';
 
 
 class Homepage extends React.Component {
 
     componentDidMount() {
+
+
+        let home = document.getElementById('ni-home');
+        let contact = document.getElementById('ni-contact');    
+        let about = document.getElementById('ni-about');
+    
+        home.classList.add("active");
+        contact.classList.remove("active");    
+        about.classList.remove("active");
+
+
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
         const container = document.getElementById('container');
@@ -17,6 +28,9 @@ class Homepage extends React.Component {
             container.classList.remove("right-panel-active");
         }); 
     }
+
+
+
   
     render() {
         return (
