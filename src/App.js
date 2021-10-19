@@ -5,6 +5,9 @@ import NotFound from './comps/notfound.js';
 import About from './comps/about/about.js';
 import Contact from './comps/contact/contact.js';
 import Plans from './comps/plans/plans.js';
+import AvailedList from './comps/homepage2/AvailedList.js';
+import './fa/fontawesome-free-5.15.4-web/css/all.css';
+
 import './comps/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -26,6 +29,9 @@ const App = () => {
             </Route>
             <Route exact path="/plans">
               <Plans />
+            </Route>
+            <Route exact path="/availed">
+              <AvailedList />
             </Route>
             <Route path="*">
               <NotFound />

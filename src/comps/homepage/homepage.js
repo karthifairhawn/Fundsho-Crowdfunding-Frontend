@@ -10,10 +10,12 @@ class Homepage extends React.Component {
         let home = document.getElementById('ni-home');
         let contact = document.getElementById('ni-contact');    
         let about = document.getElementById('ni-about');
+        let plan = document.getElementById('ni-plan');
     
         home.classList.add("active");
         contact.classList.remove("active");    
         about.classList.remove("active");
+        plan.classList.remove("active");
 
 
         const signUpButton = document.getElementById('signUp');
