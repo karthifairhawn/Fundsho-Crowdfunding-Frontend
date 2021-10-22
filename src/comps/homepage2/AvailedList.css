@@ -42,7 +42,7 @@ box-sizing: border-box;
 	margin: 5px;
 	width: 1200px;
 	min-height: 200px;
-	background-color: #417a2d;
+	background-color: #383838;
 	border-radius: 10px;
 }
 
@@ -64,6 +64,7 @@ box-sizing: border-box;
 }
 .al-vr-line{
 	border-left:1px solid #fff;
+	width:20px;
 }
 .al-right-info{
 	width: 100%;
@@ -71,6 +72,10 @@ box-sizing: border-box;
 .al-title{
 	padding:10px;
 	color:#fff;
+}
+.al-description{
+	color:#fff;	
+	margin-left: 25px;
 }
 
 .al-main-container::-webkit-scrollbar {

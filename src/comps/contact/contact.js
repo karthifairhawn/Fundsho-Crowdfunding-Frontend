@@ -1,4 +1,5 @@
 import React from 'react';
+import './contact.css';
 class Contact extends React.Component{
     componentDidMount(){
         let home = document.getElementById('ni-home');
@@ -10,12 +11,16 @@ class Contact extends React.Component{
         contact.classList.add("active");
         plan.classList.remove("active");
         about.classList.remove("active");
-
     }
     render(){
-        return(
-            <div className="about-content">
-                This is contact page content
+        return(            
+            <div className="contact-us">
+                <div class="gears" id="one-gear">    
+                    <div class="gears-container">
+                        <div class="gear-rotate"></div>
+                    </div>                                                        
+                </div>                
+                Under Construction...
             </div>
         );
     }
