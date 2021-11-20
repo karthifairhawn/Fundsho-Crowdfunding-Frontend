@@ -13,27 +13,32 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const App = () => {
   return ( 
-    <><Router>
-      <div className="App">
-        <Navbar />      
+    <Router>
+      <div className="App">            
         <div className="content">
           <Switch>
             <Route exact path="/">
+              <Navbar active="home"/>  
               <Homepage />
             </Route>
             <Route exact path="/about">
+              <Navbar active="about"/>  
               <About />
             </Route>
             <Route exact path="/contact-us">
+              <Navbar active="contact us"/>  
               <Contact />
             </Route>
             <Route exact path="/plans">
+              <Navbar active="plans"/>  
               <Plans />
             </Route>
             <Route exact path="/availed">
+              <Navbar active="home"/>  
               <AvailedList />
             </Route>
             <Route path="*">
+              <Navbar />  
               <NotFound />
             </Route>
           </Switch>
@@ -41,7 +46,7 @@ const App = () => {
         < Footer/>
       </div>
     </Router>
-    </>
+    
    );
 }
  
