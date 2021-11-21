@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\Warrior\\__ide_and_server_files\\postgresql-42.3.1.jar"
+    ]
+}
