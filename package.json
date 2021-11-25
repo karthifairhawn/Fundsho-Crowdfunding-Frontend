@@ -1,5 +1,5 @@
 {
-  "name": "scholarship_provider",
+  "name": "scholarship_provider", 
   "version": "0.1.0",
   "private": true,
   "dependencies": {
