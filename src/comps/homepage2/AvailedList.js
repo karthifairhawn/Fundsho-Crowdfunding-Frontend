@@ -1,5 +1,4 @@
 import React from 'react';
-import './AvailedList.css';
 
 
 class AvailedList extends React.Component {

@@ -25,8 +25,8 @@ const Navbar = ( {active} ) => {
 
     return ( 
         <div className="cnavbar">
-            {/* <h1> {active}</h1> */}
-
+        <span className="logo"></span>
+            <div className="nav-links">
             {
                 Object.keys(nav_items).map(function (key,index) {                                        
                     if(nav_items[key].value === active){
@@ -38,8 +38,10 @@ const Navbar = ( {active} ) => {
                      
                 })                
             }
+            </div>
+             
 
-
+        <Link to="/settings" ><i class="fas fa-cog setting-btn"></i></Link>
         </div>
      );
 }
