@@ -974,6 +974,10 @@ html {
     background-color:#313131;    
 }
 
+.active-pane-link{
+  background-color:#313131;  
+}
+
 .profile-img{
     width: 50px;
     border-radius: 50%;
@@ -993,6 +997,8 @@ html {
 .title{
   font-size:1.4rem;
   margin: 10px;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.265);
 } 
 .profile-page-img{
   display: flex;
@@ -1105,4 +1111,106 @@ html {
 }
 .red-text{
   color: red;
+}
+
+/* Security and Privacy  */
+
+.sub-container-sec{
+  margin:0px 10px;
+  font-size: 1rem;
+}
+
+.login-info{
+  display: flex;  
+  color:black;
+  margin: 10px;
+}
+
+
+
+.login-place-time{
+  display:flex;
+  border-bottom: 1px solid #fff;
+  color:white;
+  width:100%;
+  padding: 10px;
+  flex-direction: column;    
+}
+
+.login-place-time .login-place{
+  font-size: 1rem;
+  margin: 0.7rem 0px;
+}
+
+
+.login-place .fa{
+  margin: 0px 10px 0px 0px;
+}
+.login-place .login-time-device span{
+  font-size:0.2rem;
+}
+.login-info-grid{
+  display:grid;
+  justify-items: center;
+  gap: 1rem;
+  width:80%;  
+  grid-template-columns: 50% 50%;
+}
+
+.change-pass-row{
+  display:flex;  
+  align-items: center;
+  height:10%;
+}
+
+.change-pass-row label{  
+  width:15%;
+}
+.change-pass-row input{  
+  width:30%;
+  height:30px;
+}
+.change-password-form{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.change-pass-submit{  
+  padding: 5px 10px;
+  width: 10%;
+  background-color: #f44236;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+/* Email Page */
+
+
+.subsriptions{
+  display: flex;  
+  flex-direction: column;
+}
+.sub-element{
+  display: flex;
+  justify-content: center;  
+  flex-direction: column;  
+  width: 40%;
+  padding:1rem;
+}
+.sub-element1{
+  display: flex;    
+  align-items: center;
+}
+
+.sub-element1 input{
+  margin-right: 1%;
+  width: 5%;
+}
+.sub-element1 span{
+  font-size:1rem;
+}
+.sub-element2 {
+  font-size:0.9rem;
 }

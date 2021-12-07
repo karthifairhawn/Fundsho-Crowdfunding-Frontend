@@ -1,11 +1,11 @@
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Link, NavLink} from 'react-router-dom';
 import Email from './comps/email.js';
 import Security from './comps/security.js';
 import Wallet from './comps/wallet.js';
 import Profile from './comps/profile.js';
 
 
-const Setting = () => {
+const Setting = (  ) => {
     return (
     <>       
      <div className="setting-container">
@@ -21,33 +21,33 @@ const Setting = () => {
 
           <div className="left-pane-setting-options">
             
-            <Link to="/settings/profile">
+            <NavLink exact to="/settings/profile" activeClassName="active-pane-link">
               <span className="left-pane-setting-options-btn">                
                   <i class="fa fa-user"></i>
                   Edit Profile
               </span>
-            </Link>
+            </NavLink>
 
-            <Link to="/settings/wallet">
-              <span className="left-pane-setting-options-btn">
-                  <i class="fa fa-money"></i>
+            <NavLink to="/settings/wallet" activeClassName="active-pane-link">
+              <span className="left-pane-setting-options-btn">                  
+                  <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                   Wallet
               </span>
-            </Link>
+            </NavLink>
 
-            <Link to="/settings/security">
+            <NavLink to="/settings/security" activeClassName="active-pane-link">
               <span className="left-pane-setting-options-btn">
                 <i class="fa fa-lock"></i>
                 Security and Privacy
               </span>
-            </Link>
+            </NavLink>
 
-            <Link to="/settings/email">
+            <NavLink to="/settings/email" activeClassName="active-pane-link">
               <span className="left-pane-setting-options-btn">
                 <i class="fa fa-envelope"></i>
                 Email and SMS
               </span>                
-            </Link>
+            </NavLink>
           </div>
         </div>
         <div className="settings-content">
