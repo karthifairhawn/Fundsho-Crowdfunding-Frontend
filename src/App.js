@@ -6,11 +6,12 @@ import About from './comps/about/about.js';
 import Contact from './comps/contact/contact.js';
 import Plans from './comps/plans/plans.js';
 import AvailedList from './comps/homepage2/AvailedList.js';
-import './fa/fontawesome-free-5.15.4-web/css/all.css';
 import Setting from './comps/settings/settings';
+import 'font-awesome/css/font-awesome.min.css';
 
 import './comps/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 
 const App = () => {
   return ( 
@@ -38,7 +39,7 @@ const App = () => {
               <Navbar active="home"/>  
               <AvailedList />
             </Route>
-            <Route exact path="/settings">
+            <Route path="/settings">
               <Navbar active=""/>  
               <Setting />
             </Route>

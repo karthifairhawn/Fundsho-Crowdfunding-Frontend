@@ -1,56 +1,5 @@
+
 *{
     margin:0;
     padding:0;
-}
-.settings-container{
-    height:100%;
-    overflow:hidden !important;
-}
-.left-pane-setting-info{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;    
-    padding:5px 10px;
-    border-radius:10px;
-    backdrop-filter: blur(1px) saturate(130%);
-    -webkit-backdrop-filter: blur(0px) saturate(130%);
-    background-color: rgba(255, 255, 255, 0.21);
-    border-radius: 12px;
-    border: 1px solid rgba(209, 213, 219, 0.3);
-}
-.left-pane-setting-info-r{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    color: white;
-}
-
-.left-pane-setting{
-    width:15%;
-    height:100vh;
-    background-color:#212121;
-    padding: 20px;    
-    overflow: hidden;
-}
-.left-pane-setting-options{
-    display: flex;
-    flex-direction: column;    
-}
-.left-pane-setting-options-btn{    
-    font-size: 1rem;
-    padding: 10px 10px;
-    margin: 5px;    
-    width:100%;
-    color: #fff;
-    cursor: pointer;
-}
-
-.left-pane-setting-options-btn:hover{
-    background-color:#313131;
-    border-left: 1px solid white;
-}
-
-.profile-img{
-    width: 50px;
-    border-radius: 50%;
 }

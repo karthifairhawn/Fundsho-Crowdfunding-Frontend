@@ -26,7 +26,7 @@ class Homepage extends React.Component {
             <div className="home-container" onLoad={() => this.login_form()}>
                 <div className="container-home" id="container-home">
                     <div className="form-container sign-up-container">
-                        <form action="#">
+                        <form action="#" class="home-form">
                             <h1>Create Account</h1>
                             <span>or use your email for registration</span>
                             <input required type="text" placeholder="Name" />
@@ -36,7 +36,7 @@ class Homepage extends React.Component {
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
-                        <form action="#">
+                        <form action="#" class="home-form">
                             <h1>Sign in</h1>
                             <span>or use your account</span>
                             <input required type="email" placeholder="Email" />

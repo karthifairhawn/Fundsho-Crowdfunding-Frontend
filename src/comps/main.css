@@ -471,7 +471,7 @@ background-color: transparent;
 border-color: #FFFFFF;
 }
 
-form {
+.home-form {
 color: #FFFFFF;
 background-color: #485461;
 background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
@@ -923,3 +923,186 @@ html {
     opacity:1;
     transition: opacity 0.6s ease;
   }
+
+/* Setting Page */
+.setting-container{
+    height:100%;
+    overflow:hidden !important;
+    display: flex;
+}
+.left-pane-setting-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;    
+    padding:5px 10px;
+    border-radius:10px;
+    backdrop-filter: blur(1px) saturate(130%);
+    -webkit-backdrop-filter: blur(0px) saturate(130%);
+    background-color: #8cc1504a;
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+    margin:5px 10px;
+    font-size: 1.3rem;
+}
+.left-pane-setting-info-r{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+}
+
+.left-pane-setting{
+    width:18%;
+    height:100vh;
+    background-color:#212121;      
+    overflow: hidden;
+}
+.left-pane-setting-options{
+    display: flex;
+    flex-direction: column;    
+}
+.left-pane-setting-options-btn{    
+    font-size: 1rem;
+    display: block;
+    padding: 10px 10px;    
+    width:100%;
+    color: #fff;
+    cursor: pointer;    
+}
+
+.left-pane-setting-options-btn:hover{
+    background-color:#313131;    
+}
+
+.profile-img{
+    width: 50px;
+    border-radius: 50%;
+}
+.left-pane-setting-options .fa{
+  margin: 0px 8px;
+}
+.settings-content{
+  background-color:#181818;
+  color: #fff;  
+  width: 100%;
+  height: 90vh;
+}
+
+/* Profile Edit Page */
+
+.title{
+  font-size:1.4rem;
+  margin: 10px;
+} 
+.profile-page-img{
+  display: flex;
+  justify-content: center;  
+}
+
+.profile-page-img img{
+  width: 150px;
+  border-radius:50%;
+}
+
+.form-set_of_2{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.names-span{
+  display: flex;
+  flex-direction:column;
+  width: 450px;
+  margin: 0px 10px;
+
+}
+.form-set_of_2 label{
+  /* width: 90px; */
+}
+.names-span input{
+  width:100%;
+  height:30px;
+  padding: 1px 3px;
+  font-size:1.4rem;
+  border-radius: 0px 2px 2px 0px;
+}
+.form-container-profile{  
+  width: 70%;
+  margin: 10px 10%;
+
+}
+.hr{
+  opacity: 0.0;
+  margin: 15px 0px;
+}
+
+.setting-submit-btn{
+  display: flex;
+  justify-content: space-between;
+}
+.setting-submit-btn input{
+  width: 15%;
+  cursor: pointer;
+  margin:10px;
+  background-color: #8cc150;
+  color: #fff;
+}
+
+/* Wallet Page */
+
+.wallet-container{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  padding: 3%;
+}
+.balance-container{
+  display: flex;
+  flex-direction: row;
+  background-color:#8cc15023;
+  height:20%;  
+  border-radius:15px;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  width:80%;
+}
+.balance-amount{
+  display: flex;
+  flex-direction:column;   
+  
+}
+.balance-amount span{
+  font-size:1.6rem;
+  color: #8cc150;
+  font-weight: bold;
+}
+.add-money-wallet{
+  font-size:1.3rem;
+  color: #fff;
+  padding:10px;
+  border-radius:10px;  
+  background-color: #8cc150;
+  cursor: pointer;
+}
+.transaction-table table{
+  width:100%;
+}
+.transaction-table td{
+  border: 1px solid #fff;  
+  padding: 10px;
+  text-align: center;
+}
+.fa-green{
+  background-color: #8cc150;
+  border-radius: 50%;
+  padding:1px;
+  font-size:0.8rem;
+  margin: 0px 2px;
+}
+.green-text{
+  color: #8cc150;
+}
+.red-text{
+  color: red;
+}

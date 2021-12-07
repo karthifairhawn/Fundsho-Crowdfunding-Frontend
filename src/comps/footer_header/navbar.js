@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-const Navbar = ( {active} ) => {
 
+const Navbar = ( {active} ) => {    
     const nav_items ={
             home: {
                 "value": 'home',
@@ -40,7 +40,7 @@ const Navbar = ( {active} ) => {
             </div>
              
 
-        <Link to="/settings" ><i class="fas fa-cog setting-btn"></i></Link>
+        <Link to="/settings" ><i className="fa fa-user setting-btn"></i></Link>
         </div>
      );
 }
