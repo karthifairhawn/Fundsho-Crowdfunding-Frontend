@@ -1,6 +1,6 @@
 *{
     padding: 0px;
-    margin: 0px;
+    margin: 0px;    
 }
 
 .content-404{
@@ -504,7 +504,6 @@ border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 		0 10px 10px rgba(0,0,0,0.22);
 position: relative;
-overflow: hidden;
 width: 768px;
 max-width: 100%;
 min-height: 480px;
@@ -805,6 +804,9 @@ html {
     padding: 30px 0 0;
     max-width: 960px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .panel {
@@ -812,7 +814,7 @@ html {
     border-radius: 10px;
     padding: 15px 25px;
     position: relative;
-    width: 100%;
+    width: 90%;
     z-index: 10;
   }
   
@@ -926,8 +928,7 @@ html {
 
 /* Setting Page */
 .setting-container{
-    height:100%;
-    overflow:hidden !important;
+    height:100%;    
     display: flex;
 }
 .left-pane-setting-info{
@@ -954,8 +955,7 @@ html {
 .left-pane-setting{
     width:18%;
     height:100vh;
-    background-color:#212121;      
-    overflow: hidden;
+    background-color:#212121;          
 }
 .left-pane-setting-options{
     display: flex;

@@ -34,9 +34,9 @@ class AvailedList extends React.Component {
 
                         <div className="availed-element">                            
                             <div className="al-arrows">
-                                <i class="fas fa-arrow-circle-up" id="up1" onClick={this.upvote} ></i>
+                                <i className="fas fa-arrow-circle-up" id="up1" onClick={this.upvote} ></i>
                                 <span className="up-count" id="count1">3</span>
-                                <i class="fas fa-arrow-circle-down" id="down1" onClick={this.downvote}></i>
+                                <i className="fas fa-arrow-circle-down" id="down1" onClick={this.downvote}></i>
                             </div>
                             <div className="al-vr-line"></div>
                             <div className="al-right-info">

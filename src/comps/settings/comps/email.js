@@ -6,7 +6,7 @@ const Email = () => {
            <div className="subsriptions">
 
                <div className="sub-element">                   
-                    <div class="sub-element1">
+                    <div className="sub-element1">
                         <input type="checkbox"/>
                         <span>Feedback for Fundsho</span>
                     </div>
@@ -14,7 +14,7 @@ const Email = () => {
                </div>
 
                <div className="sub-element">                   
-                    <div class="sub-element1">
+                    <div className="sub-element1">
                         <input type="checkbox"/>
                         <span>Reminder emails</span>
                     </div>
@@ -22,7 +22,7 @@ const Email = () => {
                </div>
 
                <div className="sub-element">                   
-                    <div class="sub-element1">
+                    <div className="sub-element1">
                         <input type="checkbox"/>
                         <span>Product emails</span>
                     </div>
@@ -30,7 +30,7 @@ const Email = () => {
                </div>
 
                <div className="sub-element">                   
-                    <div class="sub-element1">
+                    <div className="sub-element1">
                         <input type="checkbox"/>
                         <span>News emails</span>
                     </div>

@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Switch, Link, NavLink} from 'react-router-dom';
+import {Route, NavLink} from 'react-router-dom';
 import Email from './comps/email.js';
 import Security from './comps/security.js';
 import Wallet from './comps/wallet.js';
@@ -23,28 +23,28 @@ const Setting = (  ) => {
             
             <NavLink exact to="/settings/profile" activeClassName="active-pane-link">
               <span className="left-pane-setting-options-btn">                
-                  <i class="fa fa-user"></i>
+                  <i className="fa fa-user"></i>
                   Edit Profile
               </span>
             </NavLink>
 
             <NavLink to="/settings/wallet" activeClassName="active-pane-link">
               <span className="left-pane-setting-options-btn">                  
-                  <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                  <i className="fa fa-credit-card-alt" aria-hidden="true"></i>
                   Wallet
               </span>
             </NavLink>
 
             <NavLink to="/settings/security" activeClassName="active-pane-link">
               <span className="left-pane-setting-options-btn">
-                <i class="fa fa-lock"></i>
+                <i className="fa fa-lock"></i>
                 Security and Privacy
               </span>
             </NavLink>
 
             <NavLink to="/settings/email" activeClassName="active-pane-link">
               <span className="left-pane-setting-options-btn">
-                <i class="fa fa-envelope"></i>
+                <i className="fa fa-envelope"></i>
                 Email and SMS
               </span>                
             </NavLink>

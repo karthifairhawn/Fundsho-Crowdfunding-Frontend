@@ -6,9 +6,9 @@ class Contact extends React.Component{
     render(){
         return(            
             <div className="contact-us">
-                <div class="gears" id="one-gear">    
-                    <div class="gears-container">
-                        <div class="gear-rotate"></div>
+                <div className="gears" id="one-gear">    
+                    <div className="gears-container">
+                        <div claclassNamess="gear-rotate"></div>
                     </div>                                                        
                 </div>                
                 Under Construction...

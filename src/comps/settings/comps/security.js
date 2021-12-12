@@ -13,15 +13,15 @@ const Security = () => {
                             </span>
                             <div className="login-info-grid">
                                 <span className="login-place-time">                                    
-                                    <span className="login-place"><i class="fa fa-location-arrow" aria-hidden="true"></i>Kovilpatti</span>
+                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>Kovilpatti</span>
                                     <span className="login-time-device">Active - Now Windows</span>
                                 </span>
                                 <span className="login-place-time">
-                                    <span className="login-place"><i class="fa fa-location-arrow" aria-hidden="true"></i>Tenkasi</span>
+                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>Tenkasi</span>
                                     <span className="login-time-device">20 hours ago · XiaoMi Redmi Note 5 Pro</span>
                                 </span>
                                 <span className="login-place-time">
-                                    <span className="login-place"><i class="fa fa-location-arrow" aria-hidden="true"></i>Chennai</span>
+                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>Chennai</span>
                                     <span className="login-time-device">1 day ago · XiaoMi Redmi Note 7 Pro</span>
                                 </span>
                             </div>
@@ -47,7 +47,7 @@ const Security = () => {
                             <label>Retype New Password :</label>
                             <input type="password" />
                         </span>           
-                        <input type="submit" value="Change Password" class="change-pass-submit"/>
+                        <input type="submit" value="Change Password" className="change-pass-submit"/>
                     </form>
                 </div>
             </>

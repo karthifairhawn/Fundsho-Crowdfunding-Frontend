@@ -6,8 +6,8 @@ class about extends React.Component{
     render(){
         return(
             <div className="about-content">
-                <div class="gears-container">
-                    <div class="gear-rotate"></div>                                                                           
+                <div className="gears-container">
+                    <div className="gear-rotate"></div>                                                                           
                 </div>                
                 Under Construction...
             </div>

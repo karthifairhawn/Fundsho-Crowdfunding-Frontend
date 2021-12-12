@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 class Homepage extends React.Component {
@@ -26,7 +27,7 @@ class Homepage extends React.Component {
             <div className="home-container" onLoad={() => this.login_form()}>
                 <div className="container-home" id="container-home">
                     <div className="form-container sign-up-container">
-                        <form action="#" class="home-form">
+                        <form action="#" className="home-form">
                             <h1>Create Account</h1>
                             <span>or use your email for registration</span>
                             <input required type="text" placeholder="Name" />
@@ -36,12 +37,12 @@ class Homepage extends React.Component {
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
-                        <form action="#" class="home-form">
+                        <form action="#" className="home-form">
                             <h1>Sign in</h1>
                             <span>or use your account</span>
                             <input required type="email" placeholder="Email" />
                             <input required type="password" placeholder="Password" />
-                            <a href="#">Forgot your password?</a>
+                            <Link to="#">Forgot your password?</Link>
                             <button>Sign In</button>
                         </form>
                     </div>
