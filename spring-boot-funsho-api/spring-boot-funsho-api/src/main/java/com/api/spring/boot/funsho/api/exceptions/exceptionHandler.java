@@ -1,5 +1,6 @@
-package com.api.spring.boot.funsho.api.resource;
+package com.api.spring.boot.funsho.api.exceptions;
 
+import com.api.spring.boot.funsho.api.exceptions.userNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +16,7 @@ import java.util.Date;
 @RestControllerAdvice
 public class exceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(userNotFoundException.class)
     public final ResponseEntity<Object>
         handleAllException(Exception ex, WebRequest request) throws Exception {
         ExceptionResponse er = new ExceptionResponse(new Date(),ex.getMessage(),request.getDescription(false));
