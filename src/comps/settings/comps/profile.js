@@ -2,15 +2,42 @@ import { useState } from "react";
 const Profile = () => {
 
     function updateProfile() {
-                
+
+        let obj = {
+            fname: fname,
+            lname: lname,
+            email: email,
+            dob: dob,
+            phNumber: phNumber,
+            userId: localStorage.getItem("userId"),
+            username: username,
+        };
+        
+        fetch('http://localhost:8080/updateuser', {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then( (response) => {
+            if(response.ok) {
+                localStorage.setItem('fname', fname);        
+                localStorage.setItem('lname', lname);        
+                localStorage.setItem('email', email);        
+                localStorage.setItem('dob', dob);         
+                localStorage.setItem('phNumber', phNumber);                               
+                localStorage.setItem('username', username);   
+            }
+        })         
+        .catch(err => console.log(err));    
+        
     }
     const [fname,setFname] = useState(localStorage.getItem("fname"));
     const [lname,setLname] = useState(localStorage.getItem("lname"));
     const [email,setEmail] = useState(localStorage.getItem("email"));
     const [dob,setDob] = useState(localStorage.getItem("dob"));
-    const [phNumber,setPhNumber] = useState(localStorage.getItem("phNumber"));
-    const [uid,setUid] = useState(localStorage.getItem("uid"));
+    const [phNumber,setPhNumber] = useState(localStorage.getItem("phNumber"));    
     const [username,setUsername] = useState(localStorage.getItem("username"));
+    
     
     return ( 
         <>
@@ -62,7 +89,7 @@ const Profile = () => {
 
                 <span className="setting-submit-btn">
                     <span></span>
-                    <input type="submit" value="Save Changes"/>
+                    <input type="submit" value="Save Changes" onClick={ (e) => { e.preventDefault(); updateProfile(); } }/>
                 </span>
 
 

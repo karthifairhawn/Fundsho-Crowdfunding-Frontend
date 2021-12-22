@@ -1,6 +1,9 @@
 package com.api.spring.boot.funsho.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,11 +18,12 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonFilter("passwordFilter")
 public class users {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    Long uId;
+    Long userId;
 
     String fname;
     String lname;
@@ -27,7 +31,8 @@ public class users {
     String email;
     String phNumber;
 
-    @JsonIgnore
+
     String password;
+
     String username;
 }

@@ -12,7 +12,6 @@ const Homepage = () => {
             password: loginPassword
         }
         
-
         fetch('http://localhost:8080/auth', {
         method: "POST",
         body: JSON.stringify(obj),
@@ -37,7 +36,7 @@ const Homepage = () => {
         localStorage.setItem('email', data.email);        
         localStorage.setItem('dob', data.dob);         
         localStorage.setItem('phNumber', data.phNumber);         
-        localStorage.setItem('uid', data.uid);        
+        localStorage.setItem('userId', data.userId);        
         localStorage.setItem('username', data.username);   
 
         let path = 'settings/profile'; 
