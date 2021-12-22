@@ -1,5 +1,34 @@
-import { useState } from "react";
+import { useState,useEffect} from "react";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
+
 const Profile = () => {
+
+    const notify = () => {
+        toast.dark('Profile updated');
+    }
+
+    const [changedData,setChangedData] = useState(false);
+    const [fname,setFname] = useState(localStorage.getItem("fname"));
+    const [lname,setLname] = useState(localStorage.getItem("lname"));
+    const [email,setEmail] = useState(localStorage.getItem("email"));
+    const [dob,setDob] = useState(localStorage.getItem("dob"));
+
+
+    
+    const [phNumber,setPhNumber] = useState(localStorage.getItem("phNumber"));    
+    const [username,setUsername] = useState(localStorage.getItem("username"));
+    const [firstRender,setFirstRender] = useState(true);
+    
+    useEffect(() => {
+        if(firstRender){
+            setFirstRender(false);
+        }else{
+            setChangedData(true);
+        }
+    },[fname,lname,email,dob,phNumber,username]);
 
     function updateProfile() {
 
@@ -25,23 +54,24 @@ const Profile = () => {
                 localStorage.setItem('email', email);        
                 localStorage.setItem('dob', dob);         
                 localStorage.setItem('phNumber', phNumber);                               
-                localStorage.setItem('username', username);   
+                localStorage.setItem('username', username);                   
+                setChangedData(false);
+                notify();
             }
         })         
         .catch(err => console.log(err));    
         
     }
-    const [fname,setFname] = useState(localStorage.getItem("fname"));
-    const [lname,setLname] = useState(localStorage.getItem("lname"));
-    const [email,setEmail] = useState(localStorage.getItem("email"));
-    const [dob,setDob] = useState(localStorage.getItem("dob"));
-    const [phNumber,setPhNumber] = useState(localStorage.getItem("phNumber"));    
-    const [username,setUsername] = useState(localStorage.getItem("username"));
-    
+
     
     return ( 
         <>
-        <div className="title">Edit Profile</div>
+   <div className="title">Edit Profile</div>
+            <ToastContainer
+                    autoClose={2000}
+                    position="top-right"
+                    className="toast-container"                       
+                />
             <form className="form-container-profile">
                 
                 <div className="profile-page-img"> <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="profile-img" /> </div>
@@ -89,7 +119,12 @@ const Profile = () => {
 
                 <span className="setting-submit-btn">
                     <span></span>
-                    <input type="submit" value="Save Changes" onClick={ (e) => { e.preventDefault(); updateProfile(); } }/>
+                    <input type="submit" className={"" + (changedData ? '' : 'disabled')} value="Save Changes" onClick={ (e) => { 
+                            e.preventDefault(); 
+                            if(!e.target.classList.contains("disabled")){
+                                updateProfile();
+                            }                            
+                        } }/>
                 </span>
 
 
@@ -99,3 +134,4 @@ const Profile = () => {
 }
  
 export default Profile;
+

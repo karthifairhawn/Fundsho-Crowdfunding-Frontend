@@ -1,7 +1,9 @@
 package com.api.spring.boot.funsho.api.resource;
 
+import com.api.spring.boot.funsho.api.entity.changePassword;
 import com.api.spring.boot.funsho.api.entity.login;
 import com.api.spring.boot.funsho.api.entity.users;
+import com.api.spring.boot.funsho.api.exceptions.oldPasswordWrong;
 import com.api.spring.boot.funsho.api.exceptions.userNotFoundException;
 import com.api.spring.boot.funsho.api.repository.userRepository;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -41,10 +43,21 @@ public class usersResource {
         UserRepository.save(user);
     }
 
+    @PostMapping("/updatepass")
+    public void updatePassword(@RequestBody changePassword newPass){
+        users found = UserRepository.findByEmail(newPass.getEmail());
+
+        if(!found.getPassword().equals(newPass.getOldPassword())){
+            throw new oldPasswordWrong("Old Password Does");
+        }
+
+        found.setPassword(newPass.getPassword());
+        UserRepository.save(found);
+    }
+
     @PostMapping("/auth")
     public MappingJacksonValue authUsers(@RequestBody @NotNull login user) throws Exception {
         users found = UserRepository.findByEmail(user.getEmail());
-        System.out.println(found.toString());
         if(found==null){
             throw new userNotFoundException("User Not Found");
         }

@@ -3,6 +3,18 @@
     margin: 0px;    
 }
 
+.disabled {
+  opacity: 0.4;
+  cursor:default  !important;
+}
+
+a{
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+
+
 .content-404{
     display: flex;
     align-items: center;
@@ -1146,9 +1158,9 @@ html {
   height:20%;  
   border-radius:15px;
   justify-content: space-between;
-  padding: 10px;
+  padding: 1.5rem;
   align-items: center;
-  width:80%;
+  width:90%;
 }
 .balance-amount{
   display: flex;
@@ -1234,14 +1246,14 @@ html {
   grid-template-columns: 50% 50%;
 }
 
-.change-pass-row{
-  display:flex;  
+.change-pass-row{  
   align-items: center;
   height:10%;
+  margin: 0.5rem;
 }
 
 .change-pass-row label{  
-  width:15%;
+  width:20%;
 }
 .change-pass-row input{  
   width:30%;

@@ -33,8 +33,13 @@ const Homepage = () => {
     function setSession(data) {          
         localStorage.setItem('fname', data.fname);        
         localStorage.setItem('lname', data.lname);        
-        localStorage.setItem('email', data.email);        
-        localStorage.setItem('dob', data.dob);         
+        localStorage.setItem('email', data.email);
+        
+        let date = data.dob;
+        date = date.split("T")[0].split("-");
+        date = date[0]+"-"+date[1]+"-"+date[2];
+        localStorage.setItem('dob', date);     
+            
         localStorage.setItem('phNumber', data.phNumber);         
         localStorage.setItem('userId', data.userId);        
         localStorage.setItem('username', data.username);   
