@@ -6,8 +6,11 @@ toast.configure();
 
 const Profile = () => {
 
-    const notify = () => {
-        toast.dark('Profile updated');
+    const notify = (msg,Type) => {
+        toast(msg,{
+            type: Type,
+            theme: 'dark'
+        })
     }
 
     const [changedData,setChangedData] = useState(false);
@@ -56,7 +59,7 @@ const Profile = () => {
                 localStorage.setItem('phNumber', phNumber);                               
                 localStorage.setItem('username', username);                   
                 setChangedData(false);
-                notify();
+                notify("Updated Profile","info");
             }
         })         
         .catch(err => console.log(err));    

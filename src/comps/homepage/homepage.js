@@ -1,8 +1,15 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect,useLayoutEffect,useState } from 'react';
 import { Link,useHistory } from 'react-router-dom';
 
 
 const Homepage = () => {
+
+    useLayoutEffect(() => {
+        if(localStorage.getItem("userId")!=null){
+            let path = '/settings/profile'; 
+            history.push(path)
+        }
+    });
     const history = useHistory();
 
     function loginUser() {
@@ -75,9 +82,9 @@ const Homepage = () => {
                     <form action="#" className="home-form">
                         <h1>Create Account</h1>
                         <span>or use your email for registration</span>
-                        <input required type="text" placeholder="Name" />
-                        <input required type="email" placeholder="Email" />
-                        <input required type="password" placeholder="Password" />
+                        <input required className="login-input" type="text" placeholder="Name" />
+                        <input required className="login-input" type="email" placeholder="Email" />
+                        <input required className="login-input" type="password" placeholder="Password" />
                         <button>Sign Up</button>
                     </form>
                 </div>
@@ -85,8 +92,8 @@ const Homepage = () => {
                     <form action="#" className="home-form">
                         <h1>Sign in</h1>
                         <span>or use your account</span>
-                        <input required type="email" onChange={ (e)=>{setEmail(e.target.value)}} placeholder="Email" />
-                        <input required type="password" onChange={ (e)=>{setPassword(e.target.value)}}placeholder="Password" />
+                        <input required className="login-input" type="email" onChange={ (e)=>{setEmail(e.target.value)}} placeholder="Email" />
+                        <input required className="login-input" type="password" onChange={ (e)=>{setPassword(e.target.value)}}placeholder="Password" />
                         <Link to="#">Forgot your password?</Link>
                         <button onClick={ (e) =>{
                                     e.preventDefault();         

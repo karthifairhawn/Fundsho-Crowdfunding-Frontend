@@ -8,7 +8,7 @@ import Plans from './comps/plans/plans.js';
 import AvailedList from './comps/homepage2/AvailedList.js';
 import Setting from './comps/settings/settings';
 import 'font-awesome/css/font-awesome.min.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './comps/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -19,28 +19,28 @@ const App = () => {
       <div className="App">            
         <div className="content">
           <Switch>
-            <Route exact path="/">
-              <Navbar active="home"/>  
+            <Route exact path="/login">
+            <Navbar /> 
               <Homepage />
             </Route>
             <Route exact path="/about">
-              <Navbar active="about"/>  
+              <Navbar/>  
               <About />
             </Route>
             <Route exact path="/contact-us">
-              <Navbar active="contact us"/>  
+              <Navbar />  
               <Contact />
             </Route>
             <Route exact path="/plans">
-              <Navbar active="plans"/>  
+              <Navbar />  
               <Plans />
             </Route>
             <Route exact path="/availed">
-              <Navbar active="home"/>  
+              <Navbar/>  
               <AvailedList />
             </Route>
             <Route path="/settings">
-              <Navbar active=""/>  
+              <Navbar/>  
               <Setting />
             </Route>
             <Route path="*">

@@ -1,46 +1,45 @@
-import { Link } from 'react-router-dom';
+import { Link,NavLink,useHistory } from 'react-router-dom';
 
 
-const Navbar = ( {active} ) => {    
-    const nav_items ={
-            home: {
-                "value": 'home',
-                "too": '/'
-            },
-            about: {
-                "value": 'about',
-                'too': '/about'
-            },
-            contact: {
-                "value": 'contact us',
-                "too": '/contact-us'
-            },
-            plans : {
-                "value": 'plans',
-                "too": '/plans'
-            }
-        }
+const Navbar = () => {
+    const history = useHistory();
+    const logout = () => {
+        localStorage.clear();
+        history.push('/login');
+    }
+    let home_link="";
+
     
-
     return ( 
         <div className="cnavbar">
         <span className="logo"></span>
             <div className="nav-links">
-            {
-                Object.keys(nav_items).map(function (key,index) {                                        
-                    if(nav_items[key].value === active){
-                        
-                        return <Link to={nav_items[key].too}  key={index} className="navbarItem active" id="ni-home">{nav_items[key].value}</Link>    
-                    }
-                        return <Link to={nav_items[key].too} key={index} className="navbarItem" id="ni-home">{nav_items[key].value}</Link>    
-                    
-                     
-                })                
-            }
-            </div>
-             
 
-        <Link to="/settings" ><i className="fa fa-user setting-btn"></i></Link>
+            { 
+                localStorage.getItem('email')==null && 
+                <NavLink className="navbarItem" to="/login" activeClassName="active">Login / Signup</NavLink>
+            }
+
+            { 
+                localStorage.getItem('email')!=null && 
+                <NavLink className="navbarItem" to="/availed" activeClassName="active">home</NavLink>
+            }
+
+            <NavLink className="navbarItem" to="/about" activeClassName="active">about</NavLink>
+            <NavLink className="navbarItem" to="/contact-us" activeClassName="active">contact us</NavLink>
+            <NavLink className="navbarItem" to="/plans" activeClassName="active">plans</NavLink>
+    
+            </div>
+
+        {
+            localStorage.getItem('email')!=null && 
+            <div className="right-buttons">            
+                <Link to="/settings/profile" ><i className="fa fa-user setting-btn"></i></Link>
+                <span onClick={() => { logout(); } }><i className="fa fa-sign-out logout-btn"></i></span>
+            </div>
+        }             
+        
+        <span></span>
         </div>
      );
 }

@@ -1,68 +1,72 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Request from './Request.js';
 
+const AvailedList = () => {
 
-class AvailedList extends React.Component {
+    const [data,setData] = useState([
+        {
+        requestId: 37,
+        userId: 1,
+        title: "Hacker Rank Contest Entry Fee",
+        requestInfo: "This is requestInfo",
+        deadLine: null,
+        requestedDate: "2021-12-22T12:06:47.658+00:00",
+        votes: 0,
+        totalAmount: 100,
+        amountAlready: 10,
+        amountRequired: 90,
+        bonafideUrl: "bonafideUrl",
+        additionalUrl: "additionalUrl1"
+        },
+        {
+        requestId: 38,
+        userId: 1,
+        title: "Spring boot 2021 Udemy Course",
+        requestInfo: "This is description",
+        deadLine: null,
+        requestedDate: "2021-12-22T16:16:44.050+00:00",
+        votes: 0,
+        totalAmount: 100,
+        amountAlready: 10,
+        amountRequired: 90,
+        bonafideUrl: "bonafideUrl",
+        additionalUrl: "additionalUrl2"
+        }
+        ]);
 
-    componentDidMount() {
+    useEffect(() => {
+        fetch("http://localhost:8080/requests")
+        .then((response) => response.json())
+        .then((response) => console.log(response));            
+    },[]);
 
-
-    }
-
-    upvote(e) {
-        let id = e.target.id;
-        id = "count"+id.substring(2);
-        id = document.getElementById(id);
-        id.innerText = parseInt(id.innerText)+1;
-
-    }    
+    return (
     
-    downvote(e) {
-        let id = e.target.id
-        id = "count"+id.substring(4);
-        id = document.getElementById(id);
-        id.innerText = parseInt(id.innerText)-1;
-    }   
-
-  
-    render() {
-        return (
-        
-            <div className="availed-list-container">                
-                    <div className="al-main-container">
+        <div className="availed-list-container">                
+            <div className="al-main-container">
+                
+                {     
+                    // data.forEach((item,idx) => {
                         
-                        {/* Availed List Element Sample Starts */}
+                    //     <Request key={idx} title={item} desc={item.desc} 
+                    //     bonafide={item.bonafide} additional={item.additional} 
+                    //     user={item.user}/>  
+                    // })    
 
-                        <div className="availed-element">                            
-                            <div className="al-arrows">
-                                <i className="fas fa-arrow-circle-up" id="up1" onClick={this.upvote} ></i>
-                                <span className="up-count" id="count1">3</span>
-                                <i className="fas fa-arrow-circle-down" id="down1" onClick={this.downvote}></i>
-                            </div>
-                            <div className="al-vr-line"></div>
-                            <div className="al-right-info">
-                                <div className="al-title">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
-                                </div>
-                                <hr />
-                                <div className="al-description">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis beatae, incidunt nesciunt illo sunt quibusdam sequi quidem, provident ea voluptates nemo. Provident architecto quod assumenda laudantium non cum, tempore corrupti.                                          
-                                        <ol>
-                                            <li>lorem Ipsum</li>
-                                            <li>ipsum</li>
-                                            <li>lorem ipsume tempus</li>
-                                        </ol>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    Object.entries(data).map((item,idx) => (                        
+                        // console.log(item)
+                        <Request key={idx} title={item[1].title+" "+idx} desc={item[1].requestInfo} 
+                        bonafide={item[1].bonafideUrl} additional={item[1].additionalUrl} 
+                        user={item[1].user} vote={item[1].votes}/>                        
+                        
+                    ))
+                }
 
-                        {/* Availed List Element Sample Ends */}                        
-
-                    </div>                
-            </div>
-        );
-    }
+            </div>                
+        </div>
+    );
+    
 }
 
 
