@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 
 @Data
@@ -20,8 +23,13 @@ public class requests{
     Long requestId;
     int userId;
 
+    @Column(length = 1337)
     String title;
+    
+    @Column(length = 1337)
     String requestInfo;
+
+
     Date deadLine;
     Date requestedDate;
     int votes;

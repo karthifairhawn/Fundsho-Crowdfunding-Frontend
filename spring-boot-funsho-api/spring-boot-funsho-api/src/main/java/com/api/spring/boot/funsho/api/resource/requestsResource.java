@@ -16,7 +16,12 @@ public class requestsResource {
     requestsRepository RequestsRepository;
 
     @GetMapping("/requests")
-    public List<requests> getAllRequests(){
+    public List<Object> getAllRequests(){
+        return  RequestsRepository.getAllRequests();
+    }
+
+    @GetMapping("/requeststemplate")
+    public List<requests> getAllTemplateRequests(){
         return  RequestsRepository.findAll();
     }
 

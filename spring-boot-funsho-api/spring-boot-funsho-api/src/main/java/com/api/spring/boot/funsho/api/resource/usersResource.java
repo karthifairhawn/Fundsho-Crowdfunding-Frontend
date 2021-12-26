@@ -1,5 +1,7 @@
 package com.api.spring.boot.funsho.api.resource;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.api.spring.boot.funsho.api.entity.changePassword;
 import com.api.spring.boot.funsho.api.entity.login;
 import com.api.spring.boot.funsho.api.entity.users;
@@ -20,6 +22,12 @@ public class usersResource {
 
     @Autowired
     userRepository UserRepository;
+    private HttpServletRequest request;
+
+    @Autowired
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
 
     @GetMapping("/users")
     public MappingJacksonValue findAll()
@@ -62,6 +70,14 @@ public class usersResource {
             throw new userNotFoundException("User Not Found");
         }
         if(found.getPassword().equals(user.getPassword())){
+            String ipAddress = "";
+            if (request != null) {
+                ipAddress = request.getHeader("X-FORWARDED-FOR");
+                if (ipAddress == null || "".equals(ipAddress)) {
+                    ipAddress = request.getRemoteAddr();
+                }
+            }
+            System.out.println(ipAddress);
             MappingJacksonValue mapping = new MappingJacksonValue(found);
             mapping.setFilters(passwordFilter());
             return mapping;

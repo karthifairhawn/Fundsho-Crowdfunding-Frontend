@@ -7,7 +7,6 @@ const Navbar = () => {
         localStorage.clear();
         history.push('/login');
     }
-    let home_link="";
 
     
     return ( 
@@ -16,12 +15,12 @@ const Navbar = () => {
             <div className="nav-links">
 
             { 
-                localStorage.getItem('email')==null && 
+                localStorage.getItem('email')===null && 
                 <NavLink className="navbarItem" to="/login" activeClassName="active">Login / Signup</NavLink>
             }
 
             { 
-                localStorage.getItem('email')!=null && 
+                localStorage.getItem('email')!==null && 
                 <NavLink className="navbarItem" to="/availed" activeClassName="active">home</NavLink>
             }
 
@@ -32,7 +31,7 @@ const Navbar = () => {
             </div>
 
         {
-            localStorage.getItem('email')!=null && 
+            localStorage.getItem('email')!==null && 
             <div className="right-buttons">            
                 <Link to="/settings/profile" ><i className="fa fa-user setting-btn"></i></Link>
                 <span onClick={() => { logout(); } }><i className="fa fa-sign-out logout-btn"></i></span>

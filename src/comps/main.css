@@ -797,7 +797,7 @@ box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	width: 1300px;
-  height: 600px;
+  height: 90vh;
   border-radius:0px 0px 10px 10px;
 	background-color: #22262b;
 
@@ -813,9 +813,47 @@ box-sizing: border-box;
   display: flex;
   flex-direction:column;
 }
+.al-title .title-links{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: flex-start;
+}
+
+.links-drop-down{
+  position: absolute;
+  color: yellowgreen;
+}
+
+.donation-bar{
+  display: flex;
+  flex-direction: column;
+  width:10rem;
+}
+
+.donation-info{
+  margin:0.5rem 0px;
+}
+
+
+
+
+.links-drop-down a{
+  color: yellowgreen;
+}
+
+.read-more .fa-arrow-right{
+  font-size:12px;
+  margin: 0px 10px;
+}
 
 .requests-links a{
   color: yellowgreen;
+}
+
+.requests-links .fa-link{
+  font-size:12px;
+  margin: 0px 5px;
 }
 
 .request-footer{

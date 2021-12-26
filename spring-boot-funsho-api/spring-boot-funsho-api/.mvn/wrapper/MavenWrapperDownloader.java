@@ -65,7 +65,7 @@ public class MavenWrapperDownloader {
                 System.out.println("- ERROR loading '" + MAVEN_WRAPPER_PROPERTIES_PATH + "'");
             } finally {
                 try {
-                    if(mavenWrapperPropertyFileInputStream != null) {
+                    if(mavenWrapperPropertyFileInputStream !== null) {
                         mavenWrapperPropertyFileInputStream.close();
                     }
                 } catch (IOException e) {
@@ -95,7 +95,7 @@ public class MavenWrapperDownloader {
     }
 
     private static void downloadFileFromURL(String urlString, File destination) throws Exception {
-        if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
+        if (System.getenv("MVNW_USERNAME") !== null && System.getenv("MVNW_PASSWORD") !== null) {
             String username = System.getenv("MVNW_USERNAME");
             char[] password = System.getenv("MVNW_PASSWORD").toCharArray();
             Authenticator.setDefault(new Authenticator() {

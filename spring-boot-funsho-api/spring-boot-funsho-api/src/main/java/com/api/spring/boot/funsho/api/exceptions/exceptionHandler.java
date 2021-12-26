@@ -1,6 +1,5 @@
 package com.api.spring.boot.funsho.api.exceptions;
 
-import com.api.spring.boot.funsho.api.exceptions.userNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import com.rest.all_apis.user_api.ExceptionHandler.ExceptionResponse;
+
 
 import java.util.Date;
 

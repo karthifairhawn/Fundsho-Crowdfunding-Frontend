@@ -1,5 +1,5 @@
-
-const Request = ({title,user,desc,bonafide,additional,vote}) => {
+import ProgressBar from 'react-bootstrap/ProgressBar'
+const Request = ({title,user,desc,bonafide,additional,vote,amountAlready,amountRequired,amountTotal,date}) => {
 return(
     <div className="availed-element container">                            
         <div className="al-arrows">
@@ -10,9 +10,18 @@ return(
         <div className="al-vr-line"></div>
         <div className="al-right-info">
             <div className="al-title">
-                <span className="req-title">{ title }</span> 
+                <div className="title-links">
+                    <span className="req-title">{ title }</span> 
+                    <details>
+                        <summary>Links Provided</summary>
+                        <ul class="links-drop-down">
+                            <li><span><a href={bonafide} >Bonafide</a></span></li>
+                            <li><span><a href={additional}>Additional Details</a></span></li>
+                        </ul>                                        
+                    </details>
+                </div>                
                 <span className="requested-user">
-                    @{user}
+                    @{user} on  {date.split("T")[0]}
                 </span>
             </div>                                
             <div className="al-description">
@@ -21,13 +30,18 @@ return(
                 </p>
 
                 <div className="request-footer">
-                    <div className="requests-links">
-                        <span>Bonafide : <a href={bonafide} >Get Bonafide</a></span>
-                        <span>Additional Details : <a href={additional}>Get Additional Details</a></span>
+                    <div className="donation-bar">
+                        <span className="donation-info">Fund Requested : {amountTotal}</span> 
+                        <div><ProgressBar  variant="success"  now={(amountAlready/amountTotal)*100} label={`${amountAlready}₹`}/></div>
                     </div>
-                    <div className="read-more">Read More</div>
+                    <div className="read-more">
+                        View Request 
+                        <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                    </div>
                 </div>
                 
+                
+
             </div>
         </div>
     </div>

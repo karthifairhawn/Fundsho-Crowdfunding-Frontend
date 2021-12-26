@@ -1,4 +1,4 @@
-package com.rest.all_apis.user_api.ExceptionHandler;
+package com.api.spring.boot.funsho.api.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,7 @@
-import { type } from 'jquery';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-
+import {APIIP} from '../config';
 const Security = () => {
 
     const notify = (msg,Type) => {
@@ -16,6 +15,25 @@ const Security = () => {
     const [newPassword1,setNewPassword1] = useState("");
     const [newPassword2,setNewPassword2] = useState("");
 
+    class loginInfo{
+        constructor(loginData){
+            this.data = [];                        
+            this.loginData = loginData.split("+");
+            this.ip = this.loginData[0];
+            this.place = this.loginData[1];
+            this.time = this.loginData[2];
+            this.device = this.loginData[3];
+        }
+        getPlace(){
+            return this.place;
+        }
+    }
+
+    const [currInfo,setCurrInfo] = useState();
+    const [prevInfo,setPrevInfo] = useState();
+    const [oldInfo,setOldInfo] = useState();
+    const [layoutRendered,setLayoutRendered] = useState(false);
+
     const changePassword = () => {
         console.log(newPassword1===newPassword2);
         if(newPassword1 === newPassword2) {
@@ -26,7 +44,7 @@ const Security = () => {
                 password: newPassword1
             }
             
-            fetch('http://localhost:8080/updatepass', {
+            fetch(APIIP.ip+'/updatepass', {
             method: "POST",
             body: JSON.stringify(obj),
             headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -37,7 +55,7 @@ const Security = () => {
                     setPassword("");
                     setNewPassword1("");
                     setNewPassword2("");
-                }else if(response.status==400){
+                }else if(response.status===400){
                     setPassword("");
                     setNewPassword1("");
                     setNewPassword2("");
@@ -47,6 +65,22 @@ const Security = () => {
             .catch(err => console.log(err));
         }
     }
+
+    useEffect(() =>{
+
+        fetch(APIIP.ip+'/logindata/'+localStorage.getItem("userId"),{})
+        .then( (response) =>{
+            return response.json();
+        })
+        .then( (response) => {              
+            setCurrInfo( new loginInfo(response.currentLogin));
+            setPrevInfo( new loginInfo(response.previousLogin));
+            setOldInfo( new loginInfo(response.oldLogin));  
+            setLayoutRendered(true);          
+        });
+
+
+    },[])
         
     return ( 
         <>
@@ -54,7 +88,7 @@ const Security = () => {
                 <div className="title">Security and Privacy</div>
 
                 <div className="sub-container-sec">
-                    <div className="sub-title">Where You're Logged in</div>
+                    <div className="sub-title">Previous logins of your account</div>
                     <div className="all-login-container">
                         <div className="login-info">
                             <span className="location-symbol">
@@ -62,16 +96,16 @@ const Security = () => {
                             </span>
                             <div className="login-info-grid">
                                 <span className="login-place-time">                                    
-                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>Kovilpatti</span>
-                                    <span className="login-time-device">Active - Now Windows</span>
+                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{layoutRendered && currInfo.place}</span>
+                                    <span className="login-time-device">Active - Now  {layoutRendered && currInfo.device }</span>
                                 </span>
                                 <span className="login-place-time">
-                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>Tenkasi</span>
-                                    <span className="login-time-device">20 hours ago · XiaoMi Redmi Note 5 Pro</span>
+                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{layoutRendered && prevInfo.place}</span>
+                                    <span className="login-time-device">{layoutRendered && prevInfo.time} · {layoutRendered && prevInfo.device}</span>
                                 </span>
                                 <span className="login-place-time">
-                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>Chennai</span>
-                                    <span className="login-time-device">1 day ago · XiaoMi Redmi Note 7 Pro</span>
+                                    <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{layoutRendered && oldInfo.place}</span>
+                                    <span className="login-time-device">{layoutRendered && oldInfo.time} ·{layoutRendered && oldInfo.device}</span>
                                 </span>
                             </div>
                         </div>

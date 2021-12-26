@@ -1,0 +1,6 @@
+IP Fetch Sample
+
+https://api.freegeoip.app/json/2409:4072:6011:3855:6ceb:acf4:765a:e076?apikey=24fb3460-658e-11ec-b1d2-5d001065511b
+
+
+SELECT * from users right join requests on users.user_id = requests.user_id where users.user_id = requests.user_id

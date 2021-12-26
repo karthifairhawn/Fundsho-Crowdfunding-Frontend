@@ -1,7 +1,7 @@
 import { useState,useEffect} from "react";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import {APIIP} from '../config';
 toast.configure();
 
 const Profile = () => {
@@ -45,7 +45,7 @@ const Profile = () => {
             username: username,
         };
         
-        fetch('http://localhost:8080/updateuser', {
+        fetch(APIIP.ip+'/updateuser', {
         method: "POST",
         body: JSON.stringify(obj),
         headers: {"Content-type": "application/json; charset=UTF-8"}
