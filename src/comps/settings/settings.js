@@ -3,9 +3,15 @@ import Email from './comps/email.js';
 import Security from './comps/security.js';
 import Wallet from './comps/wallet.js';
 import Profile from './comps/profile.js';
+import {useState,useEffect} from'react';
 
 
 const Setting = (  ) => {
+  const [balance,setBalance] = useState();
+    useEffect(() => {      
+      setBalance(localStorage.getItem('balance'));
+    },[])
+
     return (
     <>       
      <div className="setting-container">
@@ -13,8 +19,8 @@ const Setting = (  ) => {
           <div className="left-pane-setting-info">
             <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="profile-img" className="profile-img" />
             <div className="left-pane-setting-info-r">
-              <span className="profile-info-name">Pepper</span>
-              <span className="wallet-balance">₹ 500</span>
+              <span className="profile-info-name">{localStorage.getItem("fname")}</span>
+              <span className="wallet-balance">₹ {balance}</span>
             </div>                            
           </div>
           <br />

@@ -14,7 +14,7 @@ return(
                     <span className="req-title">{ title }</span> 
                     <details>
                         <summary>Links Provided</summary>
-                        <ul class="links-drop-down">
+                        <ul className="links-drop-down">
                             <li><span><a href={bonafide} >Bonafide</a></span></li>
                             <li><span><a href={additional}>Additional Details</a></span></li>
                         </ul>                                        

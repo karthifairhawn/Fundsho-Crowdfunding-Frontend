@@ -1,5 +1,8 @@
 package com.api.spring.boot.funsho.api.resource;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.api.spring.boot.funsho.api.entity.changePassword;
@@ -33,6 +36,15 @@ public class usersResource {
     public MappingJacksonValue findAll()
     {
         MappingJacksonValue mapping = new MappingJacksonValue(UserRepository.findAll());
+        mapping.setFilters(passwordFilter());
+        return mapping;
+    }
+
+    @GetMapping("/getuser/{sessionKey}")
+    public MappingJacksonValue findUsingSessonKey(@PathVariable String sessionKey)
+    {
+        System.out.println(sessionKey);
+        MappingJacksonValue mapping = new MappingJacksonValue(UserRepository.findBySessionKey(sessionKey));
         mapping.setFilters(passwordFilter());
         return mapping;
     }
@@ -78,6 +90,9 @@ public class usersResource {
                 }
             }
             System.out.println(ipAddress);
+            String newSessionKey = (ipAddress+new Date()).hashCode()+"";
+            found.setSessionKey(newSessionKey);
+            UserRepository.save(found);
             MappingJacksonValue mapping = new MappingJacksonValue(found);
             mapping.setFilters(passwordFilter());
             return mapping;
@@ -87,7 +102,7 @@ public class usersResource {
 
     public FilterProvider passwordFilter(){
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept(
-                "fname","lname","dob","email","phNumber","username","userId"
+                "fname","lname","dob","email","phNumber","username","userId","wallet","sessionKey"
         );
 
         FilterProvider filters = new SimpleFilterProvider().addFilter("passwordFilter", filter);

@@ -147,6 +147,10 @@ const Homepage = () => {
         localStorage.setItem('phNumber', data.phNumber);         
         localStorage.setItem('userId', data.userId);        
         localStorage.setItem('username', data.username);   
+        localStorage.setItem('balance',data.wallet.balance); 
+        localStorage.setItem('sessionkey',data.sessionKey); 
+        
+        
 
         fetch("https://api.freegeoip.app/json/?apikey=24fb3460-658e-11ec-b1d2-5d001065511b")
         .then((response) => response.json())
@@ -154,11 +158,11 @@ const Homepage = () => {
             response["userId"] = data.userId;
             response["device"] = getOS();
             
-            fetch(APIIP.ip+'/logindata', {
-                method: "POST",
-                body: JSON.stringify(response),
-                headers: {"Content-type": "application/json; charset=UTF-8"}
-                });
+        fetch(APIIP.ip+'/logindata', {
+            method: "POST",
+            body: JSON.stringify(response),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+            });
 
         } )
 

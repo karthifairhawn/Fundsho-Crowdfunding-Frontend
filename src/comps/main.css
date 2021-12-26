@@ -837,7 +837,6 @@ box-sizing: border-box;
 
 
 
-
 .links-drop-down a{
   color: yellowgreen;
 }
@@ -1234,6 +1233,8 @@ html {
 
 /* Wallet Page */
 
+
+
 .wallet-container{
   
   display:flex;
@@ -1279,6 +1280,13 @@ html {
 }
 .fa-green{
   background-color: #8cc150;
+  border-radius: 50%;
+  padding:1px;
+  font-size:0.8rem;
+  margin: 0px 2px;
+}
+.fa-red{
+  background-color: red;
   border-radius: 50%;
   padding:1px;
   font-size:0.8rem;
