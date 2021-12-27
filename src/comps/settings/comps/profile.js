@@ -1,10 +1,25 @@
-import { useState,useEffect} from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { useState,useEffect } from "react";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {APIIP} from '../config';
 toast.configure();
 
 const Profile = () => {
+
+    
+
+    const [changedData,setChangedData] = useState(false);
+    const [fname,setFname] = useState("");
+    const [lname,setLname] = useState("");
+    const [email,setEmail] = useState("");
+    const [dob,setDob] = useState("");
+
+
+    
+    const [phNumber,setPhNumber] = useState("");
+    const [username,setUsername] = useState("");
+    // const [firstRender,setFirstRender] = useState(true);
+
 
     const notify = (msg,Type) => {
         toast(msg,{
@@ -13,25 +28,39 @@ const Profile = () => {
         })
     }
 
-    const [changedData,setChangedData] = useState(false);
-    const [fname,setFname] = useState(localStorage.getItem("fname"));
-    const [lname,setLname] = useState(localStorage.getItem("lname"));
-    const [email,setEmail] = useState(localStorage.getItem("email"));
-    const [dob,setDob] = useState(localStorage.getItem("dob"));
-
-
     
-    const [phNumber,setPhNumber] = useState(localStorage.getItem("phNumber"));    
-    const [username,setUsername] = useState(localStorage.getItem("username"));
-    const [firstRender,setFirstRender] = useState(true);
-    
-    useEffect(() => {
-        if(firstRender){
-            setFirstRender(false);
-        }else{
-            setChangedData(true);
+
+   useEffect(() =>{        
+        var nullValues = false;
+        function checkNull(msg){
+            if(msg === "null" || msg ===null){
+                nullValues=true;
+                
+                return "";
+            }       
+            return msg;
         }
-    },[fname,lname,email,dob,phNumber,username]);
+        setChangedData(false);
+        setFname(checkNull(localStorage.getItem("fname")));
+        setLname(checkNull(localStorage.getItem("lname")));
+        setEmail(checkNull(localStorage.getItem("email")));
+        setDob(checkNull(localStorage.getItem("dob")));        
+        setPhNumber(checkNull(localStorage.getItem("phNumber")));
+        setUsername(checkNull(localStorage.getItem("username")));
+        // setFirstRender(true);
+        if(nullValues){
+            notify("Please update profile","warning");
+        }
+    },[]);
+    
+    // useEffect(() => {
+    //     if(firstRender){
+    //         setFirstRender(false);
+    //     }else{
+    //         setChangedData(true);
+    //     }
+    // },[fname,lname,email,dob,phNumber,username]);
+
 
     function updateProfile() {
 
@@ -70,11 +99,7 @@ const Profile = () => {
     return ( 
         <>
    <div className="title">Edit Profile</div>
-            <ToastContainer
-                    autoClose={2000}
-                    position="top-right"
-                    className="toast-container"                       
-                />
+
             <form className="form-container-profile">
                 
                 <div className="profile-page-img"> <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="profile-img" /> </div>

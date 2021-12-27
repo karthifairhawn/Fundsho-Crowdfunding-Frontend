@@ -1,16 +1,23 @@
 package com.api.spring.boot.funsho.api.resource;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import com.api.spring.boot.funsho.api.entity.changePassword;
 import com.api.spring.boot.funsho.api.entity.login;
+import com.api.spring.boot.funsho.api.entity.loginData;
 import com.api.spring.boot.funsho.api.entity.users;
+import com.api.spring.boot.funsho.api.entity.wallet.transaction;
+import com.api.spring.boot.funsho.api.entity.wallet.wallet;
 import com.api.spring.boot.funsho.api.exceptions.oldPasswordWrong;
 import com.api.spring.boot.funsho.api.exceptions.userNotFoundException;
+import com.api.spring.boot.funsho.api.repository.loginDataRepository;
 import com.api.spring.boot.funsho.api.repository.userRepository;
+import com.api.spring.boot.funsho.api.repository.walletRepository;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -26,6 +33,13 @@ public class usersResource {
     @Autowired
     userRepository UserRepository;
     private HttpServletRequest request;
+
+    @Autowired
+    walletRepository WalletRepository;
+
+    @Autowired
+    loginDataRepository LoginDataRepository;
+
 
     @Autowired
     public void setRequest(HttpServletRequest request) {
@@ -50,9 +64,29 @@ public class usersResource {
     }
 
     @PostMapping("/users")
-    public void saveUsers(@RequestBody users user){
+    public MappingJacksonValue saveUsers(@RequestBody users user){
 
         UserRepository.save(user);
+        users newUser = UserRepository.findByEmail(user.getEmail());
+
+        loginData newLoginData = loginData.builder()
+                                .userId(newUser.getUserId())                                
+                                .build();
+        LoginDataRepository.save(newLoginData);
+
+        MappingJacksonValue mapping = new MappingJacksonValue(newUser);
+        mapping.setFilters(passwordFilter());
+        
+
+        wallet newWallet = wallet.builder()
+                            .Balance(0l)
+                            .user(newUser)
+                            .Transaction(new ArrayList<transaction>())
+                            .build();
+
+        WalletRepository.save(newWallet);
+        return mapping;
+        
     }
 
     @PostMapping("/updateuser")

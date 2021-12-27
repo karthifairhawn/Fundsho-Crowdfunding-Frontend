@@ -13,4 +13,10 @@ public interface requestsRepository extends JpaRepository<requests,Long> {
         nativeQuery = true
     )
     List<Object> getAllRequests();
+
+    @Query(
+        value = "SELECT username,title,request_info,bonafide_url,additional_url,votes,amount_already,amount_required,total_amount,requested_date from public.users right join requests on users.user_id = requests.user_id where requests.user_id=?1",
+        nativeQuery = true
+    )
+    List<Object> getAllRequestsById(Long userId);
 }

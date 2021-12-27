@@ -20,6 +20,11 @@ public class requestsResource {
         return  RequestsRepository.getAllRequests();
     }
 
+    @GetMapping("/requests/{userId}")
+    public List<Object> getAllRequests(@PathVariable Long userId){
+        return  RequestsRepository.getAllRequestsById(userId);
+    }
+
     @GetMapping("/requeststemplate")
     public List<requests> getAllTemplateRequests(){
         return  RequestsRepository.findAll();

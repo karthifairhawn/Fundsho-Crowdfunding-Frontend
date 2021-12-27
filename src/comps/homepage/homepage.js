@@ -3,6 +3,7 @@ import { Link,useHistory } from 'react-router-dom';
 import {APIIP} from '../settings/config';
 
 
+
 const Homepage = () => {
 
     function getOS() {
@@ -130,27 +131,38 @@ const Homepage = () => {
                 throw new Error("User not found"); 
             }
         }) 
-        .then(json => setSession(json))
+        .then(json => {
+            setSession(json)            
+        })
         .catch(err => console.log(err));    
     }
 
-    function setSession(data) {          
-        localStorage.setItem('fname', data.fname);        
-        localStorage.setItem('lname', data.lname);        
-        localStorage.setItem('email', data.email);
+    function setSession(data) {             
         
-        let date = data.dob;
-        date = date.split("T")[0].split("-");
-        date = date[0]+"-"+date[1]+"-"+date[2];
-        localStorage.setItem('dob', date);     
-            
-        localStorage.setItem('phNumber', data.phNumber);         
+        localStorage.setItem('email', data.email);
         localStorage.setItem('userId', data.userId);        
-        localStorage.setItem('username', data.username);   
-        localStorage.setItem('balance',data.wallet.balance); 
+        localStorage.setItem('username', data.username);  
         localStorage.setItem('sessionkey',data.sessionKey); 
         
         
+          
+            
+        localStorage.setItem('phNumber', data.phNumber);         
+        
+        if(data.fname!==null) {
+            localStorage.setItem('balance',data.wallet.balance); 
+            localStorage.setItem('fname', data.fname);        
+            localStorage.setItem('lname', data.lname); 
+            let date = data.dob;
+            if(date!==null){
+                date = date.split("T")[0].split("-");
+                date = date[0]+"-"+date[1]+"-"+date[2];
+                localStorage.setItem('dob', date);   
+            }  
+            
+        }
+        
+                
 
         fetch("https://api.freegeoip.app/json/?apikey=24fb3460-658e-11ec-b1d2-5d001065511b")
         .then((response) => response.json())
@@ -176,6 +188,34 @@ const Homepage = () => {
     const [loginEmail,setEmail] = useState("");
     const [loginPassword,setPassword] = useState("");
 
+    const[newUserName,setNewUserName] = useState("");
+    const[newEmail,setNewEmail] = useState("");
+    const[newPassword,setNewPassword]  = useState("");
+
+    function signUp(){
+        let obj = {
+            email: newEmail,
+            password: newPassword,
+            username: newUserName
+        }
+        
+        fetch(APIIP.ip+'/users', {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        // .then( (response) => {            
+        //     if(response.ok) {
+        //         return response.json();
+        //     }
+        // }) 
+        // .then(json => setSession(json))
+        // .catch(err => console.log(err));   
+
+        let path = '/login'; 
+        history.push(path);
+    }
+
     useEffect(() =>{
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
@@ -197,12 +237,12 @@ const Homepage = () => {
             <div className="container-home" id="container-home">
                 <div className="form-container sign-up-container">
                     <form action="#" className="home-form">
-                        <h1>Create Account {process.env.api_address+" "}</h1>
+                        <h1>Create Account</h1>
                         <span>or use your email for registration</span>
-                        <input required className="login-input" type="text" placeholder="Name" />
-                        <input required className="login-input" type="email" placeholder="Email" />
-                        <input required className="login-input" type="password" placeholder="Password" />
-                        <button>Sign Up</button>
+                        <input required className="login-input" type="text" placeholder="User Name" value={newUserName} onChange={(e) => {setNewUserName(e.target.value)}}/>
+                        <input required className="login-input" type="email" placeholder="Email" value={newEmail} onChange={(e) => {setNewEmail(e.target.value)}}/>
+                        <input required className="login-input" type="password" placeholder="Password" value={newPassword} onChange={(e) => {setNewPassword(e.target.value)}}/>
+                        <button onClick={ (e)=> {e.preventDefault(); signUp(); } } >Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
@@ -228,7 +268,7 @@ const Homepage = () => {
                         <div className="overlay-panel overlay-right">
                             <h1>Hello, Friend!</h1>
                             <p>Enter your personal details and start journey with us</p>
-                            <button className="ghost" id="signUp">Sign Up</button>
+                            <button className="ghost" id="signUp" >Sign Up</button>
                         </div>
                     </div>
                 </div>                

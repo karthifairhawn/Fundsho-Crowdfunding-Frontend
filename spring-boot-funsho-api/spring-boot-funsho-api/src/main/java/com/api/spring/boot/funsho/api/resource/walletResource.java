@@ -13,6 +13,7 @@ import com.api.spring.boot.funsho.api.repository.userRepository;
 import com.api.spring.boot.funsho.api.repository.walletRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@CrossOrigin
 public class walletResource {
     
     @Autowired
@@ -39,21 +41,24 @@ public class walletResource {
 
     @PostMapping("/addmoney")
     public void addTransaction(@RequestBody addMoneyTransaction data){
-        System.out.println(data.toString());
+        System.out.println(data.toString()+"---------");
         users user = UserRepository.findBySessionKey(data.getSessionId());
-        if(user != null){
-            transaction curr =  transaction.builder()
-                        .reason("Add to wallet")
-                        .amount(data.getAmount())
-                        .status(data.getStatus())
-                        .direction(data.getDirection())
-                        .timestamp(new Date())
-                        .build();                    
-            wallet userWallet = WalletRepository.findWalletByFUserId(data.getUserId());
-            List<transaction> temp = userWallet.getTransaction();            
-            temp.add(curr);
-            WalletRepository.save(userWallet); 
-        }            
+        if(user == null) return;
+
+        transaction curr =  transaction.builder()
+                    .reason("Add to wallet")
+                    .amount(data.getAmount())
+                    .status(data.getStatus())
+                    .direction("in")
+                    .timestamp(new Date())
+                    .build();                    
+        wallet userWallet = WalletRepository.findWalletByFUserId(data.getUserId());
+        List<transaction> temp = userWallet.getTransaction();            
+        temp.add(curr);
+        if(data.getStatus().equals(true)) userWallet.setBalance(userWallet.getBalance()+data.getAmount());
+        WalletRepository.save(userWallet); 
+            
+                 
     }   
 
 

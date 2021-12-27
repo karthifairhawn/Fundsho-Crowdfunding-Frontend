@@ -15,27 +15,25 @@ const Security = () => {
     const [newPassword1,setNewPassword1] = useState("");
     const [newPassword2,setNewPassword2] = useState("");
 
-    class loginInfo{
-        constructor(loginData){
-            this.data = [];                        
-            this.loginData = loginData.split("+");
-            this.ip = this.loginData[0];
-            this.place = this.loginData[1];
-            this.time = this.loginData[2];
-            this.device = this.loginData[3];
-        }
-        getPlace(){
-            return this.place;
-        }
+    function loginInfo(loginData){        
+            var obj ={};                             
+            loginData = loginData.split("+");
+            obj.ip = loginData[0];
+            obj.place = loginData[1];
+            obj.time = loginData[2];
+            obj.device =loginData[3];                  
+            return obj;  
     }
 
-    const [currInfo,setCurrInfo] = useState();
-    const [prevInfo,setPrevInfo] = useState();
-    const [oldInfo,setOldInfo] = useState();
+
+
+    const [currInfo,setCurrInfo] = useState("");
+    const [prevInfo,setPrevInfo] = useState("");
+    const [oldInfo,setOldInfo] = useState("");
     const [layoutRendered,setLayoutRendered] = useState(false);
 
     const changePassword = () => {
-        console.log(newPassword1===newPassword2);
+        
         if(newPassword1 === newPassword2) {
             let obj = {
                 userId: localStorage.getItem("userId"),
@@ -63,6 +61,11 @@ const Security = () => {
                 }
             })             
             .catch(err => console.log(err));
+        }else{
+            notify("New passwords doesn't match", "warning"); 
+            setPassword("");  
+            setNewPassword1("");
+            setNewPassword2("");
         }
     }
 
@@ -73,9 +76,9 @@ const Security = () => {
             return response.json();
         })
         .then( (response) => {              
-            setCurrInfo( new loginInfo(response.currentLogin));
-            setPrevInfo( new loginInfo(response.previousLogin));
-            setOldInfo( new loginInfo(response.oldLogin));  
+            setCurrInfo(loginInfo(response.currentLogin));
+            setPrevInfo(loginInfo(response.previousLogin));
+            setOldInfo(loginInfo(response.oldLogin));  
             setLayoutRendered(true);          
         });
 

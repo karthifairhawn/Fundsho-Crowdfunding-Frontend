@@ -35,7 +35,7 @@ const App = () => {
               <Navbar />  
               <Plans />
             </Route>
-            <Route exact path="/availed">
+            <Route path="/availed">
               <Navbar/>  
               <AvailedList />
             </Route>

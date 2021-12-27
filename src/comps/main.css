@@ -514,11 +514,7 @@ input{
 .home-container{
 	width: 100%;
 	height: 90vh;
-	background-color:#252525;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	
+background-color:#252525;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
@@ -785,13 +781,33 @@ box-sizing: border-box;
 }
 
 .availed-list-container{		
-	background-color: #000000;
-	background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
-  display: flex;
-  justify-content: center;
-  height: 90vh;
+	background-color: #181818;
 	
+  display: flex;  
+  height: 90vh;	
+  
+  width: 100%;
 }
+
+.requests-sidebar{
+  color: #fff;
+  background-color: #181818;
+  height: 90vh;  
+  border-right: 2px solid #252525;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+/* .sidebar-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:1rem;
+  color: yellowgreen;
+} */
+
+.sidebar-item
+
 .al-main-container{
 	
 	display: flex;
@@ -892,7 +908,7 @@ box-sizing: border-box;
 	font-size:20px;
 }
 .al-vr-line{
-	border-left:1px solid #fff;
+	border-left:1px solid #252525;
 	width:20px;
 }
 .al-right-info{
@@ -1130,7 +1146,16 @@ html {
     justify-content: space-around;
     color: white;
 }
-
+.home-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-center{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 .left-pane-setting{
     width:18%;    
     background-color:#212121;          
@@ -1149,12 +1174,18 @@ html {
 }
 
 .left-pane-setting-options-btn:hover{
-    background-color:#313131;    
+    background-color:#313131;   
+    color: #fff; 
 }
 
 .active-pane-link{
   background-color:#313131;  
 }
+.progress{
+  width: 120%;
+}
+
+
 
 .profile-img{
     width: 50px;
@@ -1171,6 +1202,10 @@ html {
 }
 
 /* Profile Edit Page */
+
+.profile-info-name{
+  font-size:1rem;
+}
 
 .title{
   font-size:1.4rem;
@@ -1272,7 +1307,30 @@ html {
 }
 .transaction-table table{
   width:100%;
+
 }
+
+.transaction-table{
+  max-height: 40vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  border-bottom: 1px solid #fff;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+  ::-webkit-scrollbar-track {
+  background: #020202;
+}
+  ::-webkit-scrollbar-thumb {
+  background: yellowgreen; 
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  
+  background: yellowgreen; 
+} 
 .transaction-table td{
   border: 1px solid #fff;  
   padding: 10px;
