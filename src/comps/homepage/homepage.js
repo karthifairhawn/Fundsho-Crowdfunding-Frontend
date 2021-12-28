@@ -6,8 +6,7 @@ import {APIIP} from '../settings/config';
 
 const Homepage = () => {
 
-    function getOS() {
-        
+    function getOS() {        
         var nAgt = navigator.userAgent;
         var browserName  = navigator.appName;
         var fullVersion  = ''+parseFloat(navigator.appVersion); 

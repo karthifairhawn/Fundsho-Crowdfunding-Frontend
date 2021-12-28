@@ -18,7 +18,7 @@ const Profile = () => {
     
     const [phNumber,setPhNumber] = useState("");
     const [username,setUsername] = useState("");
-    // const [firstRender,setFirstRender] = useState(true);
+    
 
 
     const notify = (msg,Type) => {
@@ -34,8 +34,7 @@ const Profile = () => {
         var nullValues = false;
         function checkNull(msg){
             if(msg === "null" || msg ===null){
-                nullValues=true;
-                
+                nullValues=true;                
                 return "";
             }       
             return msg;
@@ -46,20 +45,14 @@ const Profile = () => {
         setEmail(checkNull(localStorage.getItem("email")));
         setDob(checkNull(localStorage.getItem("dob")));        
         setPhNumber(checkNull(localStorage.getItem("phNumber")));
-        setUsername(checkNull(localStorage.getItem("username")));
-        // setFirstRender(true);
+        setUsername(checkNull(localStorage.getItem("username")));        
         if(nullValues){
             notify("Please update profile","warning");
         }
     },[]);
-    
-    // useEffect(() => {
-    //     if(firstRender){
-    //         setFirstRender(false);
-    //     }else{
-    //         setChangedData(true);
-    //     }
-    // },[fname,lname,email,dob,phNumber,username]);
+
+
+    useEffect(() => {});
 
 
     function updateProfile() {
@@ -108,11 +101,11 @@ const Profile = () => {
                 <div className="form-set_of_2">
                     <span className="names-span">                    
                         <label htmlFor="firstname">First Name</label>
-                        <input type="text" value={fname} onChange={ (e) => setFname(e.target.value)}/>
+                        <input type="text" value={fname} onChange={ (e) => {setChangedData(true); setFname(e.target.value)}}/>
                     </span>
                     <span className="names-span">                    
                         <label htmlFor="lastname">Last Name</label>
-                        <input type="text" value={lname} onChange={ (e) => setLname(e.target.value)}/>
+                        <input type="text" value={lname} onChange={ (e) => {setChangedData(true);setLname(e.target.value)}}/>
                     </span>
                 </div>
                 <br />
@@ -120,11 +113,11 @@ const Profile = () => {
                 <div className="form-set_of_2">
                     <span className="names-span">                    
                             <label htmlFor="firstname">Email</label>
-                            <input type="email" value={email} onChange={ (e) => setEmail(e.target.value)}/> 
+                            <input type="email" value={email} onChange={ (e) => {setChangedData(true);setEmail(e.target.value)}}/> 
                     </span>                
                     <span className="names-span">                    
                             <label htmlFor="username">User Name</label>
-                            <input type="text" value={username} onChange={ (e) => setUsername(e.target)} />
+                            <input type="text" value={username} onChange={ (e) => {setChangedData(true);setUsername(e.target)}} />
                     </span>
                 </div>
                 <br />
@@ -132,7 +125,7 @@ const Profile = () => {
                 <div className="form-set_of_2">
                     <span className="names-span">                    
                             <label htmlFor="dob">DOB</label>
-                            <input type="date" value={dob} onChange={ (e) => setDob(e.target.value)} />
+                            <input type="date" value={dob} onChange={ (e) => {setChangedData(true);setDob(e.target.value)}} />
                     </span>                                
                 </div>
                 <br />
@@ -140,7 +133,7 @@ const Profile = () => {
                 <div className="form-set_of_2">
                     <span className="names-span">                    
                             <label htmlFor="number">Contact Number</label>
-                            <input type="text" value={phNumber} onChange={ (e) => setPhNumber(e.target.value)}/>
+                            <input type="text" value={phNumber} onChange={ (e) => {setChangedData(true);setPhNumber(e.target.value)}}/>
                     </span>                                
                 </div>
                 <br />

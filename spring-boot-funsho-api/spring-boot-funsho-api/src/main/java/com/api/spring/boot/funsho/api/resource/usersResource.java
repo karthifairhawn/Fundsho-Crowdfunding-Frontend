@@ -2,7 +2,7 @@ package com.api.spring.boot.funsho.api.resource;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,6 +23,8 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +48,23 @@ public class usersResource {
         this.request = request;
     }
 
+
+    // @GetMapping("/hello")
+    // public simpleJson hello() {
+    //     return new simpleJson();
+    // }
+
+    
+    @GetMapping("/hello")
+    public ResponseEntity<String> listAllHeaders(
+        @RequestHeader Map<String, String> headers) {
+        headers.forEach((key, value) -> {
+            System.out.println(String.format("Header '%s' = %s", key, value));
+        });
+
+        return new ResponseEntity<String>(String.format("Listed %d headers", headers.size()), HttpStatus.OK);
+    }
+
     @GetMapping("/users")
     public MappingJacksonValue findAll()
     {
@@ -55,12 +74,13 @@ public class usersResource {
     }
 
     @GetMapping("/getuser/{sessionKey}")
-    public MappingJacksonValue findUsingSessonKey(@PathVariable String sessionKey)
+    public MappingJacksonValue findUposingSessonKey(@PathVariable String sessionKey)
     {
         System.out.println(sessionKey);
         MappingJacksonValue mapping = new MappingJacksonValue(UserRepository.findBySessionKey(sessionKey));
         mapping.setFilters(passwordFilter());
         return mapping;
+       
     }
 
     @PostMapping("/users")

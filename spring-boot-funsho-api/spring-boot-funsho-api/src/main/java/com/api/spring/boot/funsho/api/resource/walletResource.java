@@ -3,7 +3,6 @@ package com.api.spring.boot.funsho.api.resource;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transaction;
 
 import com.api.spring.boot.funsho.api.entity.users;
 import com.api.spring.boot.funsho.api.entity.wallet.addMoneyTransaction;
@@ -14,8 +13,7 @@ import com.api.spring.boot.funsho.api.repository.walletRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

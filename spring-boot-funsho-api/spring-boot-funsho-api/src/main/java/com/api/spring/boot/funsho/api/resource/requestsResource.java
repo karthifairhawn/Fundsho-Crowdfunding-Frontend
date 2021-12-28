@@ -30,10 +30,17 @@ public class requestsResource {
         return  RequestsRepository.findAll();
     }
 
+    @GetMapping("/requestsbyrid/{reqId}")
+    public Object getRequestsByReqId(@PathVariable Long reqId){
+        return  RequestsRepository.getRequestsByReqId(reqId);
+    }
+
     @PostMapping("/requests")
     public void addNewRequests(@RequestBody requests req){
         req.setVotes(0);
         req.setRequestedDate(new Date());
+        req.setAmountRequired(req.getTotalAmount());
+        req.setAmountAlready(0);        
         RequestsRepository.save(req);
     }
 }

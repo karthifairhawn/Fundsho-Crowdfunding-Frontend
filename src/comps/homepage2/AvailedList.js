@@ -2,6 +2,10 @@ import React, { useState,useEffect } from 'react';
 import Request from './Request.js';
 import {NavLink, Route,useLocation,useHistory } from 'react-router-dom';
 import {APIIP} from '../settings/config';
+import ViewRequest from './ViewRequest';
+
+
+import NewRequest from './NewRequest';
 
 const AvailedList = () => {
 
@@ -34,8 +38,6 @@ const AvailedList = () => {
 
     if(path==='/availed'){
         history.push("/availed/all")
-        // return <Redirect to="/availed/all" />
-        // window.location.href = "/availed/all";
     }
 
     return (
@@ -46,7 +48,23 @@ const AvailedList = () => {
             </div>     
 
             <Route path="/availed/all">
-                <div className="availed-list-container">                          
+                <div className="availed-list-container">    
+
+
+               {
+                Object.entries(data).map((item,idx) => {
+                    return (
+
+                        <Route key={idx} path={"/availed/all/"+item[1][10]}>
+                            <ViewRequest id={item[1][10]} />
+                        </Route>
+
+                    );
+                })  
+                }
+                
+
+                <Route exact path="/availed/all">
                     <div className="al-main-container">                
                         {     
                             Object.entries(data).map((item,idx) => (                          
@@ -61,18 +79,28 @@ const AvailedList = () => {
                                 amountAlready={item[1][6]}
                                 amountRequired={item[1][7]}
                                 amountTotal={item[1][8]} 
-                                date={item[1][9]}                                             
+                                date={item[1][9]}    
+                                reqId={item[1][10]}                                             
                                 />
                             ))
                         }
                     </div>                
+                </Route>
+
                 </div>
             </Route>
 
 
             
             <Route path={"/availed/"+localStorage.getItem("userId")}>
-                <div className="availed-list-container">                          
+                
+                
+                <div className="availed-list-container">  
+                        <div className="add-request">
+
+                        <NewRequest/>
+                            
+                        </div>                        
                     <div className="al-main-container">                
                         {     
                             Object.entries(ownData).map((item,idx) => (                          
@@ -87,7 +115,8 @@ const AvailedList = () => {
                                 amountAlready={item[1][6]}
                                 amountRequired={item[1][7]}
                                 amountTotal={item[1][8]} 
-                                date={item[1][9]}                                             
+                                date={item[1][9]}   
+
                                 />
                             ))
                         }

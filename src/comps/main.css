@@ -3,6 +3,14 @@
     margin: 0px;    
 }
 
+textarea{
+  background-color: #181818;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-bottom: 1px solid yellowgreen;
+}
+
 .disabled {
   opacity: 0.4;
   cursor:default  !important;
@@ -14,9 +22,19 @@ a{
 }
 
 input{
-  padding: 1rem 0.2rem;
+  padding: 1.1rem 0.2rem;
+  margin: 0.1rem;
+  border: none;
+  background-color: #181818 ;
+  color: #fff;
+  border-bottom: 1px solid rgba(153, 205, 50, 0.455);
+  outline: none;
 }
 
+input:active{
+  border: none;
+  
+}
 
 
 .content-404{
@@ -28,7 +46,10 @@ input{
 .about-content{
     width: 100%;
     height: 90vh;
-    background-color: #252525;
+    background-color: #2525256b;
+    background-image: url("https://www.collab2.co.za/wp-content/uploads/2017/06/contact-us-background.jpg");    
+    /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.86)), url("https://www.collab2.co.za/wp-content/uploads/2017/06/contact-us-background.jpg-img-path"); */
+
     color: #fff;    
 }
 
@@ -40,6 +61,8 @@ input{
     overflow:auto;
 }
 .all-about-info{
+  background-color: #252525e5;
+  padding: 0 1rem;
   width: 60%;  
 }
 
@@ -511,10 +534,19 @@ input{
 }
 
 /* Homepage CSS */
+
+.overlay{
+
+  background-color: #252525d9;
+
+}
 .home-container{
 	width: 100%;
 	height: 90vh;
-background-color:#252525;
+  background-color:#252525;
+  background-image: url("https://i.pinimg.com/originals/69/99/85/699985e4f45a5e1e8596b98ea8999ab9.jpg");
+  background-repeat:no-repeat;
+  background-size: cover;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
@@ -580,8 +612,9 @@ border-color: #FFFFFF;
 
 .home-form {
 color: #FFFFFF;
-background-color: #485461;
-background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+background-color: #252525;
+/* background-color: #485461;
+background-image: linear-gradient(315deg, #485461 0%, #28313b 74%); */
 /* background-color: #FFFFFF; */
 display: flex;
 align-items: center;
@@ -780,13 +813,44 @@ box-sizing: border-box;
 	font-family: 'Jura', sans-serif;
 }
 
+.add-request{
+  display: block;
+  align-items: flex-end;
+  margin:1rem 0;
+  width: 100%;
+}
+.new-request-form{
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  
+}
+.new-request-form input{
+  margin:0.2rem 0;
+}
 .availed-list-container{		
 	background-color: #181818;
 	
   display: flex;  
+  flex-direction: column;
   height: 90vh;	
   
   width: 100%;
+}
+
+.request-from-header{
+  display: flex;
+  justify-content: space-between;
+  color: yellowgreen;
+}
+
+.ReactModal__Overlay{
+  background-color: rgba(0, 0, 0, 0.326) !important;
+  backdrop-filter: blur(5px);
+
+}
+.white{
+  color: #fff !important;
 }
 
 .requests-sidebar{
@@ -806,7 +870,6 @@ box-sizing: border-box;
   color: yellowgreen;
 } */
 
-.sidebar-item
 
 .al-main-container{
 	
@@ -821,7 +884,7 @@ box-sizing: border-box;
 	align-items: center;
 	padding: 10px;
 
-	overflow-y: scroll;
+	overflow-y: scroll !important;
 
 }
 
@@ -1457,4 +1520,134 @@ html {
 }
 .sub-element2 {
   font-size:0.9rem;
+}
+
+
+/* Single Page Request */
+
+.singlerequest-page{
+  color: #fff;
+  margin-left: 1rem;
+}
+
+.spr-container{
+  background-color: #181818;
+  opacity: 1;
+  background-image: radial-gradient(circle at center center, #9acd32, #181818), repeating-radial-gradient(circle at center center, #9acd32, #9acd32, 40px, transparent 80px, transparent 40px);
+  background-blend-mode: multiply;  
+  height:90vh;
+  overflow-y: scroll;
+}
+
+.srp-header{
+  display: flex;
+  color:#fff;
+  width:100%;
+  padding:1rem;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom: 1px solid rgba(153, 205, 50, 0.238);
+}
+.srp-header .fa{
+  color: yellowgreen !important;
+  font-size: 1.6rem;
+}
+
+
+.srp-content{
+  display: flex;
+  align-items:center;
+  margin-left: -1rem;
+}
+
+.srp-content .al-arrows{
+  background-color:rgba(153, 205, 50, 0.421);
+  border-radius:0 15px 15px 0;
+  margin:0 0.5rem 0 0;
+}
+
+.srp-content .al-arrows .fa{
+  font-size: 1.7rem;
+}
+
+
+.srp-content p{
+  text-indent: 1rem;
+  margin:1rem 0;  
+}
+
+.shared-edit{
+
+}
+.shared-edit span{
+  margin:0 1rem 0 0;
+  cursor: pointer;  
+  
+}
+
+.donation-progress .progress{
+  width:70% !important;  
+  height:1.5rem;
+}
+
+.donation-progress {
+  display: flex;
+  align-items:center;
+  margin:0.8rem 0;
+}
+
+.donation-progress span{
+  font-size:1rem;
+  font-weight: 600;
+  margin:0 0.4rem 0 0 ;
+}
+.donation-progress .progress .progress-bar{
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.srp-information{
+  display: flex;
+  flex-direction: column;  
+}
+.srp-information span{
+  font-size: 1rem;  
+  display: flex;
+  align-items:center;
+}
+
+.srp-information a:hover{
+  color:#fff;
+ 
+}
+
+/* SRP COMMENT SECTION */
+
+.srp-comment-section span{
+  font-size: 1rem;
+}
+
+.add-comment{
+  display: flex;
+  align-items:center;
+}
+.add-comment input{
+  border:none;
+  outline: none;
+  border-bottom: 1px solid white;
+  padding:0.7rem 0.1rem;
+  background-color: #080c03;
+  width:60%;
+  height:1rem;
+  margin: 0 0 0 1rem;
+}
+.add-comment-img img{
+  width:50px;
+  border-radius: 50%;
+}
+
+.add-comment button{
+  opacity: 0.5;
+  padding: 8px 30px;
+  margin-left: 1rem;  
 }
