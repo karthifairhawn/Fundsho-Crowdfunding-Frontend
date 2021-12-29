@@ -7,6 +7,7 @@ import Contact from './comps/contact/contact.js';
 import Plans from './comps/plans/plans.js';
 import AvailedList from './comps/homepage2/AvailedList.js';
 import Setting from './comps/settings/settings';
+import NewRequestPage from './comps/NewRequestPage';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './comps/main.css';
@@ -42,6 +43,9 @@ const App = () => {
             <Route path="/settings">
               <Navbar/>  
               <Setting />
+            </Route>
+            <Route path="/newrequest">
+               <NewRequestPage />              
             </Route>
             <Route path="*">
               <Navbar />  

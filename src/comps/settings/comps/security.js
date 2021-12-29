@@ -123,15 +123,15 @@ const Security = () => {
                     <form className="change-password-form">
                         <span className="change-pass-row">
                             <label>Old Password :</label>
-                            <input type="password" value={password} onChange={ (e) => { setPassword(e.target.value); }}/>
+                            <input placeholder="Enter old password" type="password" value={password} onChange={ (e) => { setPassword(e.target.value); }}/>
                         </span>
                         <span className="change-pass-row">
                             <label>New Password :</label>
-                            <input type="password" value={newPassword1} onChange={ (e) => { setNewPassword1(e.target.value); }} />
+                            <input placeholder="Enter new password" type="password" value={newPassword1} onChange={ (e) => { setNewPassword1(e.target.value); }} />
                         </span>
                         <span className="change-pass-row">
                             <label>Retype New Password :</label>
-                            <input type="password" value={newPassword2} onChange={ (e) => { setNewPassword2(e.target.value); }} />
+                            <input placeholder="Enter new password again" type="password" value={newPassword2} onChange={ (e) => { setNewPassword2(e.target.value); }} />
                         </span>                                   
                         <Button onClick={ (e) => { e.preventDefault(); changePassword(); }} variant="danger">Change Password</Button>
                     </form>

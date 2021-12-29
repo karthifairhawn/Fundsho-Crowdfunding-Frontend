@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import {Link} from 'react-router-dom';
 import { useState } from 'react';
 import {APIIP} from '../settings/config';
 
@@ -16,7 +17,7 @@ const customStyles = {
   
 };
 
-const NewRequest = () => {
+const NewRequestButton = () => {
 
     function updateRequest() {
 
@@ -56,13 +57,15 @@ const NewRequest = () => {
   
     return (
       <div>
-        <button onClick={openModal}>Add New Request</button>
+        {/* <button onClick={openModal}>Add New Request</button> */}
+        <button><Link to="/newrequest">Add New Request</Link></button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
           contentLabel="Example Modal"
+          ariaHideApp={false}
         >
           <div className="request-from-header">
               <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Enter Request Details</h2><button onClick={closeModal}>close</button>  
@@ -75,7 +78,7 @@ const NewRequest = () => {
             <input type="text" placeholder="Bonafide URL" value={bonafide} onChange={ (e) => (setBonafide(e.target.value))}/>
             <input type="text" placeholder="Additional URL" value={additional} onChange={ (e) => (setAdditional(e.target.value))}/>
 
-            <label class="white">Deadline for donation</label>
+            <label className="white">Deadline for donation</label>
             <input type="date" value={deadline} onChange={ (e) => (setDeadline(e.target.value))}/>
 
             <input type="text" value={amount} onChange={ (e) => (setAmount(e.target.value))} placeholder="Total amount required"/>          
@@ -92,4 +95,4 @@ const NewRequest = () => {
     );
   }
  
-export default NewRequest;
+export default NewRequestButton;

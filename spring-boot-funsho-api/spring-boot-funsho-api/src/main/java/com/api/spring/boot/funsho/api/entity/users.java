@@ -37,6 +37,7 @@ public class users {
 
     String username;
 
+    String place;
     @OneToOne(
         mappedBy = "user"
     )

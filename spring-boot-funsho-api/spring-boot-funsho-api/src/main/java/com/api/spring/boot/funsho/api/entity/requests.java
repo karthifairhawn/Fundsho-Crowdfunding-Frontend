@@ -16,12 +16,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class requests{
+public class requests{    
 
     @Id
     @GeneratedValue
     Long requestId;
-    int userId;
+    Long userId;
 
     @Column(length = 1337)
     String title;
@@ -32,10 +32,9 @@ public class requests{
 
     Date deadLine;
     Date requestedDate;
-    int votes;
-    int totalAmount;
-    int amountAlready;
-    int amountRequired;
+    Long votes;
+    Long totalAmount;
+    Long amountAlready;
 
     String bonafideUrl;
     String additionalUrl;

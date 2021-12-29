@@ -3,6 +3,10 @@
     margin: 0px;    
 }
 
+.black-btn{
+  background-color:#252525;
+}
+
 textarea{
   background-color: #181818;
   outline: none;
@@ -823,6 +827,8 @@ box-sizing: border-box;
   width: 700px;
   display: flex;
   flex-direction: column;
+  height: 600px;
+  overflow-y:scroll;
   
 }
 .new-request-form input{
@@ -874,8 +880,7 @@ box-sizing: border-box;
 .al-main-container{
 	
 	display: flex;
-	flex-direction: column;
-	width: 1300px;
+	flex-direction: column;	
   height: 90vh;
   border-radius:0px 0px 10px 10px;
 	background-color: #22262b;
@@ -923,6 +928,7 @@ box-sizing: border-box;
 .read-more .fa-arrow-right{
   font-size:12px;
   margin: 0px 10px;
+
 }
 
 .requests-links a{
@@ -943,6 +949,8 @@ box-sizing: border-box;
 .request-footer .read-more{
   color: yellowgreen;
   cursor: pointer;
+  display: flex;
+  align-items:center;
 }
 
 .availed-element{
@@ -1188,6 +1196,9 @@ html {
 .setting-container{
     height:100%;    
     display: flex;
+}
+.setting-container input{
+  border-color:rgba(255, 255, 255, 0.306);
 }
 .left-pane-setting-info{
     display: flex;
@@ -1531,9 +1542,9 @@ html {
 }
 
 .spr-container{
-  background-color: #181818;
+  background-color: #22262b;
   opacity: 1;
-  background-image: radial-gradient(circle at center center, #9acd32, #181818), repeating-radial-gradient(circle at center center, #9acd32, #9acd32, 40px, transparent 80px, transparent 40px);
+  /* background-image: radial-gradient(circle at center center, #9acd32, #181818), repeating-radial-gradient(circle at center center, #9acd32, #9acd32, 40px, transparent 80px, transparent 40px); */
   background-blend-mode: multiply;  
   height:90vh;
   overflow-y: scroll;
@@ -1551,6 +1562,7 @@ html {
 .srp-header .fa{
   color: yellowgreen !important;
   font-size: 1.6rem;
+  cursor: pointer;
 }
 
 
@@ -1636,7 +1648,7 @@ html {
   outline: none;
   border-bottom: 1px solid white;
   padding:0.7rem 0.1rem;
-  background-color: #080c03;
+  background-color: #22262b;
   width:60%;
   height:1rem;
   margin: 0 0 0 1rem;
@@ -1650,4 +1662,118 @@ html {
   opacity: 0.5;
   padding: 8px 30px;
   margin-left: 1rem;  
+}
+
+.donate-container{
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  justify-content: center;
+}
+
+.donate-container button{
+  padding: 0.5rem 1rem;
+  border:1px solid #0075ff;
+
+}
+
+
+/* New Request Page */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=PT+Sans&family=Ubuntu:wght@300&display=swap');
+
+.NewRequestPage *{
+  font-family: 'Comforter Brush', cursive;
+  font-family: 'PT Sans', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+}
+.NewRequestPage{
+  background-color:#353535;
+  color:#fff;
+  height:90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+.nrp-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin:2rem;
+}
+
+.nrp-header-title{
+  font-size:2rem;
+}
+
+.nrp-form-header{
+  display: flex;
+  align-items: center;
+}
+
+.nrp-form{
+  width:1200px;  
+}
+
+.nrp-form h6{
+  color: yellowgreen;
+  font-weight:600;
+  font-size:1.3rem;
+  margin:1rem 0;
+}
+
+.nrp-header-number{
+  font-size:1.5rem;  
+  padding: 1rem 2rem; 
+  border-radius: 10px;
+}
+
+.nrp-form-sub-group-row{
+  display: flex;
+  justify-content: space-between;
+  margin:1rem 0;
+}
+
+.nrp-form-element{
+  display: flex;
+  flex-direction:column;
+  width: 100%;
+}
+
+.nrp-form-element input{
+  width:80%;
+  height:3rem;
+  background-color: #353535;
+  color: #fff !important;
+  border-color: #fff;
+}
+.nrp-nighty-width{
+  width:90% !important;
+}
+
+.nrp-form-element select{  
+  width:21rem;
+  background-color: #353535;
+  color: #fff !important;
+  border:0px;
+  border-bottom: 1px solid #fff;
+  outline:0px;
+  height:3.2rem;
+}
+
+.no-border{
+  border: none;
+}
+
+.nrp-form{
+  padding:0rem 5rem;
+}
+
+.nrp-form textarea{
+  background-color: #353535;
+  border:1px solid #fff;
+  margin: 1rem 0rem;
+  padding:0.5rem;
 }

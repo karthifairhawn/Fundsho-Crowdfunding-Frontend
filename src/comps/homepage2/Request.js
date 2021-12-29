@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import ProgressBar from 'react-bootstrap/ProgressBar'
-const Request = ({title,user,desc,bonafide,additional,vote,amountAlready,amountRequired,amountTotal,date,reqId}) => {    
+const Request = ({user,title,desc,bonafide,additional,vote,amountAlready,amountTotal,date,reqId}) => {    
 return(
     <div className="availed-element container">                            
         <div className="al-arrows">
@@ -22,7 +22,7 @@ return(
                     </details>
                 </div>                
                 <span className="requested-user">
-                    @{user} on  {date.split("T")[0]}                    
+                    @{user} on  {date.split("T")[0]}                                        
                 </span>
             </div>                                
             <div className="al-description">
@@ -36,7 +36,7 @@ return(
                         <div><ProgressBar  variant="success"  now={(amountAlready/amountTotal)*100} label={`${amountAlready}₹`}/></div>
                     </div>
                     <div className="read-more">
-                        <Link to={'/availed/all/'+reqId} >View Request </Link>                        
+                        <Link className="white" to={'/availed/all/'+reqId} >View Request </Link>                        
                         <i className="fa fa-arrow-right" aria-hidden="true"></i>
                     </div>
                 </div>

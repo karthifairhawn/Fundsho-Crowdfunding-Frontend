@@ -1,39 +1,50 @@
 import ProgressBar from 'react-bootstrap/ProgressBar'
+// import {useState} from 'react';
+// import {APIIP} from '../settings/config';
+import {useHistory} from 'react-router-dom';
+import DonateModel from './DonateModel';
 
-const SinglePageRequest = () => {
+const SinglePageRequest = ({title,user,desc,bonafide,additional,vote,amountAlready,amountTotal,date,reqId,reRenderFunction}) => {
+
+    // const [data,setData] = useState({});
+    const history = useHistory();
+
+    const goBack = ()=>{
+        history.push('/availed/all');           
+    };
+
+
     return ( 
         <div className="spr-container">
             <div className="singlerequest-page">
 
                 <div className="srp-header">
-                    <i className="fa fa-arrow-left" aria-hidden="true"></i>
-                    <div className="srp-title">This is title</div>
+                    <i onClick={ () =>{goBack();}} className="fa fa-arrow-left" aria-hidden="true"></i>
+                    <div className="srp-title">{title}</div>
                     <div className="srp-donate-now-btn">
-                        <button>Donate Now</button>
+
+                        {
+                            user!==localStorage.getItem('username')
+                            &&
+                            <DonateModel amountRequiredProp={amountTotal-amountAlready} reqId={reqId} reRenderFunction={reRenderFunction}/>
+                        }
+
                     </div>                    
                 </div>          
 
                 <div className="srp-sub-header">
-                    @karthifairhawn on 12/02/2021
+                    @{user} on {date}
                 </div>      
 
                 <div className="srp-content">
                     <div className="al-arrows">
                         <i className="fa fa-arrow-circle-up" id="up1"  ></i>
-                        <span className="up-count" id="count1">12</span>
+                        <span className="up-count" id="count1">{vote}</span>
                         <i className="fa fa-arrow-circle-down" id="down1"></i>
                     </div>
                     <div>
                     <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus nisi qui blanditiis vero perferendis ipsam. Facere, voluptatem in eius aliquid inventore consectetur, nisi nesciunt similique dolorem doloremque corporis saepe ex.
-                        Ipsum nam blanditiis odio asperiores corporis praesentium quia maiores beatae, neque cupiditate. Perspiciatis debitis aperiam sequi dolorum, assumenda voluptates nesciunt hic ratione animi. Aperiam delectus officiis suscipit alias nisi sit?
-                        Perspiciatis doloremque, ducimus sint fuga, architecto iure qui ea animi ipsum facilis aliquid suscipit, ratione deleniti molestiae iste voluptatibus! Sapiente dicta deleniti placeat natus fugit quam necessitatibus labore quasi veniam.
-                        Dolor harum eos odio quas, nisi reprehenderit perferendis nihil obcaecati unde provident enim, at quae molestiae vitae excepturi minus illo. Temporibus soluta repellat esse porro earum quam doloribus ullam nesciunt.
-                        Exercitationem, rem! Qui perferendis, voluptatibus atque accusantium numquam, magni omnis dolorum repellat veniam, reiciendis earum autem sunt. Impedit nemo culpa tenetur aliquid voluptate molestiae, eaque illo unde beatae et omnis?
-                        Dicta earum illum facilis quos. Provident, vel. Eius tenetur reiciendis, nisi nam veritatis obcaecati dolorum? Delectus provident eius ipsa, animi, aperiam minima dicta voluptates excepturi fuga impedit dolore explicabo totam.
-                        Atque distinctio voluptate ut quasi quia. Dolorum id cumque nam dolor tenetur, dicta et nobis magnam numquam tempore qui odit ipsam, ab ullam obcaecati ipsa corporis sed nihil perferendis eius.
-                        Pariatur similique provident, voluptas nesciunt inventore corporis sed eveniet velit accusamus omnis explicabo blanditiis consequuntur nobis. Asperiores nihil dicta cupiditate quia perferendis, incidunt alias! Quidem reprehenderit neque itaque suscipit commodi.
-                        Aut, hic modi minima maiores a harum qui! Quisquam facilis, vero ratione ut quibusdam recusandae exercitationem tempora? Necessitatibus, eius voluptatem, quia expedita minus, aliquid fuga doloribus labore adipisci praesentium cum!
+                            {desc}
                     </p>
                     <div className="shared-edit">
                         <span>Share</span>
@@ -46,16 +57,16 @@ const SinglePageRequest = () => {
                 </div>
 
                 <div className="donation-progress">
-                    <span>Recieved&nbsp;<i className="fa fa-inr" aria-hidden="true"></i></span>
-                    <ProgressBar animated striped variant="success"  now='34' label="123₹ / 500₹"/>
+                    <span>Recieved&nbsp;</span>
+                    <ProgressBar animated striped variant="success"  now={(amountAlready/amountTotal) *100} ></ProgressBar> <span> &nbsp;{amountAlready+ "₹ / "+amountTotal+"₹"}</span>
                 </div>
 
                 <div className="srp-information">
                     <span>
-                        <i className="fa fa-link" aria-hidden="true">&nbsp;</i><a href="" target="_blank">Bonafide Informations</a>
+                        <i className="fa fa-link" aria-hidden="true">&nbsp;</i><a rel="noopener noreferrer" href={bonafide} target="_blank">Bonafide Information</a>
                     </span>                        
                     <span>
-                        <i className="fa fa-link" aria-hidden="true">&nbsp;</i><a href="" target="_blank">Additional Informations</a>                    
+                        <i className="fa fa-link" aria-hidden="true">&nbsp;</i><a rel="noopener noreferrer" href={additional} target="_blank">Additional Informations</a>                    
                     </span>
                 </div>
 
