@@ -5,9 +5,9 @@ import NotFound from './comps/notfound.js';
 import About from './comps/about/about.js';
 import Contact from './comps/contact/contact.js';
 import Plans from './comps/plans/plans.js';
-import AvailedList from './comps/homepage2/AvailedList.js';
 import Setting from './comps/settings/settings';
 import NewRequestPage from './comps/NewRequestPage';
+import MainHomepage from './comps/homepage3/homepage';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './comps/main.css';
@@ -20,8 +20,7 @@ const App = () => {
       <div className="App">            
         <div className="content">
           <Switch>
-            <Route exact path="/login">
-            <Navbar /> 
+            <Route exact path="/login">            
               <Homepage />
             </Route>
             <Route exact path="/about">
@@ -38,10 +37,10 @@ const App = () => {
             </Route>
             <Route path="/availed">
               <Navbar/>  
-              <AvailedList />
+              <MainHomepage/>
             </Route>
             <Route path="/settings">
-              <Navbar/>  
+              <Navbar dark="true"/>  
               <Setting />
             </Route>
             <Route path="/newrequest">

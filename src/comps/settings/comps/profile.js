@@ -138,14 +138,17 @@ const Profile = () => {
                 </div>
                 <br />
 
-                <span className="setting-submit-btn">
+                <span className="submit-btn-grp">
                     <span></span>
-                    <input type="submit" className={"" + (changedData ? '' : 'disabled')} value="Save Changes" onClick={ (e) => { 
+
+                    <button type="submit" className={"" + (changedData ? '' : 'disabled')} value="Save Changes" onClick={ (e) => { 
                             e.preventDefault(); 
                             if(!e.target.classList.contains("disabled")){
                                 updateProfile();
                             }                            
-                        } }/>
+                        } }>
+                    Submit
+                    </button>
                 </span>
 
 

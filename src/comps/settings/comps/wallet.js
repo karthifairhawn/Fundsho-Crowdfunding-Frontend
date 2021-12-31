@@ -10,7 +10,7 @@ const Wallet = () => {
         fontSize:'1rem'
     }
     useEffect(() => {
-        fetch("http://localhost:8080/getuser/"+localStorage.getItem("sessionkey"))
+        fetch(APIIP.ip+"/getuser/"+localStorage.getItem("sessionkey"))
         .then((response)=> response.json())
         .then((response => {
             setWalletBalance(response.wallet.balance);

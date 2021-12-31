@@ -16,6 +16,7 @@
     "dotenv": "^10.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
+    "pure-react-carousel": "^1.27.8",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.4",
     "react-browser-router": "^2.1.2",

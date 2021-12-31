@@ -46,8 +46,7 @@ public class requestsResource {
     @PostMapping("/requests")
     public void addNewRequests(@RequestBody requests req){
         req.setVotes(0l);
-        req.setRequestedDate(new Date());
-        req.setAmountRequired(req.getTotalAmount());
+        req.setRequestedDate(new Date());        
         req.setAmountAlready(0l);        
         RequestsRepository.save(req);
     }

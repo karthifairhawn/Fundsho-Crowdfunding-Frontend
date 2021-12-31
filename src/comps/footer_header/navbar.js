@@ -1,16 +1,31 @@
 import { Link,NavLink,useHistory } from 'react-router-dom';
 
 
-const Navbar = () => {
+const Navbar = ({dark}) => {
     const history = useHistory();
     const logout = () => {
         localStorage.clear();
         history.push('/login');
     }
 
+    var style = {
+        
+      };
+    if(dark==="true"){
+        style={            
+            "backgroundColor":"black !important"
+        }
+            
+    }else{
+        style={};
+        
+    }
+
+    
     
     return ( 
-        <div className="cnavbar">
+        <div>
+        <div className="cnavbar"  style={style}>
         <span className="logo"></span>
             <div className="nav-links">
 
@@ -39,6 +54,7 @@ const Navbar = () => {
         }             
         
         <span></span>
+        </div>
         </div>
      );
 }
