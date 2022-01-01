@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,10 +50,17 @@ public class usersRequestResource {
 
     @GetMapping("/topthreerequests")
     public List<usersRequest> getUsersRequests(){
-        Pageable firstPage = PageRequest.of(0, 3, Sort.by("annualSalary"));
-        List<usersRequest>  page = UsersRequestRepository.findAll(firstPage).getContent();
+        Pageable firstPage = PageRequest.of(0, 3, Sort.by("amountRecieved").descending());
+        List<usersRequest>  page = UsersRequestRepository.findAll(firstPage).getContent();        
         return page;
     }    
+
+    @GetMapping("/usersrequests/{id}")
+    public List<usersRequest> getUsersRequests(@PathVariable("id") int id){
+        Pageable pageFormat = PageRequest.of(id, 8, Sort.by("amountRecieved").descending());
+        List<usersRequest>  page = UsersRequestRepository.findAll(pageFormat).getContent();        
+        return page;
+    }   
 
     @PostMapping("/usersrequests")
     public usersRequest saveUsersRequests(@RequestBody usersRequest obj){

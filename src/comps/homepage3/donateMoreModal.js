@@ -14,7 +14,7 @@ const DonateMore = () => {
 
                 <div className="donate-more-main-contact-us">
                     <span className="bold">Confused about how to start a Fundraiser?</span>
-                    <button className="contact-now-btn">Contact Now</button>
+                    <Link to="/contact-us"><button className="contact-now-btn">Contact Now</button></Link>
                 </div>              
             </div>
         </div>

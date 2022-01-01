@@ -1,20 +1,58 @@
 import RequestCard from "./userRequestCard";
 import DonateMore from "./donateMoreModal";
 import { Link } from 'react-router-dom';
-import {useEffect} from 'react';
+import {useEffect,useState} from 'react';
 import {APIIP} from '../settings/config';
 
 
 const MainHomepage = () => {
 
+    const [topThreeData,setTopThreeData] = useState([]);
+    const [allFundraisers,setAllFundraiser] = useState([]);
+
+    const [loadedPage,setLoadedPage] = useState(0);
+    const [moreDataAvailable,setMoreDataAvailable] = useState(true);
+
     useEffect(() => {
         fetch(APIIP.ip+'/topthreerequests')
             .then( (response) => {
                 return response.json();
-            }).then( (response) => {
-                console.log(response);
+            }).then( (response) => {                
+                setTopThreeData(response);
             })
-    })
+
+        fetch(APIIP.ip+'/usersrequests/'+loadedPage)
+        .then( (response) => {
+            return response.json();
+        }).then( (response) => { 
+            for (let i = response.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [response[i], response[j]] = [response[j], response[i]];
+            }               
+            setAllFundraiser(response);            
+        })
+    },[])
+
+    function updateFundraisers(page){  
+        fetch(APIIP.ip+'/usersrequests/'+page)
+        .then( (response) => {
+            return response.json();
+        }).then( (response) => {                
+            for (let i = response.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [response[i], response[j]] = [response[j], response[i]];
+            }
+            if(response.length<8) setMoreDataAvailable(false);
+            setAllFundraiser( allFundraisers.concat(response));
+            setTimeout(() => {
+                window.scrollTo(0, window.scrollY+1000)
+            }, 200); 
+        })                    
+    }
+
+    function scrollToDonate(){
+        window.scrollTo(0, window.scrollY+450);
+    }
     return ( 
         <div className="conatiner">
             <div className="hero-banner">
@@ -24,7 +62,7 @@ const MainHomepage = () => {
                     <br />
                     <br />
                     <div>
-                        <Link to=""><button className="donate-btn">Donate Now</button></Link>     
+                        <button onClick={scrollToDonate} className="donate-btn">Donate Now</button>     
                         <Link to="/newrequest"><button className="fundraiser-btn">Became a Fundraiser</button>         </Link>       
                     </div>
                 </div>
@@ -36,10 +74,14 @@ const MainHomepage = () => {
 
                 <h6 className="home-title title bold">Featured Fundraisers</h6>   
                 <div className="list-card-body">                        
-                    <div className="home-card-container">                            
-                        <RequestCard/>
-                        <RequestCard/>
-                        <RequestCard/>                          
+                    <div className="home-card-container">        
+
+                    {
+                    topThreeData.map(function (arrayItem,idx) {
+                        return <RequestCard key={idx} data={arrayItem}/>
+                    })  
+
+                    }                      
                     </div>                        
                 </div>
 
@@ -49,17 +91,26 @@ const MainHomepage = () => {
 
                 <div className="list-card-body">                        
                     <div className="home-card-container">                            
-                        <RequestCard/>
-                        <RequestCard/>
-                        <RequestCard/>
-                        <RequestCard/>                                                                
-                    </div>                        
-                </div>
+                    {
+                        allFundraisers.map(function (arrayItem,idx) {
+                            return <RequestCard key={idx} data={arrayItem}/>
+                        })  
+                    }                       
 
-
-                                            
-
+                    </div>                                           
+                </div>                                                         
             </div>
+
+            <div className="center load-more-btn">
+                {
+                    moreDataAvailable &&
+                    <button  className="center" onClick={() =>  updateFundraisers(allFundraisers.length/8)}>                    
+                        Load More &nbsp;
+                        <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                    </button>       
+                }
+            </div>
+            
 
             {/* <SuccessStories/> */}
 

@@ -829,12 +829,17 @@ text-decoration: none;
 box-sizing: border-box;
 	font-family: 'Jura', sans-serif;
 }
-
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
 
 .list-card-body{
 
   display:flex;
-  justify-content:center;
+  justify-content:center;  
+  align-items:center;
 }
 
 .homepage-card{
@@ -1283,12 +1288,13 @@ html {
 }
 
 .left-pane-setting-options-btn:hover{
-    background-color:#136787;   
+    background-color:#6da0b7;   
     color: #fff; 
 }
 
 .active-pane-link{
-  background-color:#136787;  
+  background-color:#136787 !important;  
+  cursor:default;
   color:#fff !important;
 }
 
@@ -1337,6 +1343,7 @@ html {
   /* margin: 10px; */
   padding: 10px 10px;  
   font-weight: bold;
+  color:#015c7e;
 } 
 .profile-page-img{
   display: flex;
@@ -1760,6 +1767,10 @@ html {
   flex-direction: column;
   align-items: center;
 }
+
+.NewRequestPage .fa-cloud-upload{
+  cursor: pointer;
+}
 .nrp-header{
   display: flex;
   flex-direction: column;
@@ -1892,7 +1903,18 @@ html {
 }
 
 .conatiner{
-  background-color:black;
+  background-color: #e6e6e6;
+}
+
+.load-more-btn .fa{
+  font-size:1rem;
+}
+
+.load-more-btn button{
+  background-color: #015c7e;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
 }
 
 
@@ -1920,6 +1942,16 @@ html {
   min-height: 250px;
 }
 
+.home-card-body p{
+  height:140px;    
+}
+
+
+.home-card-body h4{
+  height:80px;
+  font-size: 1.3rem;
+}
+
 .tag {
   background: #cccccc;
   border-radius: 50px;
@@ -1931,7 +1963,7 @@ html {
   cursor: pointer;
 }
 .tag-teal {
-  background-color: yellowgreen;
+  background-color: #6191a9;
 }
 .tag-purple {
   background-color: #5e76bf;
@@ -2033,7 +2065,7 @@ html {
 
 .contact-now-btn{
   background-color:#0077ff00;
-  color:yellowgreen;
+  color:#015c7e;
   margin-top: 10px;
 }
 
