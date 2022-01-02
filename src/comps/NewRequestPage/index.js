@@ -1,14 +1,24 @@
-import {useState} from 'react';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Navbar from '../footer_header/navbar';
+import { Container } from '@mui/material';
+import { useState } from 'react';
 import {APIIP} from '../settings/config';
+import {Link} from 'react-router-dom';
 
+const steps = ['Personal Information', 'Educational Information', 'Contact Information','Event Information'];
 
-const NewRequestPage = () => {
+export default function HorizontalLinearStepper() {
 
     const [fname,setFname] = useState("");
     const [lname,setLname] = useState("");
-    const [gender,setGender] = useState("");
-    const [identity,setIdentity] = useState("123");
+    const [gender,setGender] = useState("Male");
+    const [identity,setIdentity] = useState("");
     const [fatherName,setFatherName] = useState("");
     const [fatherOccupation,setFatherOccupation] = useState("");
     const[annualSalary,setAnnualSalary] = useState(0);
@@ -24,7 +34,7 @@ const NewRequestPage = () => {
     const [address,setAddress] = useState("");
     const [city,setCity] = useState("");
     const [pincode,setPincode] = useState("");
-    const [state,setState] = useState("");
+    const [state,setState] = useState("Andhra Pradesh");
     const [email,setEmail] = useState("");
 
     const [eventTitle,setEventTitle] = useState("");
@@ -36,24 +46,127 @@ const NewRequestPage = () => {
     
     const[identityFile,setIdentityFile] = useState(undefined);
     const[bonafideFile,setBonafideFile] = useState(undefined);
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [skipped, setSkipped] = React.useState(new Set());
 
+    const isStepOptional = (step) => {
+    return step === -1;
+    };
+
+    const isStepSkipped = (step) => {
+    return skipped.has(step);
+    };
+
+    const handleNext = () => {
+        let newSkipped = skipped;
+        if (isStepSkipped(activeStep)) {
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+        }
+
+        if(personalInformationNotNull() && activeStep === 0){
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }else if(activeStep===0){
+            alert("Fill all data");
+        }
+        
+        if(educationalInformationNotNull() && activeStep ===1){
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }else if(activeStep===1){
+            alert("Fill all data");
+        }
+
+        if(contactInformationNotNull() && activeStep ===2){
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }else if(activeStep===2){
+            alert("Fill all data");
+        }
+
+        if(eventInformationNotNull() && activeStep ===3){
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }else if(activeStep===3){
+            alert("Fill all data");
+        }
+
+        setSkipped(newSkipped);
+    };
+
+    const personalInformationNotNull = ()  =>{        
+        if(fname.length<1 || lname.length<1 || gender.length<1 || 
+            fatherName.length<1 || annualSalary===0 || dob==="" 
+            || identity.length<1 || fatherOccupation.length<1
+            ){                
+                return false;
+            }
+        
+        return true;
+    }
+
+    const educationalInformationNotNull = () => {
+        if(instName==="" || studyProgram==="" || instPlace==="" ||cgpa===""){
+            return false;
+        }
+        return true;
+    }
+
+    const contactInformationNotNull = () => {
+        if(phNumber===0 || address==="" || pincode==="" || city==="" ||
+            state==="" || email===""){
+                return false;
+            }
+        return  true;
+    }
+
+    const eventInformationNotNull = () => {
+        if(eventTitle==="" || eventDescription==="" || amountRequired===0
+        || deadLine==="" || bonafideUrl==="" || additionalLink===""){
+            return false;
+        }
+        return  true;
+    }
+
+
+
+
+    const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const handleSkip = () => {
+    if (!isStepOptional(activeStep)) {
+        // You probably want to guard against something like this,
+        // it should never occur unless someone's actively trying to break something.
+        throw new Error("You can't skip a step that isn't optional.");
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
+        const newSkipped = new Set(prevSkipped.values());
+        newSkipped.add(activeStep);
+        return newSkipped;
+    });
+    };
+
+    // const handleReset = () => {
+    // setActiveStep(0);
+    // };
 
     async function sendNewRequest(file,func) {        
-        const formData = new FormData();
-        formData.append('file',file);
-        
-        
-        
-        fetch(APIIP.ip+'/savefile', {
-            method: 'POST',
-            body: formData
-        })    
-        .then(r => r.text())
-        .then(data => {
-            func(data);
-        })  
+    const formData = new FormData();
+    formData.append('file',file);
 
-        console.log(bonafideUrl);
+
+
+    fetch(APIIP.ip+'/savefile', {
+        method: 'POST',
+        body: formData
+    })    
+    .then(r => r.text())
+    .then(data => {
+        func(data);
+    })  
+
+    console.log(bonafideUrl);
     }
 
     function submitRequest(){
@@ -99,103 +212,168 @@ const NewRequestPage = () => {
         console.log(obj);
     }
 
+  return (
+      <>
+      <Navbar/>
+      <Container className="new-request-cont">
+          <div className="title center">New Fundraiser</div>
+    <Box sx={{ width: '100%' }}>
 
-    return ( 
-        <>
-        <Navbar />
-        {/* <h1>{console.log(identity)}</h1> */}
-        <div className="NewRequestPage">            
-            <div className="nrp-header">
-                <h6 className="nrp-header-title">You can request for you and also for your friends with you account</h6>
-                <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores dicta quidem, nisi voluptatibus fugiat totam. Velit</h6>
-            </div>
+      <Stepper activeStep={activeStep}>
+        {steps.map((label, index) => {
+          const stepProps = {};
+          const labelProps = {};
+          if (isStepOptional(index)) {
+            labelProps.optional = (
+              <Typography variant="caption">Optional</Typography>
+            );
+          }
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step key={label} {...stepProps}>
+              <StepLabel {...labelProps}>{label}</StepLabel>              
+            </Step>
+          );
+        })}
+        </Stepper>
+        {activeStep === steps.length ? (
 
-            <form className="nrp-form">
+        <React.Fragment>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            All steps completed - you&apos;re finished
+            {submitRequest()}          
+        </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Box sx={{ flex: '1 1 auto' }} />
+            <Link to="/home"><Button>Go Home</Button></Link>
+            </Box>
+        </React.Fragment>
 
-                <h6>Personal Information</h6>     
-                <div className="nrp-form-sub-group-row">
-                    <div className="nrp-form-element">
-                        <label>First Name</label>
-                        <input type="text" required value={fname} onChange={(e) => {setFname(e.target.value)}} placeholder="Enter First Name"/>
-                    </div>
-                    <div className="nrp-form-element">
-                        <label>Last Name</label>
-                        <input type="text" required value={lname} onChange={(e) => {setLname(e.target.value)}} placeholder="Enter Last Name"/>
-                    </div>
-                </div>         
-                <div className="nrp-form-sub-group-row">
-                    <div className="nrp-form-element">
-                        <label>Gender</label>
-                        <select value={gender} required onChange={(e) => {setGender(e.target.value)}}>
-                            <option value="actual value 1">Male</option>
-                            <option value="actual value 2">Female</option>
-                            <option value="actual value 3">Others</option>
-                        </select>
-                    </div>
-                    <div className="nrp-form-element">
-                        <label>Uplaod Identity </label>
-                        <div>
-                            <input type="file" required accept='.pdf'    
-                            // value={identityFile}
-                            onChange={(e) => setIdentityFile(e.target.files[0])}
-                            className="no-border" placeholder="Enter Last Name"/>
-                            <i className="fa fa-cloud-upload" onClick={()=>{ sendNewRequest(identityFile,setIdentity)}} aria-hidden="true"></i>
-                        </div>                            
-                    </div>
-                </div> 
-                <div className="nrp-form-sub-group-row">
-                    <div className="nrp-form-element">
-                        <label>Father Name</label>
-                        <input value={fatherName} required onChange={(e) => {setFatherName(e.target.value)}} type="text" placeholder="Enter Father Name"/>
-                    </div>
-                    <div className="nrp-form-element">
-                        <label>Father Occupation</label>
-                        <input value={fatherOccupation} required  onChange={(e) => {setFatherOccupation(e.target.value)}} type="text" placeholder="Enter Father Occupation"/>
-                    </div>
-                </div>   
+      ) : (
+        <React.Fragment>
 
-                <div className="nrp-form-sub-group-row">
-                    <div className="nrp-form-element">
-                        <label>Household Annual Salary</label>
-                        <input  value={annualSalary} required onChange={(e) => {setAnnualSalary(e.target.value)}} type="number" placeholder="Enter Father Name"/>
-                    </div>
-                    <div className="nrp-form-element">
-                        <label>D.O.B</label>
-                        <input  value={dob} required onChange={(e) => {setDob(e.target.value)}} type="date" placeholder="Enter Father Occupation"/>
-                    </div>
-                </div> 
+            {/* Contents of Page */}
+            <Typography sx={{ mt: 2, mb: 1 }}>
 
-                {/* ------------------------ */}
+                Step {activeStep + 1}
 
-                <br />
+                {
+                    activeStep === 0
+                    && 
+                    <>
+                    <div className="nrp-form-sub-group-row">
+                        <div className="nrp-form-element">
+                            <label>First Name</label>
+                            <input type="text" required value={fname} onChange={(e) => {setFname(e.target.value)}} placeholder="Enter First Name"/>                                                 
+                            {/* <TextField id="standard-basic" label="Standard" variant="standard" />        */}
+                        </div>
+                        
+                        <div className="nrp-form-element">
+                            <label>Last Name</label>
+                            <input type="text" required value={lname} onChange={(e) => {setLname(e.target.value)}} placeholder="Enter Last Name"/>
+                        </div>
+                    </div>         
+                    <div className="nrp-form-sub-group-row">
+                        <div className="nrp-form-element">
+                            <label>Gender</label>
+                            <select value={gender} required onChange={(e) => {setGender(e.target.value)}}>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                        <div className="nrp-form-element">
+                            <label>
+                                {
+                                    !identity
+                                    &&
+                                    "Upload Identity" 
+                                }
+                                {
+                                    identity
+                                    &&
+                                    "Uploaded Identity" 
+                                }
+                            </label>
+                            <div>
+                                {
+                                    !identity
+                                    &&
+                                    <>
+                                        <input type="file" required accept='.pdf'    
+                                        onChange={(e) => setIdentityFile(e.target.files[0])}
+                                        className="no-border" placeholder="Enter Last Name"/>
+                                        <i className="fa fa-cloud-upload" onClick={()=>{ sendNewRequest(identityFile,setIdentity)}} aria-hidden="true"></i>
+                                    </>
+                                }   
+                                {
+                                    identity
+                                    &&
+                                    <h5>{identity}<i class="fa fa-check" style={{color:'green'}} aria-hidden="true"></i></h5>
+                                }
+                                
+                            </div>                            
+                        </div>
+                    </div> 
+                    <div className="nrp-form-sub-group-row">
+                        <div className="nrp-form-element">
+                            <label>Father Name</label>
+                            <input value={fatherName} required onChange={(e) => {setFatherName(e.target.value)}} type="text" placeholder="Enter Father Name"/>
+                        </div>
+                        <div className="nrp-form-element">
+                            <label>Father Occupation</label>
+                            <input value={fatherOccupation} required  onChange={(e) => {setFatherOccupation(e.target.value)}} type="text" placeholder="Enter Father Occupation"/>
+                        </div>
+                    </div>   
 
-                <h6>Educational Information</h6> 
-                <div className="nrp-form-sub-group-row">
-                    <div className="nrp-form-element">
-                        <label>Institute Name</label>
-                        <input  required value={instName} onChange={(e) => {setInstName(e.target.value)}} type="text" placeholder="Enter Institute Name"/>
+                    <div className="nrp-form-sub-group-row">
+                        <div className="nrp-form-element">
+                            <label>Household Annual Salary</label>
+                            <input  value={annualSalary} required onChange={(e) => {setAnnualSalary(e.target.value)}} type="number" placeholder="Enter Father Name"/>
+                        </div>
+                        <div className="nrp-form-element">
+                            <label>D.O.B</label>
+                            <input  value={dob} required onChange={(e) => {setDob(e.target.value)}} type="date" placeholder="Enter Father Occupation"/>
+                        </div>
+                    </div> 
+                    </>
+                }
+
+                {
+                    activeStep === 1
+                    && 
+                    <>
+                    <div className="nrp-form-sub-group-row">
+                        <div className="nrp-form-element">
+                            <label>Institute Name</label>
+                            <input  required value={instName} onChange={(e) => {setInstName(e.target.value)}} type="text" placeholder="Enter Institute Name"/>
+                        </div>
+                        <div className="nrp-form-element">
+                            <label>Study Program (Diploma/B.E/Arts)</label>
+                            <input  required value={studyProgram} onChange={(e) => {setStudyProgram(e.target.value)}} type="text" placeholder="Enter your Stucy Program"/>
+                        </div>
+                    </div>  
+
+                    <div className="nrp-form-sub-group-row">
+                        <div className="nrp-form-element">
+                            <label>Institute Place</label>
+                            <input  required value={instPlace} onChange={(e) => {setInstPlace(e.target.value)}}type="text" placeholder="Enter Institute Place"/>
+                        </div>
+                        <div className="nrp-form-element">
+                            <label>CGPA / Percentage</label>
+                            <input  required value={cgpa} onChange={(e) => {setCgpa(e.target.value)}} type="number" placeholder="Enter your Stucy Program"/>
+                        </div>
                     </div>
-                    <div className="nrp-form-element">
-                        <label>Study Program (Diploma/B.E/Arts)</label>
-                        <input  required value={studyProgram} onChange={(e) => {setStudyProgram(e.target.value)}} type="text" placeholder="Enter your Stucy Program"/>
-                    </div>
-                </div>  
+                    </>
+                }
 
-                <div className="nrp-form-sub-group-row">
-                    <div className="nrp-form-element">
-                        <label>Institute Place</label>
-                        <input  required value={instPlace} onChange={(e) => {setInstPlace(e.target.value)}}type="text" placeholder="Enter Institute Place"/>
-                    </div>
-                    <div className="nrp-form-element">
-                        <label>CGPA / Percentage</label>
-                        <input  required value={cgpa} onChange={(e) => {setCgpa(e.target.value)}} type="number" placeholder="Enter your Stucy Program"/>
-                    </div>
-                </div>  
-
-
-                <br />
-                <h6>Contact Information</h6> 
-                <div className="nrp-form-sub-group-row">
+                {
+                    activeStep === 2
+                    && 
+                    <>
+                    <div className="nrp-form-sub-group-row">
                     <div className="nrp-form-element">
                         <label>Phone Number</label>
                         <input required value={phNumber} onChange={(e) => {setPhNumber(e.target.value)}} type="text" placeholder="Enter Ph Number"/>
@@ -261,16 +439,14 @@ const NewRequestPage = () => {
                         <label>Personal Email</label>
                         <input required value={email} onChange={(e) => {setEmail(e.target.value)}} type="email" placeholder="Enter Personal Email"/>
                     </div>
-                </div>  
-
-                
-                <br />
-
-
-                {/* ---------------- */}
-                
-                <h6>Event Information</h6>     
-                <div className="nrp-form-sub-group-row">
+                </div> 
+                    </>
+                }
+                {
+                    activeStep === 3
+                    && 
+                    <>
+                    <div className="nrp-form-sub-group-row">
                     <div className="nrp-form-element">
                         <label>Title</label>
                         <input required value={eventTitle} onChange={(e) => {setEventTitle(e.target.value)}} type="text" placeholder="Enter Event Title" className="nrp-nighty-width"/>
@@ -297,31 +473,76 @@ const NewRequestPage = () => {
 
                 <div className="nrp-form-sub-group-row">
                     <div className="nrp-form-element">
-                        <label>Bonafide PDF</label>
+
+                        <label>
+                            {
+                                !bonafideUrl
+                                &&
+                                "Upload Bonafide" 
+                            }
+                            {
+                                bonafideUrl
+                                &&
+                                "Uploaded Bonafide File" 
+                            }
+                        </label>
                         <div>
-                            <input required type="file" className="no-border"                     
-                            onChange={(e) => setBonafideFile(e.target.files[0])}
-                            placeholder="Enter Last Name"/>
-                            <i className="fa fa-cloud-upload" 
-                            onClick={()=>{ sendNewRequest(bonafideFile,setBonafideUrl )} }
-                            aria-hidden="true"></i>
-                        </div>   
+                            {
+                                !bonafideUrl
+                                &&
+                                <>
+                                    <input type="file" required accept='.pdf'    
+                                     onChange={(e) => setBonafideFile(e.target.files[0])}
+                                    className="no-border" placeholder="Enter Last Name"/>
+                                    <i className="fa fa-cloud-upload" onClick={()=>{ sendNewRequest(identityFile,setBonafideUrl)}} aria-hidden="true"></i>
+                                </>
+                            }   
+                            {
+                                bonafideUrl
+                                &&
+                                <h5>{bonafideUrl}<i class="fa fa-check" style={{color:'green'}} aria-hidden="true"></i></h5>
+                            }
+                                
+                        </div> 
                     </div>
                     <div className="nrp-form-element">
                         <label>Additional Link</label>
                         <input required value={additionalLink} onChange={(e) => {setAdditionalLink(e.target.value)}} type="text" placeholder="If any additional data"/>
                     </div>
                 </div>     
-                <br />
-                                          
-                <button onClick={(e)=>{submitRequest();e.preventDefault();}}>Submit for Review</button>
-            </form>
+                    </>
+                }
             
-            <br />
-            <br />
-        </div>        
-        </>
-     );
+            </Typography>
+
+
+
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Back
+            </Button>
+
+            <Box sx={{ flex: '1 1 auto' }} />
+            {isStepOptional(activeStep) && (
+              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                Skip
+              </Button>
+            )}
+
+            <Button onClick={handleNext}>
+              {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+            </Button>
+          </Box>
+        </React.Fragment>
+        
+      )}
+    </Box>
+    </Container>
+    </>
+  );
 }
- 
-export default NewRequestPage;

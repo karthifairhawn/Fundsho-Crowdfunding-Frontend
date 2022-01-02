@@ -41,7 +41,7 @@ const SingleRequest = () => {
         .then((response) => {setPageInformation(response); console.log(response);})    
     }
 
-    useEffect(() => {
+    useEffect((loadData) => {
         loadData();
     },[])
     return ( 

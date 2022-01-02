@@ -1,11 +1,16 @@
 import React from 'react';
+import Navbar from "../footer_header/navbar";
+
 class Contact extends React.Component{
+
     componentDidMount(){
 
     }
     render(){
         return(  
+            
             <>
+            <Navbar/>
                 <div className="contact-us">
                     <div className="title-cu">EMAILUS</div>
                     <form className="form-cu">
