@@ -3,14 +3,15 @@ import DonateMore from "./donateMoreModal";
 import { Link } from 'react-router-dom';
 import {useEffect,useState} from 'react';
 import {APIIP} from '../settings/config';
+import CardSkeleton from "./cardSkeleton";
+import Navbar from "../footer_header/navbar";
 
 
 const MainHomepage = () => {
 
+    
     const [topThreeData,setTopThreeData] = useState([]);
-    const [allFundraisers,setAllFundraiser] = useState([]);
-
-    const [loadedPage,setLoadedPage] = useState(0);
+    const [allFundraisers,setAllFundraiser] = useState([]);    
     const [moreDataAvailable,setMoreDataAvailable] = useState(true);
 
     useEffect(() => {
@@ -18,18 +19,22 @@ const MainHomepage = () => {
             .then( (response) => {
                 return response.json();
             }).then( (response) => {                
-                setTopThreeData(response);
+                setTimeout(() => {
+                    setTopThreeData(response);      
+                }, 1000);   
             })
 
-        fetch(APIIP.ip+'/usersrequests/'+loadedPage)
+        fetch(APIIP.ip+'/usersrequests/0')
         .then( (response) => {
             return response.json();
         }).then( (response) => { 
             for (let i = response.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [response[i], response[j]] = [response[j], response[i]];
-            }               
-            setAllFundraiser(response);            
+            }                           
+            setTimeout(() => {
+                setAllFundraiser(response); 
+            }, 1000);              
         })
     },[])
 
@@ -54,70 +59,87 @@ const MainHomepage = () => {
         window.scrollTo(0, window.scrollY+450);
     }
     return ( 
-        <div className="conatiner">
-            <div className="hero-banner">
-                <div className="hero-banner-text">
-                    <span className="bold">COME, LAY THE FOUNDATION OF EDUCATION</span>                    
-                    <span>Let us build a educated nation, together</span>
-                    <br />
-                    <br />
-                    <div>
-                        <button onClick={scrollToDonate} className="donate-btn">Donate Now</button>     
-                        <Link to="/newrequest"><button className="fundraiser-btn">Became a Fundraiser</button>         </Link>       
+        <>
+        <Navbar>
+            </Navbar>            
+                <div className="conatiner">
+                <div className="hero-banner">
+                    <div className="hero-banner-text">
+                        <span className="bold">COME, LAY THE FOUNDATION OF EDUCATION</span>                    
+                        <span>Let us build a educated nation, together</span>
+                        <br />
+                        <br />
+                        <div>
+                            <button onClick={scrollToDonate} className="donate-btn">Donate Now</button>     
+                            <Link to="/newrequest"><button className="fundraiser-btn">Became a Fundraiser</button>         </Link>       
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
 
-            <div className="homepage-card">                
+                <div className="homepage-card">                
 
-                <h6 className="home-title title bold">Featured Fundraisers</h6>   
-                <div className="list-card-body">                        
-                    <div className="home-card-container">        
+                    <h6 className="home-title title bold">Featured Fundraisers</h6>   
+                    <div className="list-card-body">                        
+                        <div className="home-card-container">        
 
-                    {
-                    topThreeData.map(function (arrayItem,idx) {
-                        return <RequestCard key={idx} data={arrayItem}/>
-                    })  
-
-                    }                      
-                    </div>                        
-                </div>
-
-                <DonateMore/>
-
-                <br />
-
-                <div className="list-card-body">                        
-                    <div className="home-card-container">                            
-                    {
-                        allFundraisers.map(function (arrayItem,idx) {
+                        {topThreeData.length<3 && 
+                        <>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                        </>
+                        }
+                        {
+                        topThreeData.map(function (arrayItem,idx) {
                             return <RequestCard key={idx} data={arrayItem}/>
                         })  
-                    }                       
 
-                    </div>                                           
-                </div>                                                         
-            </div>
+                        }                      
+                        </div>                        
+                    </div>
 
-            <div className="center load-more-btn">
-                {
-                    moreDataAvailable &&
-                    <button  className="center" onClick={() =>  updateFundraisers(allFundraisers.length/8)}>                    
-                        Load More &nbsp;
-                        <i class="fa fa-angle-double-down" aria-hidden="true"></i>
-                    </button>       
-                }
-            </div>
-            
+                    <DonateMore/>
 
-            {/* <SuccessStories/> */}
+                    <br />
 
+                    <div className="list-card-body">                        
+                        <div className="home-card-container">  
+                        {allFundraisers.length<2 && 
+                        <>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                            <CardSkeleton/>
+                            <CardSkeleton/>                        
+                        </>
+                        }                          
+                        {
+                            allFundraisers.map(function (arrayItem,idx) {
+                                return <RequestCard key={idx} data={arrayItem}/>
+                            })  
+                        }                       
 
+                        </div>                                           
+                    </div>                                                         
+                </div>
 
+                <div className="center load-more-btn">
+                    {
+                        moreDataAvailable &&
+                        <button  className="center" onClick={() =>  updateFundraisers(allFundraisers.length/8)}>                    
+                            Load More &nbsp;
+                            <i className="fa fa-angle-double-down" aria-hidden="true"></i>
+                        </button>       
+                    }
+                </div>        
+                </div>
 
-        </div>
+        </>        
      );
 }
  

@@ -3,12 +3,14 @@ import Email from './comps/email.js';
 import Security from './comps/security.js';
 import Wallet from './comps/wallet.js';
 import Profile from './comps/profile.js';
+import Navbar from '../footer_header/navbar.js';
 // import {useState,useEffect} from'react';
 
 
 const Setting = (  ) => {      
     return (
     <>       
+    <Navbar/>
      <div className="setting-container">
         <div className="left-pane-setting">
           <div className="left-pane-setting-info">

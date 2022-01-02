@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface usersRequestRepository extends JpaRepository<usersRequest,Long>{
+
+    usersRequest findByRequestId(long requestId);
     
 
     

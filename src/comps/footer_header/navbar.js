@@ -36,7 +36,7 @@ const Navbar = ({dark}) => {
 
             { 
                 localStorage.getItem('email')!==null && 
-                <NavLink className="navbarItem" to="/availed" activeClassName="active">home</NavLink>
+                <NavLink className="navbarItem" to="/home" activeClassName="active">home</NavLink>
             }
 
             <NavLink className="navbarItem" to="/about" activeClassName="active">about</NavLink>

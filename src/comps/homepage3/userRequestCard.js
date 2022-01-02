@@ -1,4 +1,5 @@
 import { ProgressBar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 const RequestCard = ({data}) => {
 
     function calculateDaysBetweenDates(date2) {
@@ -38,8 +39,15 @@ const RequestCard = ({data}) => {
                 <br />
 
                 <div className="donation-info">
-                    <div className="raise-donation"><b className="donated-amount">₹ {data.amountRecieved}</b> raised</div>
+                    <div className="raise-donation"><b className="donated-amount">₹ {data.amountRecieved}</b> raised</div>                    
                     <ProgressBar className="donation-progress-bar" now={ (data.amountRecieved/data.amountRequired)*100 } />
+
+                    <div className="total-donate">
+                        <div className="raise-donation">of {data.amountRequired}</div>
+                        <Link to={`/fundraiser/${data.requestId}`}>                            
+                            <button className="card-donate-btn center">Donate</button>
+                        </Link>
+                    </div>                    
                 </div>
                 
 
