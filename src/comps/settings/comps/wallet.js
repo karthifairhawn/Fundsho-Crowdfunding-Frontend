@@ -14,7 +14,7 @@ const Wallet = () => {
         .then((response)=> response.json())
         .then((response => {
             setWalletBalance(response.wallet.balance);
-            setTransaction(response.wallet.transaction);
+            setTransaction(response.wallet.transaction.reverse());
         }));
     },[balanceUpdate])
 
@@ -67,6 +67,10 @@ const Wallet = () => {
                     </span>            
                 </div>
                 <span className="title">All Transactions</span>
+                {
+
+                transaction.length > 0 ?
+
                 <div className="transaction-table">
                     <table>
                         <thead>
@@ -82,8 +86,8 @@ const Wallet = () => {
                                 <tr key={idx}>
                                     <td>{item[1].transactionId}</td>
                                     <td>{item[1].reason}</td>
-                                    <td className={ (item[1].status && "green-text") || (!item[1].status && "red-text")} >
-                                        {item[1].amount}
+                                    <td className={ (item[1].direction==="in" && "green-text") || (item[1].direction==="out" && "red-text")} >
+                                        {item[1].direction==="in" ? "+"+item[1].amount : "-"+item[1].amount}
                                     </td>
                                     <td><i className={(item[1].status && "fa fa-check fa-green") || (!item[1].status && "fa fa-times fa-red")} aria-hidden="true"></i>
                                         
@@ -97,6 +101,13 @@ const Wallet = () => {
                         </tbody>
                     </table>
                 </div>
+
+                :
+                <h5 className="center">
+                    No Transactions Yet
+                </h5>
+                }
+
             </div>
         </>
      );

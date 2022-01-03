@@ -38,8 +38,7 @@ public class walletResource {
     // }
 
     @PostMapping("/addmoney")
-    public void addTransaction(@RequestBody addMoneyTransaction data){
-        System.out.println(data.toString()+"---------");
+    public void addTransaction(@RequestBody addMoneyTransaction data){        
         users user = UserRepository.findBySessionKey(data.getSessionId());
         if(user == null) return;
 
@@ -49,7 +48,8 @@ public class walletResource {
                     .status(data.getStatus())
                     .direction("in")
                     .timestamp(new Date())
-                    .build();                    
+                    .build();  
+                                      
         wallet userWallet = WalletRepository.findWalletByFUserId(data.getUserId());
         List<transaction> temp = userWallet.getTransaction();            
         temp.add(curr);

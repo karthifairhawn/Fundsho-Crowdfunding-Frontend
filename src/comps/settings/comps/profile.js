@@ -29,6 +29,7 @@ const Profile = () => {
     }
 
     
+    
 
    useEffect(() =>{        
         var nullValues = false;
@@ -40,15 +41,34 @@ const Profile = () => {
             return msg;
         }
         setChangedData(false);
-        setFname(checkNull(localStorage.getItem("fname")));
-        setLname(checkNull(localStorage.getItem("lname")));
-        setEmail(checkNull(localStorage.getItem("email")));
-        setDob(checkNull(localStorage.getItem("dob")));        
-        setPhNumber(checkNull(localStorage.getItem("phNumber")));
-        setUsername(checkNull(localStorage.getItem("username")));        
-        if(nullValues){
-            notify("Please update profile","warning");
-        }
+        fetch(APIIP.ip+"/getuser/"+localStorage.getItem('sessionkey'))
+        .then( (response)=> response.json())
+        .then( (response => {
+
+            setFname(checkNull(response.fname));
+            setLname(checkNull(response.lname));
+            setEmail(checkNull(response.email));
+            setDob(checkNull(response.dob));        
+            setPhNumber(checkNull(response.phNumber));
+            setUsername(checkNull(response.username));       
+            
+            
+        
+            let date = checkNull(response.dob);
+            if(date!==null){
+                date = date.split("T")[0].split("-");
+                date = date[0]+"-"+date[1]+"-"+date[2];
+                setDob(date);   
+            }  
+            
+        
+
+            if(nullValues){
+                notify("Please update profile","warning");
+            }
+
+        }))
+
     },[]);
 
 

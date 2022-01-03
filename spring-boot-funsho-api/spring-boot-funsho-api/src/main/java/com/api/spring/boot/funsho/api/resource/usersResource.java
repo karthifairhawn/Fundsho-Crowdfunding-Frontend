@@ -6,11 +6,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
-import com.api.spring.boot.funsho.api.entity.changePassword;
-import com.api.spring.boot.funsho.api.entity.login;
-import com.api.spring.boot.funsho.api.entity.loginData;
 import com.api.spring.boot.funsho.api.entity.users;
+import com.api.spring.boot.funsho.api.entity.auth.changePassword;
+import com.api.spring.boot.funsho.api.entity.auth.login;
+import com.api.spring.boot.funsho.api.entity.auth.loginData;
 import com.api.spring.boot.funsho.api.entity.wallet.transaction;
 import com.api.spring.boot.funsho.api.entity.wallet.wallet;
 import com.api.spring.boot.funsho.api.exceptions.oldPasswordWrong;
@@ -54,7 +53,12 @@ public class usersResource {
     //     return new simpleJson();
     // }
 
-    
+    @GetMapping("/googlesingup/{id}")
+    public void googleSingUp(@PathVariable String id){
+        System.out.println(id);
+    }
+
+
     @GetMapping("/hello")
     public ResponseEntity<String> listAllHeaders(
         @RequestHeader Map<String, String> headers) {
@@ -76,7 +80,7 @@ public class usersResource {
     @GetMapping("/getuser/{sessionKey}")
     public MappingJacksonValue findUposingSessonKey(@PathVariable String sessionKey)
     {
-        System.out.println(sessionKey);
+        
         MappingJacksonValue mapping = new MappingJacksonValue(UserRepository.findBySessionKey(sessionKey));
         mapping.setFilters(passwordFilter());
         return mapping;

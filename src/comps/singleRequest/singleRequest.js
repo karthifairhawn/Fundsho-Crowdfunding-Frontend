@@ -36,13 +36,17 @@ const SingleRequest = () => {
     };
 
     function loadData(){
+        console.log(reqId);
         fetch(APIIP.ip+"/singlerequest/"+reqId)
         .then((response) => response.json())
         .then((response) => {setPageInformation(response); console.log(response);})    
     }
 
-    useEffect((loadData) => {
-        loadData();
+    useEffect(() => {
+        console.log(reqId);
+        fetch(APIIP.ip+"/singlerequest/"+reqId)
+        .then((response) => response.json())
+        .then((response) => {setPageInformation(response); console.log(response);})    
     },[])
     return ( 
 
@@ -214,7 +218,12 @@ const SingleRequest = () => {
 
 
                         <Col md={4} lg={4} sm={12} xs={12} >
-                            <DonateModal req={pageInformation} updateFunction={loadData}/>                            
+
+                            
+                            <DonateModal req={pageInformation} updateFunction={loadData}/>    
+                            
+
+
                             <div className="payment-options">
                                 <div className="credit-card">
                                 </div>

@@ -5,12 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.api.spring.boot.funsho.api.entity.users;
 import com.api.spring.boot.funsho.api.entity.requestsEntity.donateRequest;
 import com.api.spring.boot.funsho.api.entity.requestsEntity.usersRequest;
+import com.api.spring.boot.funsho.api.entity.wallet.transaction;
 import com.api.spring.boot.funsho.api.entity.wallet.wallet;
 import com.api.spring.boot.funsho.api.repository.userRepository;
 import com.api.spring.boot.funsho.api.repository.usersRequestRepository;
@@ -67,24 +69,11 @@ public class usersRequestResource {
     @PostMapping("/donatereq")
     public wallet donateToRequest(@RequestBody donateRequest request){
 
-        System.out.println("123");
-        System.out.println("123");
-        System.out.println("123");
+        
         users handlingUser = UserRepository.findBySessionKey(request.getSessionId());
-        System.out.println("123");
-        System.out.println("123");
-        System.out.println("123");
         wallet handlingUserWallet = handlingUser.getWallet();
-
-        System.out.println("123");
-        System.out.println("123");
-        System.out.println("123");
-
         usersRequest handlingRequests = UsersRequestRepository.findByRequestId(request.getRequestId());
 
-        System.out.println("123");
-        System.out.println("123");
-        System.out.println("123");
         if(handlingRequests.getAmountRecieved() >=handlingRequests.getAmountRequired()){
             System.out.println("Already Req dumbed");
             return handlingUserWallet;
@@ -96,10 +85,29 @@ public class usersRequestResource {
         if(handlingUser.getUserId()==recievingUser.getUserId()) return recievingUserWallet;
         if(handlingUser.getWallet().getBalance()<request.getDonationAmount()) return handlingUserWallet;
 
-        recievingUserWallet.setBalance(recievingUserWallet.getBalance()+request.getDonationAmount());  // Update Reciever Balance (Working)                
+
+        recievingUserWallet.setBalance(recievingUserWallet.getBalance()+request.getDonationAmount());  // Update Reciever Balance (Working)         
+        transaction recieverTransaction = transaction.builder()
+                    .reason("Donation Recieved From "+handlingUser.getFname())
+                    .amount(request.getDonationAmount())
+                    .status(true)
+                    .direction("in")
+                    .timestamp(new Date())
+                    .build();
+        recievingUserWallet.getTransaction().add(recieverTransaction);        
         UserRepository.save(recievingUser);
 
-        handlingUserWallet.setBalance(handlingUserWallet.getBalance()-request.getDonationAmount());        
+
+
+        handlingUserWallet.setBalance(handlingUserWallet.getBalance()-request.getDonationAmount());   
+        transaction donorTransaction = transaction.builder()
+                    .reason("Donation to "+recievingUser.getFname()+" successfull")
+                    .amount(request.getDonationAmount())
+                    .status(true)
+                    .direction("out")
+                    .timestamp(new Date())
+                    .build();
+        handlingUserWallet.getTransaction().add(donorTransaction);       
         UserRepository.save(handlingUser);
 
         handlingRequests.setAmountRecieved(handlingRequests.getAmountRecieved()+request.getDonationAmount());

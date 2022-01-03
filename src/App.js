@@ -1,4 +1,4 @@
-import Homepage from './comps/loginPage/homepage.js';
+import LoginPage from './comps/loginPage/LoginPage.js';
 import NotFound from './comps/notfound.js';
 import About from './comps/about/about.js';
 import Contact from './comps/contact/contact.js';
@@ -18,12 +18,14 @@ const App = () => {
     <Router>
       <div className="App">            
         <div className="content">
+          
           <Switch>
-            <Route exact path="/login"><Homepage /></Route>
+          <Route exact path="/"><MainHomepage /></Route>
+          <Route exact path="/home"><MainHomepage /></Route>
+            <Route exact path="/login"><LoginPage /></Route>
             <Route exact path="/about"><About /></Route>
             <Route exact path="/contact-us"><Contact /></Route>
-            <Route exact path="/plans"><Plans /></Route>
-            <Route exact path="/home"><MainHomepage/></Route>
+            <Route exact path="/plans"><Plans /></Route>            
             <Route path="/settings"><Setting /></Route>
 
             <Route exact path="/newrequest"><HorizontalLinearStepper/></Route>

@@ -7,13 +7,20 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Navbar from '../footer_header/navbar';
 import { Container } from '@mui/material';
-import { useState } from 'react';
+import { useState,useLayoutEffect } from 'react';
 import {APIIP} from '../settings/config';
-import {Link} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
 
 const steps = ['Personal Information', 'Educational Information', 'Contact Information','Event Information'];
 
 export default function HorizontalLinearStepper() {
+    let history = useHistory();
+    useLayoutEffect(() => {
+        if(localStorage.getItem('sessionkey')==="" || localStorage.getItem('sessionkey')===null){            
+            history.push('/login');
+        }
+        console.log(localStorage.getItem('sessionKey'));
+    })
 
     const [fname,setFname] = useState("");
     const [lname,setLname] = useState("");
@@ -311,7 +318,7 @@ export default function HorizontalLinearStepper() {
                                 {
                                     identity
                                     &&
-                                    <h5>{identity}<i class="fa fa-check" style={{color:'green'}} aria-hidden="true"></i></h5>
+                                    <h5>{identity}<i className="fa fa-check" style={{color:'green'}} aria-hidden="true"></i></h5>
                                 }
                                 
                             </div>                            
@@ -494,13 +501,13 @@ export default function HorizontalLinearStepper() {
                                     <input type="file" required accept='.pdf'    
                                      onChange={(e) => setBonafideFile(e.target.files[0])}
                                     className="no-border" placeholder="Enter Last Name"/>
-                                    <i className="fa fa-cloud-upload" onClick={()=>{ sendNewRequest(identityFile,setBonafideUrl)}} aria-hidden="true"></i>
+                                    <i className="fa fa-cloud-upload" onClick={()=>{ sendNewRequest(bonafideFile,setBonafideUrl)}} aria-hidden="true"></i>
                                 </>
                             }   
                             {
                                 bonafideUrl
                                 &&
-                                <h5>{bonafideUrl}<i class="fa fa-check" style={{color:'green'}} aria-hidden="true"></i></h5>
+                                <h5>{bonafideUrl}<i className="fa fa-check" style={{color:'green'}} aria-hidden="true"></i></h5>
                             }
                                 
                         </div> 

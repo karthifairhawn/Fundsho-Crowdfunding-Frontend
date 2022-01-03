@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 toast.configure();
 
 
@@ -31,11 +32,14 @@ const style = {
 export default function DonateModal({req,updateFunction}) {
 
   useEffect(() => {
-    fetch(APIIP.ip+"/getuser/"+localStorage.getItem("sessionkey"))
-    .then((response)=> response.json())
-    .then((response => {
-        setWalletBalance(response.wallet.balance);        
-    }));
+
+    if(localStorage.getItem("sessionkey")!==null){
+      fetch(APIIP.ip+"/getuser/"+localStorage.getItem("sessionkey"))
+      .then((response)=> response.json())
+      .then((response => {
+          setWalletBalance(response.wallet.balance);        
+      }));
+    }
   },[])
   
   const notify = (msg,Type) => {
@@ -80,6 +84,7 @@ export default function DonateModal({req,updateFunction}) {
   return (
     <div>
       <Button className="contibute-btn" onClick={handleOpen}>♥ Contibute Now</Button>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -87,20 +92,34 @@ export default function DonateModal({req,updateFunction}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Your Wallet Balance : ₹{walletBalance}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>    
-          <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-            {10+"₹ "}
-            <Slider value={donationAmount} onChange={(e)=> {setDonationAmount(e.target.value)}} min={10} max={Math.min(req.amountRequired,walletBalance)} defaultValue={60} aria-label="Default" valueLabelDisplay="auto" />
-            {Math.min(req.amountRequired,walletBalance)+"₹"}
-          </Stack>                    
-            <TextField id="standard-basic" onChange={(e)=> {setDonationAmount(e.target.value)}} value={donationAmount} label="₹ Amount to Donate" variant="standard" />
-          </Typography>
+          {
+            localStorage.getItem("sessionkey")!==null
 
-          <Button onClick={()=> {makeDonation();handleClose();}} className="modal-donate-btn" variant="contained"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;Donate</Button>
+            ?
+
+            <>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Your Wallet Balance : ₹{walletBalance}
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>    
+              <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+                {10+"₹ "}
+                <Slider value={donationAmount} onChange={(e)=> {setDonationAmount(e.target.value)}} min={10} max={Math.min(req.amountRequired,walletBalance)} defaultValue={60} aria-label="Default" valueLabelDisplay="auto" />
+                {Math.min(req.amountRequired,walletBalance)+"₹"}
+              </Stack>                    
+                <TextField id="standard-basic" onChange={(e)=> {setDonationAmount(e.target.value)}} value={donationAmount} label="₹ Amount to Donate" variant="standard" />
+                <Button onClick={()=> {makeDonation();handleClose();}} className="modal-donate-btn" variant="contained"><i className="fa fa-heart" aria-hidden="true"></i> &nbsp;Donate</Button>
+              </Typography>
+            </>  
+
+            
+            :
+
+            <Link to="/login"> <Button variant="contained" className="modal-donate-btn">Login Now To Donate</Button></Link>
+          }          
         </Box>
+
+
       </Modal>
     </div>
   );

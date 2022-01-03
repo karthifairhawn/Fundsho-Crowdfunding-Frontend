@@ -1,4 +1,4 @@
-package com.api.spring.boot.funsho.api.entity;
+package com.api.spring.boot.funsho.api.entity.auth;
 
 
 import javax.persistence.Entity;

@@ -3,6 +3,7 @@ import { Link,NavLink,useHistory } from 'react-router-dom';
 
 const Navbar = ({dark}) => {
     const history = useHistory();
+
     const logout = () => {
         localStorage.clear();
         history.push('/login');
@@ -30,12 +31,11 @@ const Navbar = ({dark}) => {
             <div className="nav-links">
 
             { 
-                localStorage.getItem('email')===null && 
+                localStorage.getItem('sessionkey')===null && 
                 <NavLink className="navbarItem" to="/login" activeClassName="active">Login / Signup</NavLink>
             }
 
             { 
-                localStorage.getItem('email')!==null && 
                 <NavLink className="navbarItem" to="/home" activeClassName="active">home</NavLink>
             }
 
@@ -46,7 +46,7 @@ const Navbar = ({dark}) => {
             </div>
 
         {
-            localStorage.getItem('email')!==null && 
+            localStorage.getItem('sessionkey')!==null && 
             <div className="right-buttons">            
                 <Link to="/settings/profile" ><i className="fa fa-user setting-btn"></i></Link>
                 <span onClick={() => { logout(); } }><i className="fa fa-sign-out logout-btn"></i></span>

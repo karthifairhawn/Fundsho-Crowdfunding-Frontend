@@ -2,8 +2,8 @@ package com.api.spring.boot.funsho.api.resource;
 
 import java.util.Date;
 
-import com.api.spring.boot.funsho.api.entity.loginData;
-import com.api.spring.boot.funsho.api.entity.recievedLogin;
+import com.api.spring.boot.funsho.api.entity.auth.loginData;
+import com.api.spring.boot.funsho.api.entity.wallet.recievedLogin;
 import com.api.spring.boot.funsho.api.repository.loginDataRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

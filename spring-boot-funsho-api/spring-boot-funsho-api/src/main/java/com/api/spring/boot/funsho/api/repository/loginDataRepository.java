@@ -1,5 +1,5 @@
 package com.api.spring.boot.funsho.api.repository;
-import com.api.spring.boot.funsho.api.entity.loginData;
+import com.api.spring.boot.funsho.api.entity.auth.loginData;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

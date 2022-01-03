@@ -1,10 +1,20 @@
 import React, { useEffect,useLayoutEffect,useState } from 'react';
 import { Link,useHistory } from 'react-router-dom';
 import {APIIP} from '../settings/config';
+import SocialButton from "./SocialButton";
+import ReCAPTCHA from "react-google-recaptcha";
 
 
+const LoginPage = () => {
 
-const Homepage = () => {
+    const handleSocialLogin = (user) => {
+        // fetch(APIIP.ip+'/googlesingup/'+user._token.idToken);
+        console.log(user);
+    };
+      
+      const handleSocialLoginFailure = (err) => {    
+
+    };
 
     function getOS() {        
         var nAgt = navigator.userAgent;
@@ -99,12 +109,24 @@ const Homepage = () => {
         return os+" > "+browserName;
       }
 
-      
+    // function generatePassword(passwordLength) {
+    // var numberChars = "0123456789";
+    // var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // var lowerChars = "abcdefghijklmnopqrstuvwxyz";
+    // var allChars = numberChars + upperChars + lowerChars;
+    // var randPasswordArray = Array(passwordLength);
+    // randPasswordArray[0] = numberChars;
+    // randPasswordArray[1] = upperChars;
+    // randPasswordArray[2] = lowerChars;
+    // randPasswordArray = randPasswordArray.fill(allChars, 3);
+    // return shuffleArray(randPasswordArray.map(function(x) { return x[Math.floor(Math.random() * x.length)] })).join('');
+    // }
+    
 
 
     useLayoutEffect(() => {
-        if(localStorage.getItem("userId")!=null){
-            let path = '/settings/profile'; 
+        if(localStorage.getItem("sessionKey")!=null){
+            let path = '/'; 
             history.push(path)
         }
     });
@@ -124,45 +146,25 @@ const Homepage = () => {
         .then( (response) => {
             
             if(response.ok) {
+                
                 return response.json();
             }else{
                 alert('User not found');
                 throw new Error("User not found"); 
             }
         }) 
-        .then(json => {
+        .then(json => {            
             setSession(json)            
         })
         .catch(err => console.log(err));    
     }
 
     function setSession(data) {             
-        
-        localStorage.setItem('email', data.email);
+                
         localStorage.setItem('userId', data.userId);        
         localStorage.setItem('username', data.username);  
         localStorage.setItem('sessionkey',data.sessionKey); 
-        
-        
-          
-            
-        localStorage.setItem('phNumber', data.phNumber);         
-        
-        if(data.fname!==null) {
-            localStorage.setItem('balance',data.wallet.balance); 
-            localStorage.setItem('fname', data.fname);        
-            localStorage.setItem('lname', data.lname); 
-            let date = data.dob;
-            if(date!==null){
-                date = date.split("T")[0].split("-");
-                date = date[0]+"-"+date[1]+"-"+date[2];
-                localStorage.setItem('dob', date);   
-            }  
-            
-        }
-        
-                
-
+                                                                      
         fetch("https://api.freegeoip.app/json/?apikey=24fb3460-658e-11ec-b1d2-5d001065511b")
         .then((response) => response.json())
         .then( (response) => {
@@ -175,11 +177,8 @@ const Homepage = () => {
             headers: {"Content-type": "application/json; charset=UTF-8"}
             });
 
-        } )
-
-
-            
-        let path = 'settings/profile'; 
+        } )           
+        let path = '/'; 
         history.push(path);
         
     }
@@ -192,6 +191,12 @@ const Homepage = () => {
     const[newPassword,setNewPassword]  = useState("");
 
     function signUp(){
+        if(newEmail ==="" ||newUserName ==="" ||newPassword ===""){
+            console.log(newEmail+" "+newUserName+" "+newPassword);
+            alert("Fill in all informations to sign up");
+            return;
+        }
+        
         let obj = {
             email: newEmail,
             password: newPassword,
@@ -203,13 +208,6 @@ const Homepage = () => {
         body: JSON.stringify(obj),
         headers: {"Content-type": "application/json; charset=UTF-8"}
         })
-        // .then( (response) => {            
-        //     if(response.ok) {
-        //         return response.json();
-        //     }
-        // }) 
-        // .then(json => setSession(json))
-        // .catch(err => console.log(err));   
 
         let path = '/login'; 
         history.push(path);
@@ -229,9 +227,14 @@ const Homepage = () => {
         }); 
          
     })
+
+    function onRecaptchaChange(value){
+        console.log("Captcha value:", value);
+    }
     
     return (
-    
+        <>        
+
         <div className="home-container" onLoad={() => this.login_form()}>
             <div className="container-home" id="container-home">
                 <div className="form-container sign-up-container">
@@ -241,7 +244,39 @@ const Homepage = () => {
                         <input required className="login-input" type="text" placeholder="User Name" value={newUserName} onChange={(e) => {setNewUserName(e.target.value)}}/>
                         <input required className="login-input" type="email" placeholder="Email" value={newEmail} onChange={(e) => {setNewEmail(e.target.value)}}/>
                         <input required className="login-input" type="password" placeholder="Password" value={newPassword} onChange={(e) => {setNewPassword(e.target.value)}}/>
+
+                        <ReCAPTCHA
+                            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                            onChange={onRecaptchaChange}
+                            theme="dark"
+                            size="normal"
+                        />
+
                         <button onClick={ (e)=> {e.preventDefault(); signUp(); } } >Sign Up</button>
+
+                        <div style={{borderBottom: "1px solid white",width: "100%",margin:'10px 0'}}/>
+
+
+                        <div className="social-login-btns">
+                            <SocialButton className="google-login"
+                            provider="google"
+                            appId="211234703568-9q6ssgaikdbfm9q9qkhf0p5oovoknfog.apps.googleusercontent.com"
+                            onLoginSuccess={handleSocialLogin}
+                            onLoginFailure={handleSocialLoginFailure}
+                            >
+                                <i className="fa fa-google" aria-hidden="true"></i> 
+                            </SocialButton>
+
+                            <SocialButton className="google-login"
+                            provider="facebook"
+                            appId="211234703568-9q6ssgaikdbfm9q9qkhf0p5oovoknfog.apps.googleusercontent.com"
+                            onLoginSuccess={handleSocialLogin}
+                            onLoginFailure={handleSocialLoginFailure}
+                            >
+                                <i className="fa fa-facebook" aria-hidden="true"></i>                 
+                            </SocialButton>  
+                        </div>
+
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
@@ -251,11 +286,42 @@ const Homepage = () => {
                         <input required className="login-input" type="email" onChange={ (e)=>{setEmail(e.target.value)}} placeholder="Email" />
                         <input required className="login-input" type="password" onChange={ (e)=>{setPassword(e.target.value)}}placeholder="Password" />
                         <Link to="#">Forgot your password?</Link>
+                        <ReCAPTCHA
+                            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                            onChange={onRecaptchaChange}
+                            theme="dark"
+                            size="normal"
+                        />
+
                         <button onClick={ (e) =>{
                                     e.preventDefault();         
                                     loginUser();
                                 }}>Sign In</button>
+                        
+                        <div style={{borderBottom: "1px solid white",width: "100%",margin:'10px 0'}}/>
+
+                        <div className="social-login-btns">
+                            <SocialButton className="google-login"
+                            provider="google"
+                            appId="211234703568-9q6ssgaikdbfm9q9qkhf0p5oovoknfog.apps.googleusercontent.com"
+                            onLoginSuccess={handleSocialLogin}
+                            onLoginFailure={handleSocialLoginFailure}
+                            >
+                                <i className="fa fa-google" aria-hidden="true"></i> 
+                            </SocialButton>
+
+                            <SocialButton className="google-login"
+                            provider="facebook"
+                            appId="211234703568-9q6ssgaikdbfm9q9qkhf0p5oovoknfog.apps.googleusercontent.com"
+                            onLoginSuccess={handleSocialLogin}
+                            onLoginFailure={handleSocialLoginFailure}
+                            >
+                                <i className="fa fa-facebook" aria-hidden="true"></i>                 
+                            </SocialButton>  
+                        </div>
+
                     </form>
+                    
                 </div>
                 <div className="overlay-container">
                     <div className="overlay">
@@ -269,15 +335,17 @@ const Homepage = () => {
                             <p>Enter your personal details and start journey with us</p>
                             <button className="ghost" id="signUp" >Sign Up</button>
                         </div>
+                        
                     </div>
                 </div>                
             </div>
 
         </div>
+        </>
     );
 }
 
 
 
 
-export default Homepage;
+export default LoginPage;

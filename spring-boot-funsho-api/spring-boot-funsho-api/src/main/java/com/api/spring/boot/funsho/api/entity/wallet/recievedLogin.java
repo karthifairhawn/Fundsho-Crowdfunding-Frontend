@@ -1,4 +1,4 @@
-package com.api.spring.boot.funsho.api.entity;
+package com.api.spring.boot.funsho.api.entity.wallet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
