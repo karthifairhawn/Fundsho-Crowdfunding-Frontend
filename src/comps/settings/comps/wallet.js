@@ -23,6 +23,11 @@ const Wallet = () => {
 
     const [walletBalance,setWalletBalance] = useState(localStorage.getItem("balance"));
 
+    function alertGatway(){
+        alert("Payment Gateway is under maintanence");
+    }
+    
+
     return (     
         <>
         
@@ -35,8 +40,10 @@ const Wallet = () => {
                         <span style={style}> Current Balance </span> 
                     </span>     
                     <span>
-                        <Popup trigger={<button> + Add Money to Wallet</button>} position="center">
-                            <form>
+                        <button onClick={ (e) =>{ alertGatway() }}> + Add Money to Wallet</button>
+                        <button style={{margin:"0px 10px"}} onClick={ (e) =>{ alertGatway() }}> Withdraw</button>
+                            
+                            {/* <form>
                                 <label>Amount</label>
                                 <input type="text" placeholder="Amount" value={amountToAdd} onChange={ (e) =>{setAmountToAdd(e.target.value)} }/>
 
@@ -62,8 +69,8 @@ const Wallet = () => {
 
 
                                  }}>submit</button>
-                            </form>
-                        </Popup>                        
+                            </form> */}
+                        {/* </Popup>                         */}
                     </span>            
                 </div>
                 <span className="title">All Transactions</span>

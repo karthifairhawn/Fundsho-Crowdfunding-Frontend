@@ -58,6 +58,8 @@ public class usersRequest {
 
     // Event Information
 
+    
+    String imageUrl;
     String eventTitle;
     Long amountRequired;
     Date deadLine;

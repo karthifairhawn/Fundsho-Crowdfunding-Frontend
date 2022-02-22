@@ -50,6 +50,7 @@ export default function HorizontalLinearStepper() {
     const [eventDescription,setEventDescription] = useState("");
     const [bonafideUrl,setBonafideUrl] = useState("");
     const [additionalLink,setAdditionalLink] = useState("");
+    const [imageUrl,setImageUrl] = useState("http://rgs24.com/wp-content/uploads/2018/02/The-Psychology-of-Charity-Top-Five-Reasons-Donors-Give.jpg");
     
     const[identityFile,setIdentityFile] = useState(undefined);
     const[bonafideFile,setBonafideFile] = useState(undefined);
@@ -205,7 +206,8 @@ export default function HorizontalLinearStepper() {
             deadLine: deadLine,
             eventDescription: eventDescription,
             bonafideUrl:bonafideUrl,
-            additionalLinks: additionalLink
+            additionalLinks: additionalLink,
+            imageUrl: imageUrl
 
         }
         

@@ -82,9 +82,15 @@ public class usersRequestResource {
         users recievingUser = UserRepository.findByUserId(handlingRequests.getUserId());
         wallet recievingUserWallet = recievingUser.getWallet();
 
-        if(handlingUser.getUserId()==recievingUser.getUserId()) return recievingUserWallet;
-        if(handlingUser.getWallet().getBalance()<request.getDonationAmount()) return handlingUserWallet;
+        // if(handlingUser.getUserId()==recievingUser.getUserId()) return recievingUserWallet;
+        // if(handlingUser.getWallet().getBalance()<request.getDonationAmount()) return handlingUserWallet;
 
+        
+        System.out.println();
+        System.out.println("HandlingUser Updated");
+        System.out.println("HandlingUser Name "+handlingUser.getFname());
+        System.out.println("Reciever Name "+recievingUser.getFname());
+        System.out.println();
 
         recievingUserWallet.setBalance(recievingUserWallet.getBalance()+request.getDonationAmount());  // Update Reciever Balance (Working)         
         transaction recieverTransaction = transaction.builder()
@@ -99,6 +105,7 @@ public class usersRequestResource {
 
 
 
+
         handlingUserWallet.setBalance(handlingUserWallet.getBalance()-request.getDonationAmount());   
         transaction donorTransaction = transaction.builder()
                     .reason("Donation to "+recievingUser.getFname()+" successfull")
@@ -109,6 +116,7 @@ public class usersRequestResource {
                     .build();
         handlingUserWallet.getTransaction().add(donorTransaction);       
         UserRepository.save(handlingUser);
+
 
         handlingRequests.setAmountRecieved(handlingRequests.getAmountRecieved()+request.getDonationAmount());
         UsersRequestRepository.save(handlingRequests);
@@ -122,12 +130,17 @@ public class usersRequestResource {
         return result;
     }   
 
-    @GetMapping("/usersrequests/{id}")
-    public List<usersRequest> getUsersRequests(@PathVariable("id") int id){
-        Pageable pageFormat = PageRequest.of(id, 8, Sort.by("amountRecieved").descending());
-        List<usersRequest>  page = UsersRequestRepository.findAll(pageFormat).getContent();        
-        return page;
+    @GetMapping("/usersrequests/{id}/{page}")
+    public List<usersRequest> getUsersRequests(@PathVariable("id") long id, @PathVariable("page") int page){
+        Pageable pageFormat = PageRequest.of(page, 8);
+        List<usersRequest>  res = UsersRequestRepository.findByUserIdNot(id,pageFormat);        
+        return res;
     }   
+
+    @GetMapping("/allreq")
+    public List<usersRequest> getAllUsersRequests(){
+        return UsersRequestRepository.findAll();
+    }
 
     @PostMapping("/usersrequests")
     public usersRequest saveUsersRequests(@RequestBody usersRequest obj){

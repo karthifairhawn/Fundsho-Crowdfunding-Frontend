@@ -266,130 +266,139 @@ input:active{
   
   /* Contact CSS  */
 
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.contact-us-page * {
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+* {
   margin: 0;
   box-sizing: border-box;
 }
 
+.cup  {
+  
+  background: linear-gradient(90deg, rgba(1,92,125,1) 22%, rgba(69,133,162,1) 50%, rgba(111,161,184,1) 77%, rgba(165,194,213,1) 93%);
+  height:100vh;
+}
 
-
-.contact-us-page #contact {
-  background-color: #6a9ac4;
+.cup #contact {
+  /* background-color: #6a9ac4; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.contact-us-page.contact-box {
+.cup .contact-box {
   width: clamp(100px, 90%, 1000px);
   margin: 80px 50px;
   display: flex;
   flex-wrap: wrap;
 }
 
-.contact-us-page.contact-links,
-.contact-us-page.contact-form-wrapper {
+.cup .contact-links, .cup .contact-form-wrapper {
   width: 50%;
   padding: 8% 5% 10% 5%;
 }
 
-.contact-us-page.contact-links {
+
+.cup .contact-links {
   background-color: #1f2e43;
-  background: radial-gradient(
-      circle at 55% 92%,
-      #426691 0 12%,
-      transparent 12.2%
-    ),
-    radial-gradient(circle at 94% 72%, #426691 0 10%, transparent 10.2%),
+  background:
     radial-gradient(
-      circle at 20% max(78%, 350px),
-      #263a53 0 7%,
-      transparent 7.2%
-    ),
-    radial-gradient(circle at 0% 0%, #263a53 0 40%, transparent 40.2%), #1f2e43;
+      circle at 55% 92%, #426691 0 12%, transparent 12.2%
+    ), 
+    radial-gradient(
+      circle at 94% 72%, #426691 0 10%, transparent 10.2%
+    ), 
+    radial-gradient(
+      circle at 20% max(78%, 350px), #263a53 0 7%, transparent 7.2%
+    ), 
+    radial-gradient(
+      circle at 0% 0%, #263a53 0 40%, transparent 40.2%
+    ), 
+    #1f2e43;
   border-radius: 10px 0 0 10px;
 }
 
-.contact-us-page.contact-form-wrapper {
+.cup .contact-form-wrapper {
   background-color: #ffffff8f;
   border-radius: 0 10px 10px 0;
 }
 
 @media only screen and (max-width: 800px) {
-  .contact-us-page.contact-links,
-  .contact-us-page.contact-form-wrapper {
+  .cup .contact-links, .cup .contact-form-wrapper {
     width: 100%;
   }
-
-  .contact-us-page.contact-links {
+  
+  .cup .contact-links {
     border-radius: 10px 10px 0 0;
   }
-
-  .contact-us-page.contact-form-wrapper {
+  
+  .cup .contact-form-wrapper {
     border-radius: 0 0 10px 10px;
   }
 }
 
 @media only screen and (max-width: 400px) {
-  .contact-us-page .contact-box {
+  .cup .contact-box {
     width: 95%;
     margin: 8% 5%;
   }
 }
 
-.contact-us-page h2 {
-  font-family: "Arimo", sans-serif;
+.cup h2 {
+  font-family: 'Arimo', sans-serif;
   color: #fff;
   font-size: clamp(30px, 6vw, 60px);
   letter-spacing: 2px;
   text-align: center;
-  transform: scale(0.95, 1);
+  transform: scale(.95, 1);
 }
 
-.contact-us-page .links {
+.cup .links {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 50px;
 }
 
-.contact-us-page.link {
+.cup .link {
   margin: 10px;
   cursor: pointer;
 }
 
-.contact-us-page img {
+.cup img {
   width: 45px;
   height: 45px;
-  filter: hue-rotate(220deg) drop-shadow(2px 4px 4px #0006);
+  filter: 
+    hue-rotate(220deg)
+    drop-shadow(2px 4px 4px #0006);
   transition: 0.2s;
   user-select: none;
 }
 
-.contact-us-page img:hover {
+.cup img:hover {
   transform: scale(1.1, 1.1);
 }
 
-.contact-us-page img:active {
+.cup img:active {
   transform: scale(1.1, 1.1);
-  filter: hue-rotate(220deg) drop-shadow(2px 4px 4px #222) sepia(0.3);
+  filter: 
+    hue-rotate(220deg)
+    drop-shadow(2px 4px 4px #222)
+    sepia(0.3);
 }
 
-.contact-us-page .form-item {
+.cup .form-item {
   position: relative;
 }
 
-.contact-us-page label,
-.contact-us-page input,
-.contact-us-page textarea {
-  font-family: "Poppins", sans-serif;
+.cup label,.cup  input, .cup textarea {
+  font-family: 'Poppins', sans-serif;
 }
 
-.contact-us-page label {
+.cup label {
   position: absolute;
   top: 10px;
   left: 2%;
@@ -399,8 +408,7 @@ input:active{
   user-select: none;
 }
 
-.contact-us-page input,
-.contact-us-page textarea {
+.cup input, .cup textarea {
   width: 100%;
   outline: 0;
   border: 1px solid #ccc;
@@ -410,21 +418,21 @@ input:active{
   font-size: clamp(15px, 1.5vw, 18px);
 }
 
-.contact-us-page input:focus + label,
-.contact-us-page input:valid + label,
-.contact-us-page textarea:focus + label,
-.contact-us-page textarea:valid + label {
+input:focus+label, 
+input:valid+label, 
+textarea:focus+label, 
+textarea:valid+label {
   font-size: clamp(13px, 1.3vw, 16px);
   color: #777;
   top: -20px;
-  transition: all 0.225s ease;
+  transition: all .225s ease;
 }
 
-.contact-us-page.submit-btn {
+.cup .submit-btn {
   background-color: #fd917e;
   filter: drop-shadow(2px 2px 3px #0003);
   color: #fff;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins",sans-serif;
   font-size: clamp(16px, 1.6vw, 18px);
   display: block;
   padding: 12px 20px;
@@ -436,35 +444,38 @@ input:active{
   transition: 0.2s;
 }
 
-.contact-us-page.submit-btn:hover {
+.cup .submit-btn:hover {
   transform: scale(1.1, 1.1);
 }
 
-.contact-us-page.submit-btn:active {
+.cup .submit-btn:active {
   transform: scale(1.1, 1.1);
   filter: sepia(0.5);
 }
 
 @media only screen and (max-width: 800px) {
-  .contact-us-pageh2 {
+  .cup h2 {
     font-size: clamp(40px, 10vw, 60px);
   }
 }
 
 @media only screen and (max-width: 400px) {
-  .contact-us-pageh2 {
+  .cup h2 {
     font-size: clamp(30px, 12vw, 60px);
   }
-
-  .contact-us-page.links {
+  
+  .cup .links {
     padding-top: 30px;
   }
-
-  .contact-us-page img {
+  
+  .cup img {
     width: 38px;
     height: 38px;
   }
 }
+
+  
+
 
 
   /* Footer Header CSS */
@@ -857,6 +868,16 @@ box-sizing: border-box;
   align-items:center;
 }
 
+
+.card-main-link{
+  color: black;
+}
+
+
+.card-main-link:hover{
+  color: black;
+}
+
 .homepage-card{
   background-color: #e6e6e6;
 }
@@ -968,7 +989,7 @@ body {
 }
 
 .donation-info{
-  margin:0.5rem 0px;
+  margin:0 0 0.5rem 0px;
 }
 
 
@@ -1326,6 +1347,12 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:padding 0.2s;
+}
+
+.card-donate-btn:hover{
+  padding: 14px 48px;
+  transition:padding 0.2s;
 }
 
 .total-donate{
@@ -1568,8 +1595,9 @@ html {
 .login-place .fa{
   margin: 0px 10px 0px 0px;
 }
-.login-place .login-time-device span{
-  font-size:0.2rem;
+.login-info .login-time-device{
+  font-size: 0.9rem;
+  font-weight: bold !important;
 }
 .login-info-grid{
   display:grid;
@@ -1676,6 +1704,10 @@ html {
   display:flex;
   justify-content:space-between;
   flex-wrap: wrap;
+}
+
+.share-buttons .fa{
+  margin: 0px 10px;
 }
 
 .wapp-share,.fb-share,.twitter-share{
@@ -1828,6 +1860,10 @@ html {
 .credit-card{
   background-position: 0 112px;;
 }
+.card-image{
+  width: 100%;
+  height: 180px;
+}
 .credit-card:hover{
   background-position: 350px 112px;
 }
@@ -1860,7 +1896,7 @@ html {
     font-size: 17px;
     font-weight: normal;
     border-radius: 4px;
-    background-color: #3b5998;
+    background-color: #13cb6a;
     color: #fff;
     font-size: 17px;
     font-weight: 400;
@@ -1869,6 +1905,11 @@ html {
     align-items: center;
     justify-content: center;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.fb-share-right .fa-whatsapp{
+  font-size:1.5rem;
+  margin:0px 10px;
 }
 
 .sp-donation-info{
@@ -2118,7 +2159,17 @@ html {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
+  transition: box-shadow .5s;
+
 }
+
+.home-card:hover{
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.429);  
+  transition: box-shadow .5s;
+
+}
+
+
 .home-card-body {
   display: flex;
   flex-direction: column;
@@ -2164,7 +2215,7 @@ html {
 
 .home-card-body p {
   font-size: 13px;
-  margin: 0 0 20px;
+  margin: 0;
 }
 .user {
   display: flex;

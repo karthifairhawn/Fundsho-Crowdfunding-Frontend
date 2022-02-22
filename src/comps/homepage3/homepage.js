@@ -24,7 +24,7 @@ const MainHomepage = () => {
                 }, 1000);   
             })
 
-        fetch(APIIP.ip+'/usersrequests/0')
+        fetch(APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/0')
         .then( (response) => {
             return response.json();
         }).then( (response) => { 
@@ -39,7 +39,9 @@ const MainHomepage = () => {
     },[])
 
     function updateFundraisers(page){  
-        fetch(APIIP.ip+'/usersrequests/'+page)
+        let url = APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/'+page;
+        console.log(url);
+        fetch(url)
         .then( (response) => {
             return response.json();
         }).then( (response) => {                
@@ -120,7 +122,9 @@ const MainHomepage = () => {
                         }                          
                         {
                             allFundraisers.map(function (arrayItem,idx) {
-                                return <RequestCard key={idx} data={arrayItem}/>
+                                // if(arrayItem.userId!== parseInt(localStorage.getItem("userId"))){
+                                    return <RequestCard key={idx} data={arrayItem}/>
+                                // }                                
                             })  
                         }                       
 

@@ -8,6 +8,9 @@ import TextField from '@mui/material/TextField';
 import { APIIP } from "../settings/config";
 import { useParams } from "react-router-dom";
 import DonateModal from "../homepage3/DonateModel";
+import {
+    EmailShareButton,
+    FacebookShareButton} from "react-share";
 
 
 const SingleRequest = () => {
@@ -55,18 +58,20 @@ const SingleRequest = () => {
             <Navbar/>
             <div className="single-page-container">
                 <h2>{pageInformation.eventTitle}</h2>
+                
                 <Container fluid="sm">
                     <Row>
                         <Col md={8} lg={8} sm={12} xs={12} >                        
                             <div className="sp-left-container">
-                            <img src="https://kettocdn.gumlet.io/media/campaign/366000/366181/image/0c5ffc7a210b8bf623470ac33a088f799b590cba.png?w=750&amp;dpr=1.3" className="srp-cover" alt="Fundraiser img" />
+                            <img src={pageInformation.imageUrl} className="srp-cover" alt="Fundraiser img" />
                             <div className="share-fr-row">
                                 <div></div>                    
                                 <button className="share-fundraiser">
                                     <i className="fa fa-share-alt" aria-hidden="true"></i>
-                                    <span>
-                                        Share Fundraiser
-                                    </span>                                     
+                                    
+                                        <span>
+                                            Share Fundraiser
+                                        </span>                                                                         
                                 </button>
                             </div>
 
@@ -82,13 +87,27 @@ const SingleRequest = () => {
                                 <TabPanel value="1">
                                     <div className="header sp-content" >
                                         <h3>Words from Fundraiser</h3>
+
+                                    
+
                                         <p>
                                             {pageInformation.eventDescription}                                            
                                         </p>                                        
                                         <div className="share-buttons">
-                                            <button className="wapp-share">Share</button>
-                                            <button className="fb-share">Share</button>
-                                            <button className="twitter-share">Share</button>
+                                            <a href={"https://api.whatsapp.com/send?text="+window.location.href} target="_blank" rel="noreferrer"><button className="wapp-share">
+                                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                                Share
+                                            </button></a>
+                                            <a href={"https://www.facebook.com/sharer/sharer.php?u="+window.location.href} target="_blank" rel="noreferrer"><button className="fb-share">
+                                            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+    
+
+                                                Share
+                                            </button></a>
+                                            <a href={"https://twitter.com/intent/tweet?url="+window.location.href} target="_blank" rel="noreferrer"><button className="twitter-share">
+                                            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                                                Share
+                                                </button></a>
                                         </div>
                                     </div>
                                 </TabPanel>
@@ -220,7 +239,13 @@ const SingleRequest = () => {
                         <Col md={4} lg={4} sm={12} xs={12} >
 
                             
-                            <DonateModal req={pageInformation} updateFunction={loadData}/>    
+                            {
+                                parseInt(localStorage.getItem('userId'))!==pageInformation.userId
+                                ?
+                                <DonateModal req={pageInformation} updateFunction={loadData}/>    
+                                :
+                                ''
+                            }
                             
 
 
@@ -234,7 +259,12 @@ const SingleRequest = () => {
                                 <div className="upi">                                    
                                 </div>
                             </div>
-                            <button className="fb-share-right">Spread the word</button>
+                            <a href={"https://api.whatsapp.com/send?text="+window.location.href} target="_blank" rel="noreferrer">
+                                <button className="fb-share-right">
+                                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                    Spread the word
+                                </button>
+                            </a>
 
                             <div className="sp-donation-info">
                                 <div className="sp-donated-amount">
