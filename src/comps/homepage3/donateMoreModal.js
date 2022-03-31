@@ -4,7 +4,7 @@ const DonateMore = () => {
         <div className="donate-more-body">
             <div className="donate-more-card">
                 <div className="donate-more-main-container">
-                    <div><img src="https://ketto.gumlet.io/assets/images/Sip-banner-people/girls-sip.png?w=160&amp;dpr=1.3" alt="donate-more"/></div>
+                    <div className="book-image-parent"><img src="https://i.ibb.co/Kwy4t83/book.png" className="book-image" alt="donate-more"/></div>
                     <div className="donate-more-right-container">
                         <span className="donate-more-content">What's more than educating one student</span>                        
                         <span className="donate-more bold">Donate More !</span>

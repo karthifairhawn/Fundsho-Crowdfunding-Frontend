@@ -38,6 +38,8 @@ const MainHomepage = () => {
         })
     },[])
 
+    
+
     function updateFundraisers(page){  
         let url = APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/'+page;
         console.log(url);

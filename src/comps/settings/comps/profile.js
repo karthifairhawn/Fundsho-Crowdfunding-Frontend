@@ -55,11 +55,12 @@ const Profile = () => {
             
         
             let date = checkNull(response.dob);
-            if(date!==null){
-                date = date.split("T")[0].split("-");
-                date = date[0]+"-"+date[1]+"-"+date[2];
-                setDob(date);   
-            }  
+            setDob(date);
+            // if(date!==null){
+            //     date = date.split("T")[0].split("-");
+            //     date = date[0]+"-"+date[1]+"-"+date[2];
+            //     setDob(date);   
+            // }  
             
         
 

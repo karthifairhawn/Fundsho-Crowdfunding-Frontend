@@ -2095,9 +2095,22 @@ html {
 }
 
 .hero-banner{
-  background-image: url("https://www.ketto.org/assets/images/Sip-banner-people/sip-banner-pc.png");
+  background-image: url("../img/banner.png");
   height:400px;
   background-size:cover;
+  display: flex;
+  align-items: center;
+}
+
+.book-image{
+
+  background-image: url("../img/book.png");
+  width: 10rem;
+  height:8rem;
+  background-repeat: no-repeat;
+}
+
+.book-image-parent{
   display: flex;
   align-items: center;
 }
@@ -2330,7 +2343,7 @@ html {
 }
 
 .donate-more-main-container .donate-more-content{
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-family: 'Ubuntu', sans-serif;
 
   display: flex;
