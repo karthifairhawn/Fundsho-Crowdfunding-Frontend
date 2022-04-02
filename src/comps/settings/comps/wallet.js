@@ -1,25 +1,28 @@
 import { useState,useEffect } from 'react';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { APIIP } from '../config';
 const Wallet = () => {
 
     const [transaction,setTransaction] = useState({});
-    const [balanceUpdate,setBalanceUpdate] = useState(true);
+    // const [balanceUpdate,setBalanceUpdate] = useState(true);
     const style = {
         fontSize:'1rem'
     }
     useEffect(() => {
+
+        console.log(localStorage);
+
         fetch(APIIP.ip+"/getuser/"+localStorage.getItem("sessionkey"))
         .then((response)=> response.json())
         .then((response => {
+            console.log(response);
             setWalletBalance(response.wallet.balance);
             setTransaction(response.wallet.transaction.reverse());
         }));
-    },[balanceUpdate])
+    },[])
 
-    const [amountToAdd,setAmountToAdd] = useState(0);
-    const [amountAddStatus,setAmountAddStatus] = useState(false);
+    // const [amountToAdd,setAmountToAdd] = useState(0);
+    // const [amountAddStatus,setAmountAddStatus] = useState(false);
 
     const [walletBalance,setWalletBalance] = useState(localStorage.getItem("balance"));
 

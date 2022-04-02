@@ -32,6 +32,7 @@ const Profile = () => {
     
 
    useEffect(() =>{        
+       //console.log(localStorage);
         var nullValues = false;
         function checkNull(msg){
             if(msg === "null" || msg ===null){
@@ -44,23 +45,23 @@ const Profile = () => {
         fetch(APIIP.ip+"/getuser/"+localStorage.getItem('sessionkey'))
         .then( (response)=> response.json())
         .then( (response => {
-
+            // console.log(localStorage.getItem('sessionkey'));
             setFname(checkNull(response.fname));
             setLname(checkNull(response.lname));
             setEmail(checkNull(response.email));
-            setDob(checkNull(response.dob));        
+            // setDob(checkNull(response.dob));        
             setPhNumber(checkNull(response.phNumber));
             setUsername(checkNull(response.username));       
             
             
         
             let date = checkNull(response.dob);
-            setDob(date);
-            // if(date!==null){
-            //     date = date.split("T")[0].split("-");
-            //     date = date[0]+"-"+date[1]+"-"+date[2];
-            //     setDob(date);   
-            // }  
+            // setDob(date);
+            if(date!==null){
+                date = date.split("T")[0].split("-");
+                date = date[0]+"-"+date[1]+"-"+date[2];
+                setDob(date);   
+            }  
             
         
 
@@ -73,7 +74,9 @@ const Profile = () => {
     },[]);
 
 
-    useEffect(() => {});
+    useEffect(() => {
+        // console.log(localStorage);  
+    });
 
 
     function updateProfile() {
@@ -86,6 +89,7 @@ const Profile = () => {
             phNumber: phNumber,
             userId: localStorage.getItem("userId"),
             username: username,
+            sessionKey: localStorage.getItem("sessionkey"),
         };
         
         fetch(APIIP.ip+'/updateuser', {

@@ -80,7 +80,8 @@ public class usersResource {
     @GetMapping("/getuser/{sessionKey}")
     public MappingJacksonValue findUposingSessonKey(@PathVariable String sessionKey)
     {
-        
+
+        // System.out.println(sessionKey);
         MappingJacksonValue mapping = new MappingJacksonValue(UserRepository.findBySessionKey(sessionKey));
         mapping.setFilters(passwordFilter());
         return mapping;
@@ -115,7 +116,7 @@ public class usersResource {
 
     @PostMapping("/updateuser")
     public void updateUser(@RequestBody users user){
-        users found = UserRepository.findByUserId(user.getUserId());
+        users found = UserRepository.findBySessionKey(user.getSessionKey());
         user.setPassword(found.getPassword());
         System.out.println(user.toString());
         UserRepository.save(user);

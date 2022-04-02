@@ -17,16 +17,16 @@ class Contact extends React.Component{
       <h2>CONTACT</h2>
       <div class="links">
         <div class="link">
-          <a><img src="https://i.postimg.cc/m2mg2Hjm/linkedin.png" alt="linkedin"/></a>
+          <a href="http://google.com"><img src="https://i.postimg.cc/m2mg2Hjm/linkedin.png" alt="linkedin"/></a>
         </div>
         <div class="link">
-          <a><img src="https://i.postimg.cc/YCV2QBJg/github.png" alt="github"/></a>
+          <a  href="http://google.com"><img src="https://i.postimg.cc/YCV2QBJg/github.png" alt="github"/></a>
         </div>
         <div class="link">
-          <a><img src="https://i.postimg.cc/W4Znvrry/codepen.png" alt="codepen"/></a>
+          <a  href="http://google.com"><img src="https://i.postimg.cc/W4Znvrry/codepen.png" alt="codepen"/></a>
         </div>
         <div class="link">
-          <a><img src="https://i.postimg.cc/NjLfyjPB/email.png" alt="email"/></a>
+          <a  href="http://google.com"><img src="https://i.postimg.cc/NjLfyjPB/email.png" alt="email"/></a>
         </div>
       </div>
     </div>

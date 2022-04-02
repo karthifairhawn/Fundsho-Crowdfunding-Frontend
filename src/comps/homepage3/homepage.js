@@ -15,6 +15,8 @@ const MainHomepage = () => {
     const [moreDataAvailable,setMoreDataAvailable] = useState(true);
 
     useEffect(() => {
+        console.log(localStorage);
+
         fetch(APIIP.ip+'/topthreerequests')
             .then( (response) => {
                 return response.json();
@@ -26,7 +28,8 @@ const MainHomepage = () => {
 
         fetch(APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/0')
         .then( (response) => {
-            return response.json();
+            // console.log(response);
+            return response.json();            
         }).then( (response) => { 
             for (let i = response.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));

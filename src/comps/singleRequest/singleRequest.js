@@ -8,9 +8,9 @@ import TextField from '@mui/material/TextField';
 import { APIIP } from "../settings/config";
 import { useParams } from "react-router-dom";
 import DonateModal from "../homepage3/DonateModel";
-import {
-    EmailShareButton,
-    FacebookShareButton} from "react-share";
+// import {
+//     EmailShareButton,
+//     FacebookShareButton} from "react-share";
 
 
 const SingleRequest = () => {
@@ -50,7 +50,7 @@ const SingleRequest = () => {
         fetch(APIIP.ip+"/singlerequest/"+reqId)
         .then((response) => response.json())
         .then((response) => {setPageInformation(response); console.log(response);})    
-    },[])
+    },[reqId])
     return ( 
 
         

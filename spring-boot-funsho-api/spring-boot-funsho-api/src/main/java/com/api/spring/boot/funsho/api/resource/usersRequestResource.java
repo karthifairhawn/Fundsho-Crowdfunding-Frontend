@@ -131,11 +131,18 @@ public class usersRequestResource {
     }   
 
     @GetMapping("/usersrequests/{id}/{page}")
-    public List<usersRequest> getUsersRequests(@PathVariable("id") long id, @PathVariable("page") int page){
+    public List<usersRequest> getUsersRequests(@PathVariable("id") String id, @PathVariable("page") int page){
         Pageable pageFormat = PageRequest.of(page, 8);
-        List<usersRequest>  res = UsersRequestRepository.findByUserIdNot(id,pageFormat);        
+        System.out.println(id);
+        if(id.equals("null")){
+            Page<usersRequest>  res = UsersRequestRepository.findAll(pageFormat);  
+            return res.getContent();
+        }
+        List<usersRequest>  res = UsersRequestRepository.findByUserIdNot(Long.parseLong(id),pageFormat);        
         return res;
     }   
+
+
 
     @GetMapping("/allreq")
     public List<usersRequest> getAllUsersRequests(){
