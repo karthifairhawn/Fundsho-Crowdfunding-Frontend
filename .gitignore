@@ -1,2 +1,3 @@
 node_modules
 .metadata
+spring-boot-funsho-api/spring-boot-funsho-api/src/main/resources/application.properties
