@@ -15,7 +15,7 @@ const MainHomepage = () => {
     const [moreDataAvailable,setMoreDataAvailable] = useState(true);
 
     useEffect(() => {
-        console.log(localStorage);
+        
 
         fetch(APIIP.ip+'/topthreerequests')
             .then( (response) => {

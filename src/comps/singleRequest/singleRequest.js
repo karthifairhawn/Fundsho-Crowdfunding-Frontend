@@ -95,17 +95,17 @@ const SingleRequest = () => {
                                         </p>                                        
                                         <div className="share-buttons">
                                             <a href={"https://api.whatsapp.com/send?text="+window.location.href} target="_blank" rel="noreferrer"><button className="wapp-share">
-                                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                                <i className="fa fa-whatsapp" aria-hidden="true"></i>
                                                 Share
                                             </button></a>
                                             <a href={"https://www.facebook.com/sharer/sharer.php?u="+window.location.href} target="_blank" rel="noreferrer"><button className="fb-share">
-                                            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                                            <i className="fa fa-facebook-official" aria-hidden="true"></i>
     
 
                                                 Share
                                             </button></a>
                                             <a href={"https://twitter.com/intent/tweet?url="+window.location.href} target="_blank" rel="noreferrer"><button className="twitter-share">
-                                            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                                            <i className="fa fa-twitter-square" aria-hidden="true"></i>
                                                 Share
                                                 </button></a>
                                         </div>
@@ -261,7 +261,7 @@ const SingleRequest = () => {
                             </div>
                             <a href={"https://api.whatsapp.com/send?text="+window.location.href} target="_blank" rel="noreferrer">
                                 <button className="fb-share-right">
-                                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                    <i className="fa fa-whatsapp" aria-hidden="true"></i>
                                     Spread the word
                                 </button>
                             </a>

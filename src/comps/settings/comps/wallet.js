@@ -8,14 +8,11 @@ const Wallet = () => {
     const style = {
         fontSize:'1rem'
     }
-    useEffect(() => {
-
-        console.log(localStorage);
+    useEffect(() => {        
 
         fetch(APIIP.ip+"/getuser/"+localStorage.getItem("sessionkey"))
         .then((response)=> response.json())
-        .then((response => {
-            console.log(response);
+        .then((response => {            
             setWalletBalance(response.wallet.balance);
             setTransaction(response.wallet.transaction.reverse());
         }));
