@@ -37,15 +37,15 @@ const Security = () => {
         if(newPassword1 === newPassword2) {
             let obj = {
                 userId: localStorage.getItem("userId"),
-                email: localStorage.getItem("email"),
+                sessionId: localStorage.getItem("sessionkey"),
                 oldPassword: password,
                 password: newPassword1
             }
             
             fetch(APIIP.ip+'/updatepass', {
-            method: "POST",
-            body: JSON.stringify(obj),
-            headers: {"Content-type": "application/json; charset=UTF-8"}
+                method: "POST",
+                body: JSON.stringify(obj),
+                headers: {"Content-type": "application/json; charset=UTF-8"}
             })
             .then( (response) => {                
                 if(response.ok) {
