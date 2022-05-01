@@ -91,7 +91,7 @@ const MainHomepage = () => {
                     <div className="list-card-body">                        
                         <div className="home-card-container">        
 
-                        {topThreeData.length<3 && 
+                        {topThreeData.length<1 && 
                         <>
                             <CardSkeleton/>
                             <CardSkeleton/>
@@ -113,7 +113,7 @@ const MainHomepage = () => {
 
                     <div className="list-card-body">                        
                         <div className="home-card-container">  
-                        {allFundraisers.length<2 && 
+                        {allFundraisers.length<1 && 
                         <>
                             <CardSkeleton/>
                             <CardSkeleton/>

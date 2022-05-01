@@ -1,7 +1,7 @@
 import React, { useEffect,useLayoutEffect,useState } from 'react';
 import { Link,useHistory } from 'react-router-dom';
 import {APIIP} from '../settings/config';
-import SocialButton from "./SocialButton";
+
 import ReCAPTCHA from "react-google-recaptcha";
 
 
@@ -257,7 +257,7 @@ const LoginPage = () => {
                         <div style={{borderBottom: "1px solid white",width: "100%",margin:'10px 0'}}/>
 
 
-                        <div className="social-login-btns">
+                        {/* <div className="social-login-btns">
                             <SocialButton className="google-login"
                             provider="google"
                             appId="211234703568-9q6ssgaikdbfm9q9qkhf0p5oovoknfog.apps.googleusercontent.com"
@@ -275,7 +275,7 @@ const LoginPage = () => {
                             >
                                 <i className="fa fa-facebook" aria-hidden="true"></i>                 
                             </SocialButton>  
-                        </div>
+                        </div> */}
 
                     </form>
                 </div>
@@ -300,7 +300,7 @@ const LoginPage = () => {
                         
                         <div style={{borderBottom: "1px solid white",width: "100%",margin:'10px 0'}}/>
 
-                        <div className="social-login-btns">
+                        {/* <div className="social-login-btns">
                             <SocialButton className="google-login"
                             provider="google"
                             appId="211234703568-9q6ssgaikdbfm9q9qkhf0p5oovoknfog.apps.googleusercontent.com"
@@ -318,7 +318,7 @@ const LoginPage = () => {
                             >
                                 <i className="fa fa-facebook" aria-hidden="true"></i>                 
                             </SocialButton>  
-                        </div>
+                        </div> */}
 
                     </form>
                     

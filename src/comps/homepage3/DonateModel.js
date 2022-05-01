@@ -37,7 +37,12 @@ export default function DonateModal({req,updateFunction}) {
       fetch(APIIP.ip+"/getuser/"+localStorage.getItem("sessionkey"))
       .then((response)=> response.json())
       .then((response => {
+        if(response.wallet>=0){
           setWalletBalance(response.wallet.balance);        
+        }else{
+          setWalletBalance(0);                  
+        }
+
       }));
     }
   },[])

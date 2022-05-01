@@ -76,25 +76,29 @@ export default function HorizontalLinearStepper() {
         if(personalInformationNotNull() && activeStep === 0){
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }else if(activeStep===0){
-            alert("Fill all data");
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            // alert("Fill all data");
         }
         
         if(educationalInformationNotNull() && activeStep ===1){
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }else if(activeStep===1){
-            alert("Fill all data");
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            // alert("Fill all data");
         }
 
         if(contactInformationNotNull() && activeStep ===2){
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }else if(activeStep===2){
-            alert("Fill all data");
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            // alert("Fill all data");
         }
 
         if(eventInformationNotNull() && activeStep ===3){
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }else if(activeStep===3){
-            alert("Fill all data");
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            // alert("Fill all data");
         }
 
         setSkipped(newSkipped);
