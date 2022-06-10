@@ -14,32 +14,32 @@ const MainHomepage = () => {
     const [allFundraisers,setAllFundraiser] = useState([]);    
     const [moreDataAvailable,setMoreDataAvailable] = useState(true);
 
-    useEffect(() => {
+    // useEffect(() => {
         
 
-        fetch(APIIP.ip+'/topthreerequests')
-            .then( (response) => {
-                return response.json();
-            }).then( (response) => {                
-                setTimeout(() => {
-                    setTopThreeData(response);      
-                }, 1000);   
-            })
+    //     fetch(APIIP.ip+'/topthreerequests')
+    //         .then( (response) => {
+    //             return response.json();
+    //         }).then( (response) => {                
+    //             setTimeout(() => {
+    //                 setTopThreeData(response);      
+    //             }, 1000);   
+    //         })
 
-        fetch(APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/0')
-        .then( (response) => {
-            // console.log(response);
-            return response.json();            
-        }).then( (response) => { 
-            for (let i = response.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [response[i], response[j]] = [response[j], response[i]];
-            }                           
-            setTimeout(() => {
-                setAllFundraiser(response); 
-            }, 1000);              
-        })
-    },[])
+    //     fetch(APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/0')
+    //     .then( (response) => {
+    //         // console.log(response);
+    //         return response.json();            
+    //     }).then( (response) => { 
+    //         for (let i = response.length - 1; i > 0; i--) {
+    //             const j = Math.floor(Math.random() * (i + 1));
+    //             [response[i], response[j]] = [response[j], response[i]];
+    //         }                           
+    //         setTimeout(() => {
+    //             setAllFundraiser(response); 
+    //         }, 1000);              
+    //     })
+    // },[])
 
     
 
@@ -65,6 +65,7 @@ const MainHomepage = () => {
     function scrollToDonate(){
         window.scrollTo(0, window.scrollY+450);
     }
+    
     return ( 
         <>
         <Navbar>

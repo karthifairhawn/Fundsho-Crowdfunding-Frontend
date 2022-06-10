@@ -5,8 +5,6 @@ import Contact from './comps/contact/contact.js';
 import Plans from './comps/plans/plans.js';
 import Setting from './comps/settings/settings';
 import MainHomepage from './comps/homepage3/homepage';
-import 'font-awesome/css/font-awesome.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './comps/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SingleRequest from './comps/singleRequest/singleRequest.js';
