@@ -26,11 +26,9 @@ const App = () => {
             <Route exact path="/plans"><Plans /></Route>            
             <Route path="/settings"><Setting /></Route>
 
-            <Route exact path="/newrequest"><HorizontalLinearStepper/></Route>
-            {/* <Route exact path="/newrequest2"><NewRequestPage /></Route> */}
+            <Route exact path="/newrequest"><HorizontalLinearStepper/></Route>            
 
             <Route exact path="/fundraiser/:reqId"><SingleRequest/></Route>            
-
 
             <Route path="*"><NotFound /></Route>
 

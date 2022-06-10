@@ -20,27 +20,16 @@ const RequestCard = ({data}) => {
         <Link className="card-main-link" to={`/fundraiser/${data.requestId}`}>
             
             <div className="home-card">
-            <img className="card-image" src={data.imageUrl} alt="" />
-                <div className="home-card-body">
-                    {/* <h1>{console.log(data)}</h1> */}
-                    
-                    {/* <span className="tag tag-teal">{data.votes+" "}Votes</span> */}
+            <img className="card-image" src={data.eventImageUrl} alt="" />
+                <div className="home-card-body">                    
                     <h4>
                         {data.eventTitle.substring(0,60)}
                         {data.eventTitle.length >=60 ? "..." : ""}
                     </h4>
                     <p>
-                        {data.eventDescription.substring(0, 240)} 
-                        {data.eventDescription.length >240 ? "..." : ""}
-                    </p>
-                    {/* <div className="user">
-                        <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
-                        <div className="user-info">
-                            <h6>{data.fname+" "+data.lname+" "}</h6>                    
-                            <h6>By {data.userId===parseInt(localStorage.getItem('userId')) ? 'You' : 'ID-'+data.userId}</h6>
-                            
-                        </div>
-                    </div> */}
+                        {data.eventDescription.substring(0, 210)} 
+                        {data.eventDescription.length >210 ? "..." : ""}
+                    </p>                    
                     
 
                     <div className="donation-info">
@@ -57,8 +46,14 @@ const RequestCard = ({data}) => {
                     
 
                     <div className="card-footer">
-                        <span><i className="fa fa-calendar-plus-o" aria-hidden="true"></i> &nbsp; {calculateDaysBetweenDates(data.deadLine)} Days left</span>
-                        <span>18&nbsp;Donations</span>
+                        <span><i className="fa fa-calendar-plus-o" aria-hidden="true"></i> &nbsp; {calculateDaysBetweenDates(data.deadLine)} Days left</span>                        
+
+                        <div>
+                            <i className="fa-solid fa-heart" style={{color: '#015c7d'}}></i>
+                            &nbsp;
+                            <span>{data.votes}&nbsp;</span>
+                        </div>
+
                     </div>
                 </div>
             </div>

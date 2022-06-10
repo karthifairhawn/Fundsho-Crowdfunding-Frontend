@@ -125,11 +125,11 @@ const Profile = () => {
             
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                        <label htmlFor="firstname">First Name</label>
+                        <label htmlhtmlFor="firstname">First Name</label>
                         <input type="text" value={fname} onChange={ (e) => {setChangedData(true); setFname(e.target.value)}}/>
                     </span>
                     <span className="names-span">                    
-                        <label htmlFor="lastname">Last Name</label>
+                        <label htmlhtmlFor="lastname">Last Name</label>
                         <input type="text" value={lname} onChange={ (e) => {setChangedData(true);setLname(e.target.value)}}/>
                     </span>
                 </div>
@@ -137,11 +137,11 @@ const Profile = () => {
 
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                            <label htmlFor="firstname">Email</label>
+                            <label htmlhtmlFor="firstname">Email</label>
                             <input type="email" value={email} onChange={ (e) => {setChangedData(true);setEmail(e.target.value)}}/> 
                     </span>                
                     <span className="names-span">                    
-                            <label htmlFor="username">User Name</label>
+                            <label htmlhtmlFor="username">User Name</label>
                             <input type="text" value={username} onChange={ (e) => {setChangedData(true);setUsername(e.target)}} />
                     </span>
                 </div>
@@ -149,7 +149,7 @@ const Profile = () => {
 
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                            <label htmlFor="dob">DOB</label>
+                            <label htmlhtmlFor="dob">DOB</label>
                             <input type="date" value={dob} onChange={ (e) => {setChangedData(true);setDob(e.target.value)}} />
                     </span>                                
                 </div>
@@ -157,7 +157,7 @@ const Profile = () => {
 
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                            <label htmlFor="number">Contact Number</label>
+                            <label htmlhtmlFor="number">Contact Number</label>
                             <input type="text" value={phNumber} onChange={ (e) => {setChangedData(true);setPhNumber(e.target.value)}}/>
                     </span>                                
                 </div>

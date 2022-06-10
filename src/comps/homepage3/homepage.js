@@ -5,61 +5,59 @@ import {useEffect,useState} from 'react';
 import {APIIP} from '../settings/config';
 import CardSkeleton from "./cardSkeleton";
 import Navbar from "../footer_header/navbar";
+import Footer from "../footer_header/footer";
 
 
 const MainHomepage = () => {
 
-    
-    const [topThreeData,setTopThreeData] = useState([]);
+    const [featuredData,setFeaturedData] = useState([]);
     const [allFundraisers,setAllFundraiser] = useState([]);    
     const [moreDataAvailable,setMoreDataAvailable] = useState(true);
+    const [currentPage,setCurrentPage] = useState(1);
 
-    // useEffect(() => {
-        
-
-    //     fetch(APIIP.ip+'/topthreerequests')
-    //         .then( (response) => {
-    //             return response.json();
-    //         }).then( (response) => {                
-    //             setTimeout(() => {
-    //                 setTopThreeData(response);      
-    //             }, 1000);   
-    //         })
-
-    //     fetch(APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/0')
-    //     .then( (response) => {
-    //         // console.log(response);
-    //         return response.json();            
-    //     }).then( (response) => { 
-    //         for (let i = response.length - 1; i > 0; i--) {
-    //             const j = Math.floor(Math.random() * (i + 1));
-    //             [response[i], response[j]] = [response[j], response[i]];
-    //         }                           
-    //         setTimeout(() => {
-    //             setAllFundraiser(response); 
-    //         }, 1000);              
-    //     })
-    // },[])
-
-    
-
-    function updateFundraisers(page){  
-        let url = APIIP.ip+'/usersrequests/'+localStorage.getItem("userId")+'/'+page;
-        console.log(url);
-        fetch(url)
-        .then( (response) => {
-            return response.json();
-        }).then( (response) => {                
-            for (let i = response.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [response[i], response[j]] = [response[j], response[i]];
+    useEffect(() => {
+        fetch(APIIP.ip+"/requests?page=1&size=3&featured=true",{
+            method:"GET",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
             }
-            if(response.length<8) setMoreDataAvailable(false);
-            setAllFundraiser( allFundraisers.concat(response));
-            setTimeout(() => {
-                window.scrollTo(0, window.scrollY+1000)
-            }, 200); 
-        })                    
+        }).then(response => {
+            response.json().then(response => {
+                // console.log(response);
+                setFeaturedData(response);
+            })
+        })
+
+        fetch(APIIP.ip+"/requests?page=1&size=8&featured=true",{
+            method:"GET",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            response.json().then(response => {
+                // console.log(response);
+                setAllFundraiser(response);
+            })
+        })
+
+
+    },[]);
+
+    function updateFundraisers(){
+        fetch(APIIP.ip+"/requests?page="+currentPage+"&size=8&featured=true",{
+            method:"GET",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            response.json().then(response => {                
+                setAllFundraiser(allFundraisers.concat(response));
+                setCurrentPage(currentPage+1);
+            })
+        })
     }
 
     function scrollToDonate(){
@@ -79,7 +77,9 @@ const MainHomepage = () => {
                         <br />
                         <div>
                             <button onClick={scrollToDonate} className="donate-btn">Donate Now</button>     
-                            <Link to="/newrequest"><button className="fundraiser-btn">Became a Fundraiser</button>         </Link>       
+                            <Link to="/newrequest">
+                                <button className="fundraiser-btn">Became a Fundraiser</button>         
+                            </Link>       
                         </div>
                     </div>
                 </div>
@@ -92,19 +92,8 @@ const MainHomepage = () => {
                     <div className="list-card-body">                        
                         <div className="home-card-container">        
 
-                        {topThreeData.length<1 && 
-                        <>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                        </>
-                        }
-                        {
-                        topThreeData.map(function (arrayItem,idx) {
-                            return <RequestCard key={idx} data={arrayItem}/>
-                        })  
-
-                        }                      
+                        {featuredData.length<1 && <> <CardSkeleton/> <CardSkeleton/> <CardSkeleton/> </> }
+                        { featuredData.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  }                      
                         </div>                        
                     </div>
 
@@ -127,28 +116,25 @@ const MainHomepage = () => {
                         </>
                         }                          
                         {
-                            allFundraisers.map(function (arrayItem,idx) {
-                                // if(arrayItem.userId!== parseInt(localStorage.getItem("userId"))){
-                                    return <RequestCard key={idx} data={arrayItem}/>
-                                // }                                
-                            })  
+                            allFundraisers.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  
                         }                       
 
                         </div>                                           
                     </div>                                                         
-                </div>
+                </div>                
 
                 <div className="center load-more-btn">
                     {
-                        moreDataAvailable &&
-                        <button  className="center" onClick={() =>  updateFundraisers(allFundraisers.length/8)}>                    
-                            Load More &nbsp;
+                        moreDataAvailable &&                        
+                        <button  className="center" onClick={() => updateFundraisers(allFundraisers.length)}>
+                            Load More Fundraisers &nbsp;
                             <i className="fa fa-angle-double-down" aria-hidden="true"></i>
                         </button>       
                     }
                 </div>        
+                <Footer/>
                 </div>
-
+                
         </>        
      );
 }
