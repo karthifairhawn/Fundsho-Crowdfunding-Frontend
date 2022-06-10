@@ -38,9 +38,9 @@ const RequestCard = ({data}) => {
 
                         <div className="total-donate">
                             <div className="raise-donation">of {data.amountRequired}</div>
-                            {/* <Link to={`/fundraiser/${data.requestId}`}>                            
+                            
                                 <button className="card-donate-btn center">Donate</button>
-                            </Link> */}
+                            
                         </div>                    
                     </div>
                     

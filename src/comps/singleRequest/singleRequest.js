@@ -1,16 +1,13 @@
 import { Container,Row,Col } from "react-bootstrap";
 import Navbar from "../footer_header/navbar";
-import { Tab,Box } from '@mui/material';
-import { TabPanel,TabContext,TabList } from '@mui/lab';
+import { Box } from '@mui/material';
 import { useState,useEffect } from "react";
 import { ProgressBar } from "react-bootstrap";
 import TextField from '@mui/material/TextField';
 import { APIIP } from "../settings/config";
 import { useParams } from "react-router-dom";
 import DonateModal from "../homepage3/DonateModel";
-// import {
-//     EmailShareButton,
-//     FacebookShareButton} from "react-share";
+
 
 
 const SingleRequest = () => {
@@ -30,7 +27,7 @@ const SingleRequest = () => {
 
 
     const [value, setValue] = useState('1');
-    const [pageInformation, setPageInformation] = useState({})
+    const [requestInformations, setRequestInformations] = useState('');
 
     const {reqId}  = useParams();
 
@@ -39,17 +36,17 @@ const SingleRequest = () => {
     };
 
     function loadData(){
-        console.log(reqId);
-        fetch(APIIP.ip+"/singlerequest/"+reqId)
-        .then((response) => response.json())
-        .then((response) => {setPageInformation(response); console.log(response);})    
+        // console.log(reqId);
+        // fetch(APIIP.ip+"/singlerequest/"+reqId)
+        // .then((response) => response.json())
+        // .then((response) => {setPageInformation(response); console.log(response);})    
     }
 
     useEffect(() => {
-        console.log(reqId);
-        fetch(APIIP.ip+"/singlerequest/"+reqId)
+    
+        fetch(APIIP.ip+"/requests/"+reqId)
         .then((response) => response.json())
-        .then((response) => {setPageInformation(response); console.log(response);})    
+        .then((response) => {setRequestInformations(response); console.log(response);})    
     },[reqId])
     return ( 
 
@@ -57,131 +54,29 @@ const SingleRequest = () => {
         <>
             <Navbar/>
             <div className="single-page-container">
-                <h2>{pageInformation.eventTitle}</h2>
+                <h2>{requestInformations.eventTitle}</h2>
                 
                 <Container fluid="sm">
                     <Row>
                         <Col md={8} lg={8} sm={12} xs={12} >                        
                             <div className="sp-left-container">
-                            <img src={pageInformation.imageUrl} className="srp-cover" alt="Fundraiser img" />
+                            <img src={requestInformations.eventImageUrl} className="srp-cover" alt="Fundraiser img" />
+
                             <div className="share-fr-row">
                                 <div></div>                    
                                 <button className="share-fundraiser">
-                                    <i className="fa fa-share-alt" aria-hidden="true"></i>
-                                    
-                                        <span>
-                                            Share Fundraiser
-                                        </span>                                                                         
+                                    <i className="fa fa-share-alt" aria-hidden="true"></i>                                    
+                                    <span>Share Fundraiser</span>                                                                         
                                 </button>
                             </div>
 
                             <Box sx={{ width: '100%', typography: 'body1' }}>
-                            <TabContext value={value}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                    <TabList onChange={handleChange} aria-label="lab API tabs example">
-                                        <Tab label="About" value="1" />
-                                        <Tab label="Educational Info" value="2" />                                        
-                                        <Tab label="Personal Info" value="3" />
-                                    </TabList>
-                                </Box>
-                                <TabPanel value="1">
-                                    <div className="header sp-content" >
-                                        <h3>Words from Fundraiser</h3>
-
-                                    
-
-                                        <p>
-                                            {pageInformation.eventDescription}                                            
-                                        </p>                                        
-                                        <div className="share-buttons">
-                                            <a href={"https://api.whatsapp.com/send?text="+window.location.href} target="_blank" rel="noreferrer"><button className="wapp-share">
-                                                <i className="fa fa-whatsapp" aria-hidden="true"></i>
-                                                Share
-                                            </button></a>
-                                            <a href={"https://www.facebook.com/sharer/sharer.php?u="+window.location.href} target="_blank" rel="noreferrer"><button className="fb-share">
-                                            <i className="fa fa-facebook-official" aria-hidden="true"></i>
-    
-
-                                                Share
-                                            </button></a>
-                                            <a href={"https://twitter.com/intent/tweet?url="+window.location.href} target="_blank" rel="noreferrer"><button className="twitter-share">
-                                            <i className="fa fa-twitter-square" aria-hidden="true"></i>
-                                                Share
-                                                </button></a>
-                                        </div>
-                                    </div>
-                                </TabPanel>
-
-
-
-                                <TabPanel value="2">
-                                    <div className="educational-info">
-
-                                        <span>{pageInformation.institutionName}</span>                                        
-                                        <span>{pageInformation.institutePlace}</span>
-                                        <span>{pageInformation.studyProgram}</span>
-                                        <span>{pageInformation.cgpa}</span>
-
-                                    </div>
-                                </TabPanel>
-                                <TabPanel value="3">
-                                
-                                <div className="sp-personalInfo">
-                                    <div className="name">
-                                        <span className="bold">Name :</span>      
-                                        <span>{pageInformation.fname+" "+pageInformation.lname}</span>                                  
-                                    </div>
-
-                                    <div className="name">
-                                        <span className="bold">Gender :</span>      
-                                        <span>{pageInformation.gender}</span>                                  
-                                    </div>
-
-                                    <div className="name">
-                                        <span className="bold">Father :</span>      
-                                        <span>{pageInformation.fatherName} / {pageInformation.fatherOccupation}</span>                                  
-                                    </div>
-
-                                    <div className="name">
-                                        <span className="bold">Household Income :</span>      
-                                        <span>{pageInformation.annualSalary}</span>                                  
-                                    </div>
-
-                                    <div className="name">
-                                        <span className="bold">Age :</span>      
-                                        <span>{Math.floor(calculateDaysBetweenDates(pageInformation.dateOfBirth)/365)}</span>                                  
-                                    </div>
-                                    <br />
-
-                                    <div className=""><h5>Contact Information</h5></div>
-
-                                    <div className="name">
-                                        <span className="bold">Phone :</span>      
-                                        <span>{pageInformation.phoneNumber}</span>                                                                          
-                                    </div>
-
-                                    <div className="name">
-                                        <span className="bold">City :</span>      
-                                        <span>{pageInformation.city} - {pageInformation.pinCode}</span>                                                                          
-                                    </div>
-
-                                    <div className="name">
-                                        <span className="bold">State :</span>      
-                                        <span>{pageInformation.stateRegion}</span>                                                                          
-                                    </div>
-
-                                    <div className="name">
-                                        <span className="bold">Email :</span>      
-                                        <span>{pageInformation.personalEmail}</span>                                                                           
-                                    </div>  
-                                </div>                                                                                                          
-                                </TabPanel>
-                            </TabContext>
+                           
                             </Box>
                             </div>
 
                             <br />
-
+{/* 
                             <div className="direct-donation">
                                 <div className="title">Direct Donation</div>
 
@@ -214,25 +109,96 @@ const SingleRequest = () => {
                                         </div>
                                     </div>                                    
                                 </div>
-                            </div>
+                            </div> */}
+
+
+
+
+
                             <br />
                             <div className="comment-section">
-                                <div className="title">Comments</div>  
-                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>    
-
-                                    <div className="comment-box">
-                                        <TextField id="input-with-sx" label="Type your public comment" variant="standard">                                        
-                                        </TextField>
-                                        <button className="card-donate-btn">Comment</button>
-                                    </div>                                
-                                    
-                                    <div className="posted-comments">
-                                        
+                                <div className="title">Event Information</div>    
+                                <hr />
+                                <div className="bc-sub-row">
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Event Title: </span>
+                                        <span>{requestInformations.eventTitle}</span>
+                                    </div>    
+                                    <br />                              
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Event Date: </span>
+                                        <span>{requestInformations.deadLine}</span>
                                     </div>
-
-
-                                </Box>                              
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Additional Files: </span>
+                                        <span>{requestInformations.addtionalFilesUrl}</span>
+                                    </div>
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Event Description: </span>
+                                        <span>{requestInformations.eventDescription}</span>
+                                    </div>
+                                </div>                            
                             </div>
+
+                            <br />
+
+                            <div className="comment-section">
+                                <div className="title">Educational Details</div>
+                                <hr />
+                                <div className="bc-sub-row">
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Education Field: </span>
+                                        <span>{requestInformations.studyProgram}</span>
+                                    </div>
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Education Institute: </span>
+                                        <span>{requestInformations.institutionName}</span>
+                                    </div>
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Education City: </span>
+                                        <span>{requestInformations.institutePlace}</span>
+                                    </div>
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">More about education: </span>
+                                        <span>{requestInformations.institutionName}</span>
+                                    </div>
+                                    <br />
+                                </div> 
+                            </div>   
+                            <br />
+
+                            <div className="comment-section">
+                                <div className="title">Contact Information</div>
+                                <hr />
+                                <div className="bc-sub-row">                                        
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Fundraiser Name: </span>
+                                        <span>{requestInformations.fname + ' ' + requestInformations.lname}</span>
+                                    </div>
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Fundraiser Email: </span>
+                                        <span>{requestInformations.personalEmail}</span>
+                                    </div>
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Fundraiser Phone: </span>
+                                        <span>{requestInformations.phoneNumber}</span>
+                                    </div>
+                                    <br />
+                                    <div className="bc-sub-title">
+                                        <span className="bold">Fundraiser Additional Information: </span>
+                                        <span>{requestInformations.background}</span>
+                                    </div>                                        
+                                </div>                                                                                        
+                            </div>
+
                         </Col>
 
 
@@ -240,9 +206,9 @@ const SingleRequest = () => {
 
                             
                             {
-                                parseInt(localStorage.getItem('userId'))!==pageInformation.userId
+                                parseInt(localStorage.getItem('userId'))!==requestInformations.userId
                                 ?
-                                <DonateModal req={pageInformation} updateFunction={loadData}/>    
+                                <DonateModal req={requestInformations} updateFunction={loadData}/>    
                                 :
                                 ''
                             }
@@ -261,22 +227,22 @@ const SingleRequest = () => {
                             </div>
                             <a href={"https://api.whatsapp.com/send?text="+window.location.href} target="_blank" rel="noreferrer">
                                 <button className="fb-share-right">
-                                    <i className="fa fa-whatsapp" aria-hidden="true"></i>
+                                    <i className="fab fa-whatsapp" aria-hidden="true"></i>
                                     Spread the word
                                 </button>
                             </a>
 
                             <div className="sp-donation-info">
                                 <div className="sp-donated-amount">
-                                    <span>₹ {pageInformation.amountRecieved}</span>                                
+                                    <span>₹ {requestInformations.amountRecieved}</span>                                
                                 </div>
                                 <div className="sp-donation-goal">
-                                    <span>raised of <b>₹ {pageInformation.amountRequired}</b> goal</span>
+                                    <span>raised of <b>₹ {requestInformations.amountRequired}</b> goal</span>
                                 </div>
-                                <ProgressBar now={(pageInformation.amountRecieved/pageInformation.amountRequired) * 100}></ProgressBar>
+                                <ProgressBar now={(requestInformations.amountRecieved/requestInformations.amountRequired) * 100}></ProgressBar>
                                 <div className="supporters-days">
-                                    <span><b>{pageInformation.votes}</b>Votes</span>
-                                    <span><b>{calculateDaysBetweenDates(pageInformation.deadLine)}</b> days left</span>
+                                    <span><b>{requestInformations.votes}</b>Votes</span>
+                                    <span><b>{calculateDaysBetweenDates(requestInformations.deadLine)}</b> days left</span>
                                 </div>
                             </div>
                         </Col>
@@ -285,7 +251,7 @@ const SingleRequest = () => {
                 </Container>
                 <div className="empty-space"></div>
             </div>
-        </>
+        </>        
      );
 }
  

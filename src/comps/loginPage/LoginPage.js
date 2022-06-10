@@ -1,5 +1,4 @@
-import { Link,NavLink,useHistory } from 'react-router-dom';
-import { padding } from "@mui/system";
+import { useHistory } from 'react-router-dom';
 import Navbar from "../footer_header/navbar";
 import {APIIP} from '../settings/config';
 import { useEffect } from 'react';
@@ -37,6 +36,7 @@ const LoginPage = () => {
       if (response.status === 200) {
         response.json().then(response => {        
           localStorage.setItem('sessionKey', response.sessionKey)
+          localStorage.setItem('userId', response.userId)
           // console.log(response);    
           history.push('/home');        
         })

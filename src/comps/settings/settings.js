@@ -13,14 +13,14 @@ const Setting = (  ) => {
     <Navbar/>
      <div className="setting-container">
         <div className="left-pane-setting">
-          <div className="left-pane-setting-info">
+          <div className="d-flex m-2 mb-1 fs-5 text-opacity-75 mt-5">SETTINGS</div>
+          {/* <div className="left-pane-setting-info">
             <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="profile-img" className="profile-img" />
             <div className="left-pane-setting-info-r">
               <span className="profile-info-name">{'@'+localStorage.getItem("username")}</span>
-              {/* <span className="wallet-balance">₹ {balance}</span> */}
+              <span className="wallet-balance">₹ {balance}</span>
             </div>                            
-          </div>
-          <br />
+          </div> */}          
 
           <div className="left-pane-setting-options">
             

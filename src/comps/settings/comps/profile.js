@@ -12,13 +12,10 @@ const Profile = () => {
     const [fname,setFname] = useState("");
     const [lname,setLname] = useState("");
     const [email,setEmail] = useState("");
-    const [dob,setDob] = useState("");
-
-
-    
+    const [dob,setDob] = useState("");    
     const [phNumber,setPhNumber] = useState("");
     const [username,setUsername] = useState("");
-    
+    const[avatarUrl,setAvatar] = useState("");
 
 
     const notify = (msg,Type) => {
@@ -42,19 +39,20 @@ const Profile = () => {
             return msg;
         }
         setChangedData(false);
-        fetch(APIIP.ip+"/getuser/"+localStorage.getItem('sessionkey'))
+
+
+
+        console.log(APIIP.ip+"/users/"+localStorage.getItem('userId')+"/profile?sessionKey="+localStorage.getItem('sessionKey'));
+        fetch(APIIP.ip+"/users/"+localStorage.getItem('userId')+"/profile?sessionKey="+localStorage.getItem('sessionKey'))
         .then( (response)=> response.json())
-        .then( (response => {
-            // console.log(localStorage.getItem('sessionkey'));
+        .then( (response => {            
             setFname(checkNull(response.fname));
             setLname(checkNull(response.lname));
-            setEmail(checkNull(response.email));
-            // setDob(checkNull(response.dob));        
+            setEmail(checkNull(response.email));                 
             setPhNumber(checkNull(response.phNumber));
-            setUsername(checkNull(response.username));       
-            
-            
-        
+            setUsername(checkNull(response.username));                               
+            setAvatar(checkNull(response.avatarUrl));
+
             let date = checkNull(response.dob);
             // setDob(date);
             if(date!==null){
@@ -63,20 +61,12 @@ const Profile = () => {
                 setDob(date);   
             }  
             
-        
-
-            if(nullValues){
-                notify("Please update profile","warning");
-            }
 
         }))
 
     },[]);
 
 
-    useEffect(() => {
-        // console.log(localStorage);  
-    });
 
 
     function updateProfile() {
@@ -120,16 +110,16 @@ const Profile = () => {
 
             <form className="form-container-profile">
                 
-                <div className="profile-page-img"> <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="profile-img" /> </div>
+                <div className="profile-page-img"> <img src={avatarUrl} alt="profile-img" /> </div>
                 <hr className="hr"/>
             
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                        <label htmlhtmlFor="firstname">First Name</label>
+                        <label htmlFor="firstname">First Name</label>
                         <input type="text" value={fname} onChange={ (e) => {setChangedData(true); setFname(e.target.value)}}/>
                     </span>
                     <span className="names-span">                    
-                        <label htmlhtmlFor="lastname">Last Name</label>
+                        <label htmlFor="lastname">Last Name</label>
                         <input type="text" value={lname} onChange={ (e) => {setChangedData(true);setLname(e.target.value)}}/>
                     </span>
                 </div>
@@ -137,11 +127,11 @@ const Profile = () => {
 
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                            <label htmlhtmlFor="firstname">Email</label>
+                            <label htmlFor="firstname">Email</label>
                             <input type="email" value={email} onChange={ (e) => {setChangedData(true);setEmail(e.target.value)}}/> 
                     </span>                
                     <span className="names-span">                    
-                            <label htmlhtmlFor="username">User Name</label>
+                            <label htmlFor="username">User Name</label>
                             <input type="text" value={username} onChange={ (e) => {setChangedData(true);setUsername(e.target)}} />
                     </span>
                 </div>
@@ -149,7 +139,7 @@ const Profile = () => {
 
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                            <label htmlhtmlFor="dob">DOB</label>
+                            <label htmlFor="dob">DOB</label>
                             <input type="date" value={dob} onChange={ (e) => {setChangedData(true);setDob(e.target.value)}} />
                     </span>                                
                 </div>
@@ -157,7 +147,7 @@ const Profile = () => {
 
                 <div className="form-set_of_2">
                     <span className="names-span">                    
-                            <label htmlhtmlFor="number">Contact Number</label>
+                            <label htmlFor="number">Contact Number</label>
                             <input type="text" value={phNumber} onChange={ (e) => {setChangedData(true);setPhNumber(e.target.value)}}/>
                     </span>                                
                 </div>

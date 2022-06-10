@@ -29,7 +29,7 @@ const MainHomepage = () => {
             })
         })
 
-        fetch(APIIP.ip+"/requests?page=1&size=8&featured=true",{
+        fetch(APIIP.ip+"/requests?page=1&size=8&featured=false",{
             method:"GET",
             mode: 'cors',
             headers: {
@@ -46,7 +46,7 @@ const MainHomepage = () => {
     },[]);
 
     function updateFundraisers(){
-        fetch(APIIP.ip+"/requests?page="+currentPage+"&size=8&featured=true",{
+        fetch(APIIP.ip+"/requests?page="+currentPage+"&size=8&featured=false",{
             method:"GET",
             mode: 'cors',
             headers: {
@@ -56,8 +56,11 @@ const MainHomepage = () => {
             response.json().then(response => {                
                 setAllFundraiser(allFundraisers.concat(response));
                 setCurrentPage(currentPage+1);
+                setMoreDataAvailable(response.length>0);
             })
         })
+
+        
     }
 
     function scrollToDonate(){

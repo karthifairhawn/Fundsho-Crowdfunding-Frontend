@@ -1360,8 +1360,7 @@ html {
   justify-content: space-between;
   align-items: center;
   height: 30px;
-
-  width:170%;
+  width: 140%;
 }
 
 
@@ -1420,6 +1419,7 @@ html {
 .profile-page-img img{
   width: 150px;
   border-radius:50%;
+  border: 2px solid #1d6d8c79;
 }
 
 .form-set_of_2{
@@ -1676,6 +1676,7 @@ html {
 }
 .sp-left-container{
     box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    height:460px;    
 }
 
 .sp-left-container p{
@@ -1683,6 +1684,7 @@ html {
   line-height:27px;
   letter-spacing:.4px;
   word-break: break-word;
+  
 }
 
 .single-page-container h2{
@@ -1696,8 +1698,8 @@ html {
 
 .share-fr-row{
   display:flex;
-  justify-content:space-between;
-  margin:10px;
+  justify-content:center;
+  margin-bottom:20px;
 }
 
 .share-buttons{
@@ -1740,6 +1742,7 @@ html {
 }
 
 .share-fundraiser{  
+  margin-top: 10px;
   color: #01bfbd;
   box-shadow: 0 1px 6px rgba(0,0,0,.2);
   border-radius: 4px!important;
@@ -1765,7 +1768,8 @@ html {
   margin:0 10px;
 }
 .srp-cover{
-  width:100%;
+  height: 400px;  
+  width: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
