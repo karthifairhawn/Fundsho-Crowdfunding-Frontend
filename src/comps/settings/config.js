@@ -6,3 +6,4 @@ export const APIIP = {
     ip :"https://fundshop-api.herokuapp.com"
     // ip:"http://192.168.43.114:8080"
 };
+

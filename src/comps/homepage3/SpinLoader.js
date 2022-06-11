@@ -8,6 +8,7 @@ import { Hearts,TailSpin } from  'react-loader-spinner'
     backdropFilter: "blur(5px)",
     padding: "100%",
     zIndex: "1",
+    position: "fixed"
 }
 
 const SpinLoader = () => {

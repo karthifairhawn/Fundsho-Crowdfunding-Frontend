@@ -137,7 +137,13 @@ const SingleRequest = () => {
             
             <Navbar/>
             <div className="single-page-container">
-                <h2>{requestInformations.eventTitle}</h2>
+                <div className="single-page-header d-flex justify-content-between align-items-center">
+                    <i class="fa-solid fa-circle-arrow-left fs-2 p-2" style={{color:"#cecfd0"}}></i>
+                    <h2>{requestInformations.eventTitle}</h2>
+                    <div></div>                
+                </div>
+
+                <hr />
                 
                 <Container fluid="sm">
                     <Row>
@@ -165,44 +171,6 @@ const SingleRequest = () => {
                             </div>
 
                             <br />
-{/* 
-                            <div className="direct-donation">
-                                <div className="title">Direct Donation</div>
-
-                                <div className="dd-info">
-                                    <span className="bold">
-                                        Transfer directly to the Bank account of this Fundraiser. Only INR transfers are allowed.
-                                    </span>
-
-                                    <div className="dd-main-content">
-                                        <div className="bank-img">
-                                            <i className="fa fa-university" aria-hidden="true"></i> 
-                                        </div>
-                                        <div className="bank-info">
-                                            <div className="name">
-                                                <span className="bold">Virtual A/C No :</span>      
-                                                <span>6999413500366181</span>                                                                          
-                                            </div>
-                                            <div className="name">
-                                                <span className="bold">Virtual A/C Name:</span>      
-                                                <span>AISHA NAZIA NASIR MAYIN-Ketto</span>                                                                          
-                                            </div>
-                                            <div className="name">
-                                                <span className="bold">A/C Type :</span>      
-                                                <span>Current</span>                                                                          
-                                            </div>
-                                            <div className="name">
-                                                <span className="bold">IFSC :</span>      
-                                                <span>YESB0CMSNOC</span>                                                                          
-                                            </div>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                            </div> */}
-
-
-
-
 
                             <br />
                             <div className="comment-section">
@@ -300,7 +268,7 @@ const SingleRequest = () => {
                                     <div className="btn-content">
                                         <div className="btn-text">
                                             <span className="bold">{
-                                                (requestInformations.amountRequired-requestInformations.amountRecieved)==0 ? 'Fundraising Closed - recieved required amount' : 'Fundraising Closed'
+                                                (requestInformations.amountRequired-requestInformations.amountRecieved)===0 ? 'Fundraising Closed - recieved required amount' : 'Fundraising Closed'
                                             }</span>
                                         </div>
                                     </div>
@@ -347,6 +315,7 @@ const SingleRequest = () => {
                                 <hr />
                                 
                                 <div className="donations-box d-flex flex-column-reverse">
+
                                 {donations.map(function(donation, index){
                                         
                                         return  <DonorBox index={index} donor={donation}/>
