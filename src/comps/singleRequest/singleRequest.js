@@ -239,7 +239,23 @@ const SingleRequest = () => {
 
                         <Col md={4} lg={4} sm={12} xs={12} >
                             
-                            { <DonateModal req={requestInformations} updateFunction={reloadRequest}/>    }                            
+                            { (requestInformations.amountRequired-requestInformations.amountRecieved)>0 ? <DonateModal req={requestInformations} updateFunction={reloadRequest}/> : 
+                            <div className="card">
+                                <div className="card-body">
+                                <div className="donate-btn">
+                                    <div className="title">Fundraising Closed</div>
+                                    <div className="btn-content">
+                                        <div className="btn-text">
+                                            <span className="bold">{
+                                                (requestInformations.amountRequired-requestInformations.amountRecieved)==0 ? 'Fundraising Closed - recieved required amount' : 'Fundraising Closed'
+                                            }</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            }                            
 
                             <div className="payment-options">
                                 <div className="credit-card">

@@ -32,13 +32,13 @@ const style = {
 export default function DonateModal({req,updateFunction}) {
 
   useEffect(() => {    
-    var url = APIIP.ip+"/users/"+localStorage.getItem("userId")+"/wallet?sessionKey="+localStorage.getItem("sessionKey");        
+      var url = APIIP.ip+"/users/"+localStorage.getItem("userId")+"/wallet?sessionKey="+localStorage.getItem("sessionKey");
+        
         fetch(url)
         .then((response)=> response.json())
-        .then((response => {                                    
-            setWalletBalance(response.balance);
-            // setBalanceUpdate(false);
-      }));
+        .then((response => {                        
+          setWalletBalance(response.balance);            
+        }));
     
   },[])
   
@@ -81,7 +81,6 @@ export default function DonateModal({req,updateFunction}) {
   const [walletBalance,setWalletBalance] = useState(0);
   const [donationAmount,setDonationAmount] = useState(10);
   const [donationDescription,setDonationDescription] = useState("");
-
   return (
     <div>
       <Button className="contibute-btn" onClick={handleOpen}>♥ Contibute Now</Button>
@@ -89,8 +88,8 @@ export default function DonateModal({req,updateFunction}) {
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           {
-            localStorage.getItem("sessionKey")!==null
-            ?
+            (localStorage.getItem("sessionKey")!==null && (req.amountRequired-req.amountRecieved)>0)
+            ?            
             <>
               <div>                                
                 <TextField required id="outlined-basic" label="Say something about donation.." variant="outlined" onChange={(e) => {setDonationDescription(e.target.value)}}/>
@@ -103,8 +102,10 @@ export default function DonateModal({req,updateFunction}) {
                
                 <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
                   {10+"₹ "}
-                  <Slider value={donationAmount} onChange={(e)=> {setDonationAmount(e.target.value)}} min={10} max={Math.min(req.amountRequired,walletBalance)} defaultValue={60} aria-label="Default" valueLabelDisplay="auto" />
-                  {Math.min(req.amountRequired,walletBalance)+"₹"}
+                  
+                  
+                  <Slider value={donationAmount} onChange={(e)=> {setDonationAmount(e.target.value)}} min={10} max={( (req.amountRequired-req.amountRecieved)<=walletBalance ? (req.amountRequired-req.amountRecieved) : walletBalance)} defaultValue={60} aria-label="Default" valueLabelDisplay="auto" />
+                  {( (req.amountRequired-req.amountRecieved)<=walletBalance ? (req.amountRequired-req.amountRecieved) : walletBalance)+"₹"}
                 </Stack>                    
                 <TextField id="standard-basic" onChange={(e)=> {setDonationAmount(e.target.value)}} value={donationAmount} label="₹ Amount to Donate" variant="standard" />
                 <Button onClick={()=> {makeDonation();handleClose();}} className="modal-donate-btn" variant="contained"><i className="fa fa-heart" aria-hidden="true"></i> &nbsp;Donate</Button>

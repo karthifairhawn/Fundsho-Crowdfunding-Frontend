@@ -1312,6 +1312,12 @@ html {
     display: flex;
     flex-direction: column;    
 }
+
+.left-pane-setting-options  a{
+  margin: 10px 0px;
+}
+
+
 .left-pane-setting-options-btn{    
     font-size: 1rem;
     display: block;

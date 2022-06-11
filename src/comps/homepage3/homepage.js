@@ -89,15 +89,19 @@ const MainHomepage = () => {
 
 
 
-                <div className="homepage-card">                
+                <div className="d-flex align-center justify-center flex-column width-100 m-5">                
 
-                    <h6 className="home-title title bold">Featured Fundraisers</h6>   
-                    <div className="list-card-body">                        
+                    <div className="card">  
+                    <div className="card-header h4 fst-italic">Featured Fundraisers</div>   
+                        <div className="card-body">
+                            
+                        <div className="list-card-body">                        
+                        </div>
                         <div className="home-card-container">        
-
-                        {featuredData.length<1 && <> <CardSkeleton/> <CardSkeleton/> <CardSkeleton/> </> }
-                        { featuredData.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  }                      
+                            {featuredData.length<1 && <> <CardSkeleton/> <CardSkeleton/> <CardSkeleton/> </> }
+                            { featuredData.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  }                      
                         </div>                        
+                        </div>
                     </div>
 
                     <DonateMore/>

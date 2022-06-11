@@ -89,7 +89,7 @@ const Wallet = () => {
                             </tr>
                         </thead>
                         <tbody className="transaction-table">                            
-                            {Object.entries(transaction).map((item,idx) => (                                        
+                            {Object.entries(transaction).reverse().map((item,idx) => (                                        
                                 <tr key={idx}>
                                     <td>{item[1].transactionId}</td>
                                     <td>{item[1].transactionDescription}</td>
