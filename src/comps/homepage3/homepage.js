@@ -36,8 +36,7 @@ const MainHomepage = () => {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            response.json().then(response => {
-                // console.log(response);
+            response.json().then(response => {                
                 setAllFundraiser(response);
             })
         })
@@ -72,7 +71,8 @@ const MainHomepage = () => {
         <Navbar>
             </Navbar>            
                 <div className="conatiner">
-                <div className="hero-banner">
+
+                <div className="hero-banner">   
                     <div className="hero-banner-text">
                         <span className="bold">COME, LAY THE FOUNDATION OF EDUCATION</span>                    
                         <span>Let us build a educated nation, together</span>
@@ -93,14 +93,11 @@ const MainHomepage = () => {
 
                     <div className="card">  
                     <div className="card-header h4 fst-italic">Featured Fundraisers</div>   
-                        <div className="card-body">
-                            
-                        <div className="list-card-body">                        
-                        </div>
-                        <div className="home-card-container">        
-                            {featuredData.length<1 && <> <CardSkeleton/> <CardSkeleton/> <CardSkeleton/> </> }
-                            { featuredData.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  }                      
-                        </div>                        
+                        <div className="card-body">                                                    
+                            <div className="home-card-container">        
+                                { featuredData.length<1 && <> <CardSkeleton/> <CardSkeleton/> <CardSkeleton/> </> }
+                                { featuredData.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  }                      
+                            </div>                        
                         </div>
                     </div>
 
@@ -108,26 +105,15 @@ const MainHomepage = () => {
 
                     <br />
 
-                    <div className="list-card-body">                        
-                        <div className="home-card-container">  
-                        {allFundraisers.length<1 && 
-                        <>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                            <CardSkeleton/>
-                            <CardSkeleton/>                        
-                        </>
-                        }                          
-                        {
-                            allFundraisers.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  
-                        }                       
+                    <div className="card">                        
+                        <div className="card-body d-flex flex-wrap">  
+
+                        { allFundraisers.length<1 &&   <> {Array(8).fill(1).map((el, i) => <CardSkeleton key={i} /> )} </>}                          
+                        { allFundraisers.map(function (arrayItem,idx) { return <RequestCard key={idx} idx={idx} data={arrayItem}/> }) }                       
 
                         </div>                                           
-                    </div>                                                         
+                    </div>   
+
                 </div>                
 
                 <div className="center load-more-btn">
