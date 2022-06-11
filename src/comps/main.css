@@ -22,7 +22,6 @@ textarea{
 }
 
 a{
-  color: #fff;
   text-decoration: none !important;
 }
 
@@ -602,10 +601,9 @@ font-size: 12px;
 }
 
 a {
-color: white;
+
 font-size: 14px;
-text-decoration: none;
-margin: 15px 0;
+text-decoration: none;  
 }
 
 button {
@@ -1616,10 +1614,7 @@ html {
 .change-pass-row label{  
   width:20%;
 }
-.change-pass-row input{  
-  width:30%;
-  height:30px;
-}
+
 .change-password-form{
   width:100%;
   display: flex;

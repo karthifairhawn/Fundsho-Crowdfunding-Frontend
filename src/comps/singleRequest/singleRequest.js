@@ -3,11 +3,41 @@ import Navbar from "../footer_header/navbar";
 import { Box } from '@mui/material';
 import { useState,useEffect } from "react";
 import { ProgressBar } from "react-bootstrap";
-import TextField from '@mui/material/TextField';
 import { APIIP } from "../settings/config";
 import { useParams } from "react-router-dom";
 import DonateModal from "../homepage3/DonateModel";
 
+import * as React from 'react';
+
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+
+
+const DonorBox = (idx) => {
+    var donor = idx.donor;
+    return ( 
+        
+        <>
+        
+        <Card sx={{ minWidth: 275 }} id={idx.index}>
+            <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom> Donor Name: {donor.donorName}</Typography>                                        
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom> Amount: {donor.amount}</Typography>                                                                                                                        
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom> Donation Comment: {donor.description}</Typography>                                                                                                                        
+            </CardContent>
+            <CardActions>
+                <Button size="small">View user.</Button>
+            </CardActions>
+        </Card>
+        <br />
+        </>
+     );
+}
+ 
 
 
 const SingleRequest = () => {
@@ -26,28 +56,34 @@ const SingleRequest = () => {
       }
 
 
-    const [value, setValue] = useState('1');
+
     const [requestInformations, setRequestInformations] = useState('');
+    const [donations, setDonations] = useState([]);
+    
 
     const {reqId}  = useParams();
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
-    function loadData(){
-        // console.log(reqId);
-        // fetch(APIIP.ip+"/singlerequest/"+reqId)
-        // .then((response) => response.json())
-        // .then((response) => {setPageInformation(response); console.log(response);})    
-    }
-
-    useEffect(() => {
-    
+    function reloadRequest(){
         fetch(APIIP.ip+"/requests/"+reqId)
         .then((response) => response.json())
-        .then((response) => {setRequestInformations(response); console.log(response);})    
-    },[reqId])
+        .then((response) => {setRequestInformations(response); })   
+        
+        fetch(APIIP.ip+"/requests/"+reqId+"/donations")
+        .then((response) => response.json())
+        .then((response) => {setDonations(response); })  
+    }
+
+    useEffect(() => {    
+        fetch(APIIP.ip+"/requests/"+reqId)
+        .then((response) => response.json())
+        .then((response) => {setRequestInformations(response); })    
+
+        fetch(APIIP.ip+"/requests/"+reqId+"/donations")
+        .then((response) => response.json())
+        .then((response) => {setDonations(response); })    
+
+    },[])
     return ( 
 
         
@@ -201,19 +237,9 @@ const SingleRequest = () => {
 
                         </Col>
 
-
                         <Col md={4} lg={4} sm={12} xs={12} >
-
                             
-                            {
-                                parseInt(localStorage.getItem('userId'))!==requestInformations.userId
-                                ?
-                                <DonateModal req={requestInformations} updateFunction={loadData}/>    
-                                :
-                                ''
-                            }
-                            
-
+                            { <DonateModal req={requestInformations} updateFunction={reloadRequest}/>    }                            
 
                             <div className="payment-options">
                                 <div className="credit-card">
@@ -244,6 +270,21 @@ const SingleRequest = () => {
                                     <span><b>{requestInformations.votes}</b>Votes</span>
                                     <span><b>{calculateDaysBetweenDates(requestInformations.deadLine)}</b> days left</span>
                                 </div>
+                            </div>
+
+                            
+                            <div className="recent-donations">
+                                <div className="title">Recent Donations <i className="fas fa-donate"></i></div>
+                                <hr />
+                                
+                                <div className="donations-box d-flex flex-column-reverse">
+                                {donations.map(function(donation, index){
+                                        
+                                        return  <DonorBox index={index} donor={donation}/>
+                                    
+                                })}
+                                </div>
+                                
                             </div>
                         </Col>
 

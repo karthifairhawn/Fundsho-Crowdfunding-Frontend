@@ -9,6 +9,7 @@ import './comps/main.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SingleRequest from './comps/singleRequest/singleRequest.js';
 import HorizontalLinearStepper from './comps/NewRequestPage/';
+import Register from './comps/loginPage/Register.js';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route exact path="/"><MainHomepage /></Route>
           <Route exact path="/home"><MainHomepage /></Route>
             <Route exact path="/login"><LoginPage /></Route>
+            <Route exact path="/register"><Register /></Route>
             <Route exact path="/about"><About /></Route>
             <Route exact path="/contact-us"><Contact /></Route>
             <Route exact path="/plans"><Plans /></Route>            

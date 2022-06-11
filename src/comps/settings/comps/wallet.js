@@ -17,8 +17,7 @@ const Wallet = () => {
         .then((response => {            
             setTransaction(response.transaction);
             console.log(response.transaction);
-            setBalance(response.balance);
-            // setBalanceUpdate(false);
+            setBalance(response.balance);            
         }));
     },[])
     
@@ -97,10 +96,10 @@ const Wallet = () => {
                                     <td className={ (item[1].transactionAmount>0 && "green-text") || (item[1].transactionAmount<0 && "red-text")} >
                                         {item[1].transactionAmount}
                                     </td>
-                                    <td><i className={(item[1].transactionStatus=="Success" && "fa fa-check fa-green") || (!item[1].status && "fa fa-times fa-red")} aria-hidden="true"></i>
+                                    <td><i className={(item[1].transactionStatus==="Success" && "fa fa-check fa-green") || (!item[1].status && "fa fa-times fa-red")} aria-hidden="true"></i>
                                         
-                                        {item[1].transactionStatus=="Success" && "Accepted"}
-                                        {!item[1].transactionStatus=="Failure" && "Failed"}
+                                        {item[1].transactionStatus==="Success" && "Accepted"}
+                                        {!item[1].transactionStatus==="Failure" && "Failed"}
                                     </td>
                                 </tr>
                             ))}

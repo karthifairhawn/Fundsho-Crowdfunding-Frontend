@@ -29,11 +29,9 @@ const Profile = () => {
     
 
    useEffect(() =>{        
-       //console.log(localStorage);
-        var nullValues = false;
+       //console.log(localStorage);        
         function checkNull(msg){
-            if(msg === "null" || msg ===null){
-                nullValues=true;                
+            if(msg === "null" || msg ===null){                             
                 return "";
             }       
             return msg;

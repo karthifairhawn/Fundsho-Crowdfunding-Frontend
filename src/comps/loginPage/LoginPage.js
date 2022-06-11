@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Navbar from "../footer_header/navbar";
 import {APIIP} from '../settings/config';
 import { useEffect } from 'react';
@@ -58,7 +58,7 @@ const LoginPage = () => {
         <Navbar/>
         <div className="d-flex align-items-center justify-content-around flex-wrap" style={{height:"90vh"}}>
           <div className="img-fluid d-flex" style={{width:"700px"}}>
-            <img className="img-fluid" src="https://preview.colorlib.com/theme/bootstrap/login-form-07/images/undraw_remotely_2j6y.svg" alt="Login Image" />
+            <img className="img-fluid" src="https://preview.colorlib.com/theme/bootstrap/login-form-07/images/undraw_remotely_2j6y.svg" alt="Login" />
           </div>
           <div className="login-form">
           <form onSubmit={(e)=>{loginUser(e)}}>
@@ -73,6 +73,9 @@ const LoginPage = () => {
             </div>            
             
             <input type="submit" className="btn btn-primary"/>
+            <br />
+
+            <Link to="/register">Create a new account</Link>
 
           </form>
           </div>

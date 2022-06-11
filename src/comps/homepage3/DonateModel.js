@@ -31,20 +31,15 @@ const style = {
 
 export default function DonateModal({req,updateFunction}) {
 
-  useEffect(() => {
-
-    if(localStorage.getItem("sessionkey")!==null){
-      fetch(APIIP.ip+"/getuser/"+localStorage.getItem("sessionkey"))
-      .then((response)=> response.json())
-      .then((response => {
-        if(response.wallet>=0){
-          setWalletBalance(response.wallet.balance);        
-        }else{
-          setWalletBalance(0);                  
-        }
-
+  useEffect(() => {    
+    var url = APIIP.ip+"/users/"+localStorage.getItem("userId")+"/wallet?sessionKey="+localStorage.getItem("sessionKey");        
+        fetch(url)
+        .then((response)=> response.json())
+        .then((response => {                                    
+            setWalletBalance(response.balance);
+            // setBalanceUpdate(false);
       }));
-    }
+    
   },[])
   
   const notify = (msg,Type) => {
@@ -55,29 +50,29 @@ export default function DonateModal({req,updateFunction}) {
   }
   function makeDonation(){
     let obj = {
-      donationAmount : donationAmount,
-      requestId : req.requestId,
-      sessionId : localStorage.getItem("sessionkey")
+      donationAmount: donationAmount,      
+      donationDescription: donationDescription    
     }
-      
-    fetch(APIIP.ip+'/donatereq', {
-    method: "POST",
-    body: JSON.stringify(obj),
-    headers: {"Content-type": "application/json; charset=UTF-8"}
-    })
-    .then( (response) => {
-        updateFunction();
-        if(response.ok) {
-            notify("Donation succeed","success")
-            return response.json();
-        }else{
-            notify("Donation Failed","warning");
-        }
-    }) 
-    .then(json => {
-      setWalletBalance(json.balance)            
-    })
-    .catch(err => console.log(err));   
+    console.log(obj);
+    fetch(APIIP.ip+'/requests/'+req.requestId+'/donate?sessionKey='+localStorage.getItem('sessionKey'), {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+      })
+      .then( (response) => {
+          updateFunction();
+          if(response.ok) {
+              notify("Donation succeed","success")
+              return response.json(); 
+          }else{
+              notify("Donation Failed","warning");
+          }
+      }).then(json => {
+        setWalletBalance(0);                    
+      })
+      .catch(err => console.log(err));   
+ 
+        
   }
 
   const [open, setOpen] = React.useState(false);
@@ -85,46 +80,40 @@ export default function DonateModal({req,updateFunction}) {
   const handleClose = () => setOpen(false);
   const [walletBalance,setWalletBalance] = useState(0);
   const [donationAmount,setDonationAmount] = useState(10);
+  const [donationDescription,setDonationDescription] = useState("");
 
   return (
     <div>
       <Button className="contibute-btn" onClick={handleOpen}>♥ Contibute Now</Button>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           {
-            localStorage.getItem("sessionkey")!==null
-
+            localStorage.getItem("sessionKey")!==null
             ?
-
             <>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Your Wallet Balance : ₹{walletBalance}
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>    
-              <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-                {10+"₹ "}
-                <Slider value={donationAmount} onChange={(e)=> {setDonationAmount(e.target.value)}} min={10} max={Math.min(req.amountRequired,walletBalance)} defaultValue={60} aria-label="Default" valueLabelDisplay="auto" />
-                {Math.min(req.amountRequired,walletBalance)+"₹"}
-              </Stack>                    
+              <div>                                
+                <TextField required id="outlined-basic" label="Say something about donation.." variant="outlined" onChange={(e) => {setDonationDescription(e.target.value)}}/>
+                </div>
+                <br />
+                <Typography id="modal-modal-title">
+                  Your Wallet Balance : ₹{walletBalance}
+                </Typography>
+
+               
+                <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+                  {10+"₹ "}
+                  <Slider value={donationAmount} onChange={(e)=> {setDonationAmount(e.target.value)}} min={10} max={Math.min(req.amountRequired,walletBalance)} defaultValue={60} aria-label="Default" valueLabelDisplay="auto" />
+                  {Math.min(req.amountRequired,walletBalance)+"₹"}
+                </Stack>                    
                 <TextField id="standard-basic" onChange={(e)=> {setDonationAmount(e.target.value)}} value={donationAmount} label="₹ Amount to Donate" variant="standard" />
                 <Button onClick={()=> {makeDonation();handleClose();}} className="modal-donate-btn" variant="contained"><i className="fa fa-heart" aria-hidden="true"></i> &nbsp;Donate</Button>
-              </Typography>
-            </>  
-
-            
+              
+            </>              
             :
-
             <Link to="/login"> <Button variant="contained" className="modal-donate-btn">Login Now To Donate</Button></Link>
           }          
         </Box>
-
-
       </Modal>
     </div>
   );

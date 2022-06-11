@@ -17,10 +17,10 @@ export default function HorizontalLinearStepper() {
     let history = useHistory();
     
     useLayoutEffect(() => {
-        if(localStorage.getItem('sessionkey')==="" || localStorage.getItem('sessionkey')===null){            
+        if(localStorage.getItem('sessionKey')==="" || localStorage.getItem('sessionKey')===null){            
             history.push('/login');
         }
-        console.log(localStorage.getItem('sessionKey'));
+        // console.log(localStorage.getItem('sessionKey'));
     })
 
     const [fname,setFname] = useState("");
