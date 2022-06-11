@@ -2164,9 +2164,7 @@ html {
 
 
 .home-card-container {
-  display: flex;
-
-  width: 1400px;
+  display: flex;  
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -2177,8 +2175,7 @@ html {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
-  transition: box-shadow .5s;
-
+  transition: box-shadow .5s;  
 }
 
 .home-card:hover{
@@ -2195,6 +2192,7 @@ html {
   align-items: flex-start;
   padding: 20px;
   min-height: 250px;
+  height:300px;
 }
 
 .home-card-body p{
@@ -2202,8 +2200,7 @@ html {
 }
 
 
-.home-card-body h4{
-  height:80px;
+.home-card-body h4{  
   font-size: 1.3rem;
 }
 

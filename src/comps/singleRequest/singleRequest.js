@@ -15,14 +15,20 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import confetti from "canvas-confetti";
+import SpinLoader from "../homepage3/SpinLoader";
+
+
+
 
 
 const DonorBox = (idx) => {
     var donor = idx.donor;
-    return ( 
-        
-        <>
-        
+
+
+
+    return (         
+        <>        
         <Card sx={{ minWidth: 275 }} id={idx.index}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom> Donor Name: {donor.donorName}</Typography>                                        
@@ -38,7 +44,6 @@ const DonorBox = (idx) => {
      );
 }
  
-
 
 const SingleRequest = () => {
 
@@ -72,22 +77,64 @@ const SingleRequest = () => {
         fetch(APIIP.ip+"/requests/"+reqId+"/donations")
         .then((response) => response.json())
         .then((response) => {setDonations(response); })  
+
+        
+        var end = Date.now() + (2 * 1000);
+
+        // go Buckeyes!
+        var colors = ['#bb0000', '#ffffff'];
+        
+        (function frame() {
+          confetti({
+            particleCount: 2,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: colors
+          });
+          confetti({
+            particleCount: 2,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: colors
+          });
+        
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        }());    
     }
+
+    useEffect(() => {
+        var ele = document.getElementById("spinloader");
+        setTimeout(() => {
+            ele.classList.add("invisible");    
+        }, 1000);        
+    },[requestInformations])
 
     useEffect(() => {    
         fetch(APIIP.ip+"/requests/"+reqId)
         .then((response) => response.json())
-        .then((response) => {setRequestInformations(response); })    
-
+        .then((response) => {
+            setTimeout(() => {
+                setRequestInformations(response);                 
+            }, 300);            
+        })    
         fetch(APIIP.ip+"/requests/"+reqId+"/donations")
         .then((response) => response.json())
         .then((response) => {setDonations(response); })    
 
     },[])
+
+   
     return ( 
 
         
         <>
+            
+            <SpinLoader />
+            
             <Navbar/>
             <div className="single-page-container">
                 <h2>{requestInformations.eventTitle}</h2>
@@ -98,11 +145,17 @@ const SingleRequest = () => {
                             <div className="sp-left-container">
                             <img src={requestInformations.eventImageUrl} className="srp-cover" alt="Fundraiser img" />
 
-                            <div className="share-fr-row">
-                                <div></div>                    
+                            <div className="d-flex justify-content-between">
+
+                                <button className="share-fundraiser m-2">
+                                    <i className="fa-solid fa-thumbs-up"></i>                                  
+                                    &nbsp;
+                                    <span onClick={()=> alert('Voting Feature is currently disable due to spamming.')} >Support Fundraiser</span>                                                                         
+                                </button>
+
                                 <button className="share-fundraiser">
                                     <i className="fa fa-share-alt" aria-hidden="true"></i>                                    
-                                    <span>Share Fundraiser</span>                                                                         
+                                    <span on>Share Fundraiser</span>                                                                         
                                 </button>
                             </div>
 
@@ -283,7 +336,7 @@ const SingleRequest = () => {
                                 </div>
                                 <ProgressBar now={(requestInformations.amountRecieved/requestInformations.amountRequired) * 100}></ProgressBar>
                                 <div className="supporters-days">
-                                    <span><b>{requestInformations.votes}</b>Votes</span>
+                                    <span><b>{requestInformations.votes}</b>Supports</span>
                                     <span><b>{calculateDaysBetweenDates(requestInformations.deadLine)}</b> days left</span>
                                 </div>
                             </div>
@@ -299,6 +352,19 @@ const SingleRequest = () => {
                                         return  <DonorBox index={index} donor={donation}/>
                                     
                                 })}
+
+                                {
+                                    donations.length ===0 ? 
+                                    
+                                        <div>
+                                            <Typography variant="h6" gutterBottom>
+                                                No donations has been made yet.
+                                            </Typography>
+                                        </div>
+                                    : 
+                                    ''
+                                     
+                                }
                                 </div>
                                 
                             </div>

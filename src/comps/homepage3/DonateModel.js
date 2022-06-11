@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+
 toast.configure();
 
 
@@ -63,6 +64,13 @@ export default function DonateModal({req,updateFunction}) {
           updateFunction();
           if(response.ok) {
               notify("Donation succeed","success")
+              var url = APIIP.ip+"/users/"+localStorage.getItem("userId")+"/wallet?sessionKey="+localStorage.getItem("sessionKey");
+        
+              fetch(url)
+              .then((response)=> response.json())
+              .then((response => {                        
+                setWalletBalance(response.balance);            
+              }));
               return response.json(); 
           }else{
               notify("Donation Failed","warning");

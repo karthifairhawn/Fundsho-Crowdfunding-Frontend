@@ -2,6 +2,7 @@ import TextField from '@mui/material/TextField';
 import { useState,useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import SpinLoader from '../../homepage3/SpinLoader';
 import {APIIP} from '../config';
 const Security = () => {
 
@@ -85,13 +86,17 @@ const Security = () => {
             setOldInfo(loginInfo(response.oldLogin));  
             setLayoutRendered(true);          
         });
-
+        var ele = document.getElementById("spinloader");
+        setTimeout(() => {
+            ele.classList.add("invisible");    
+        }, 400);        
 
     },[])
         
     return ( 
         <>
             <>
+                <SpinLoader/>
                 <div className="title">Security and Privacy</div>
 
                 <div className="sub-container-sec">

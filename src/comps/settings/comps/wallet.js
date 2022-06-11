@@ -1,4 +1,6 @@
 import { useState,useEffect } from 'react';
+import SpinLoader from '../../homepage3/SpinLoader';
+
 
 import { APIIP } from '../config';
 const Wallet = () => {
@@ -17,7 +19,11 @@ const Wallet = () => {
         .then((response => {            
             setTransaction(response.transaction);
             console.log(response.transaction);
-            setBalance(response.balance);            
+            setBalance(response.balance);      
+            var ele = document.getElementById("spinloader");
+            setTimeout(() => {
+                ele.classList.add("invisible");    
+            }, 500);              
         }));
     },[])
     
@@ -30,13 +36,13 @@ const Wallet = () => {
 
     return (     
         <>
-        
+            <SpinLoader/>
             <div className="title">Wallet</div>
             
             <div className="wallet-container">
                 <div className="balance-container">
                     <span className="balance-amount">
-                        <span> ₹ {balance}</span>+
+                        <span> ₹ {balance}</span>
                         <span style={style}> Current Balance </span> 
                     </span>     
                     <span>

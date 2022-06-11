@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SingleRequest from './comps/singleRequest/singleRequest.js';
 import HorizontalLinearStepper from './comps/NewRequestPage/';
 import Register from './comps/loginPage/Register.js';
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const App = () => {
   return ( 

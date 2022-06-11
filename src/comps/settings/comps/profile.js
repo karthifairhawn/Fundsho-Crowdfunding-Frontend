@@ -1,6 +1,7 @@
     import { useState,useEffect } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import SpinLoader from "../../homepage3/SpinLoader";
 import {APIIP} from '../config';
 toast.configure();
 
@@ -59,7 +60,10 @@ const Profile = () => {
                 setDob(date);   
             }  
             
-
+            var ele = document.getElementById("spinloader");
+        setTimeout(() => {
+            ele.classList.add("invisible");    
+        }, 500);        
         }))
 
     },[]);
@@ -104,7 +108,8 @@ const Profile = () => {
     
     return ( 
         <>
-   <div className="title">Edit Profile</div>
+        <SpinLoader/>
+    <div className="title">Edit Profile</div>
 
             <form className="form-container-profile">
                 

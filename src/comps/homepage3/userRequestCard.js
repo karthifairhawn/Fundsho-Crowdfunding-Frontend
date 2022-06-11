@@ -21,7 +21,7 @@ const RequestCard = ({data}) => {
             
             <div className="home-card">
             <img className="card-image" src={data.eventImageUrl} alt="" />
-                <div className="home-card-body">                    
+                <div className="home-card-body pb-1 pt-1">                    
                     <h4>
                         {data.eventTitle.substring(0,60)}
                         {data.eventTitle.length >=60 ? "..." : ""}
@@ -45,7 +45,9 @@ const RequestCard = ({data}) => {
                     </div>
                     
 
-                    <div className="card-footer">
+                </div>
+                
+                <div className="card-footer">
                         <span><i className="fa fa-calendar-plus-o" aria-hidden="true"></i> &nbsp; {calculateDaysBetweenDates(data.deadLine)} Days left</span>                        
 
                         <div>
@@ -54,7 +56,6 @@ const RequestCard = ({data}) => {
                             <span>{data.votes}&nbsp;</span>
                         </div>
 
-                    </div>
                 </div>
             </div>
         </Link>
