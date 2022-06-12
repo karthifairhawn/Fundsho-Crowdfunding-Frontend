@@ -1,8 +1,9 @@
     import { useState,useEffect } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import SpinLoader from "../../homepage3/SpinLoader";
-import {APIIP} from '../config';
+import SpinLoader from "../../../homepage3/SpinLoader";
+import {APIIP} from '../../config';
+import ProfileInformation from "./ProfileInformation";
 toast.configure();
 
 const Profile = () => {
@@ -108,10 +109,13 @@ const Profile = () => {
     
     return ( 
         <>
-        <SpinLoader/>
-    <div className="title">Edit Profile</div>
+            <SpinLoader/>          
+            <div className="d-flex flex-wrap">
+                <ProfileInformation/>
+            </div>
+            
 
-            <form className="form-container-profile">
+            {/* <form className="form-container-profile">
                 
                 <div className="profile-page-img"> <img src={avatarUrl} alt="profile-img" /> </div>
                 <hr className="hr"/>
@@ -170,8 +174,8 @@ const Profile = () => {
                 </span>
 
 
-            </form>
-        </>
+            </form> */}
+            </>        
      );
 }
  

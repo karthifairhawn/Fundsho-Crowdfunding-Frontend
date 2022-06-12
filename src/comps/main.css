@@ -1,6 +1,13 @@
+html,body, .App, #root{
+  height:100%;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 *{
     padding: 0px;
     margin: 0px;    
+    font-family: 'Poppins', sans-serif;
 }
 
 .black-btn{
@@ -574,10 +581,6 @@ textarea:valid+label {
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-* {
-box-sizing: border-box;
-	font-family: 'Jura', sans-serif;
-}
 
 h1 {
 font-weight: bold;
@@ -590,14 +593,9 @@ text-align: center;
 
 p {
 font-size: 14px;
-font-weight: 100;
 line-height: 20px;
 letter-spacing: 0.5px;
 margin: 20px 0 30px;
-}
-
-span {
-font-size: 12px;
 }
 
 a {
@@ -849,10 +847,6 @@ text-decoration: none;
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-* {
-box-sizing: border-box;
-	font-family: 'Jura', sans-serif;
-}
 .center{
   display: flex;
   align-items: center;
@@ -1333,7 +1327,7 @@ html {
 }
 
 .active-pane-link{
-  background-color:#136787 !important;  
+  background-color:#327a98 !important;  
   cursor:default;
   color:#fff !important;
 }
@@ -1384,11 +1378,9 @@ html {
 .left-pane-setting-options .fa{
   margin: 0px 8px;
 }
-.settings-content{
-  background-color:#e6e6e6  ;
+.settings-content{  
   color: black;  
   width: 100%;
-  height: 90vh;
 }
 
 /* Profile Edit Page */
@@ -1963,126 +1955,6 @@ html {
   align-items: center;
   width:100%
 }
-/* New Request Page */
-
-
-@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=PT+Sans&family=Ubuntu:wght@300&display=swap');
-
-.new-request-cont{
-  margin-top: 10px;
-}
-
-.NewRequestPage input,label,h6{
-  font-family: 'Ubuntu', sans-serif;
-  
-}
-
-.NewRequestPage label{
-  font-weight:bold;
-}
-.NewRequestPage .fa{
-  font-size:1.5rem;
-}
-
-.NewRequestPage input[type="file"]{
-  width:70%;  
-}
-
-
-.NewRequestPage{
-  background-color:#fff;
-  color:black;
-  height:100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.fa-cloud-upload{
-  cursor: pointer;
-  font-size: 1.5rem;
-  color:green;
-}
-.nrp-header{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin:2rem;
-}
-
-.nrp-header-title{
-  font-size:2rem;
-}
-
-.nrp-form-header{
-  display: flex;
-  align-items: center;
-}
-
-.nrp-form{
-  width:1200px;  
-}
-
-.nrp-form h6{
-  color: #136787;
-  font-weight:600;
-  font-size:1.3rem;
-  margin:1rem 0;
-}
-
-.nrp-header-number{
-  font-size:1.5rem;  
-  padding: 1rem 2rem; 
-  border-radius: 10px;
-}
-
-.nrp-form-sub-group-row{
-  display: flex;
-  justify-content: space-between;
-  margin:1rem 0;
-}
-
-.nrp-form-element{
-  display: flex;
-  flex-direction:column;
-  width: 100%;
-}
-
-.nrp-form-element input{
-  width:80%;
-  height:3rem;
-  background-color: #fff;
-  color: black !important;
-  border-color: black;
-}
-.nrp-nighty-width{
-  width:90% !important;
-}
-
-.nrp-form-element select{  
-  width:21rem;
-  background-color: #fff;
-  color: black !important;
-  border:0px;
-  border-bottom: 1px solid #fff;
-  outline:0px;
-  height:3.2rem;
-}
-
-.no-border{
-  border: none;
-}
-
-.nrp-form{
-  padding:0rem 5rem;
-}
-
-.nrp-form textarea{
-  background-color: #fff;
-  border:1px solid black;
-  margin: 1rem 0rem;
-  padding:0.5rem;
-}
 
 
 /* Homepage New CSS */
@@ -2368,3 +2240,8 @@ html {
   height:500px;
   margin:10px;
 }
+
+
+
+
+

@@ -1,61 +1,59 @@
-import {Route, NavLink} from 'react-router-dom';
-import Email from './comps/email.js';
+import {Route, NavLink,Link} from 'react-router-dom';
+import {useEffect} from 'react';
+import Email from './comps/Email/Email.js';
 import Security from './comps/security.js';
-import Wallet from './comps/wallet.js';
-import Profile from './comps/profile.js';
+import Wallet from './comps/Wallet/Wallet.js';
+import Profile from './comps/Profile/Profile.js';
 import Navbar from '../footer_header/navbar.js';
-// import {useState,useEffect} from'react';
-
+import './settings.css';
 
 const Setting = (  ) => {      
+    useEffect(() => {
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+    });
+    }, []);
+
     return (
     <>       
-    <Navbar/>
-     <div className="setting-container">
-        <div className="left-pane-setting">
-          <div className="d-flex m-2 mb-1 fs-5 text-opacity-75 mt-5">SETTINGS</div>
-          {/* <div className="left-pane-setting-info">
-            <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="profile-img" className="profile-img" />
-            <div className="left-pane-setting-info-r">
-              <span className="profile-info-name">{'@'+localStorage.getItem("username")}</span>
-              <span className="wallet-balance">₹ {balance}</span>
-            </div>                            
-          </div> */}          
+      <Navbar />
+      <div>
+        <div className="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+          <ul className="nav flex-column text-white w-100">
+            <Link to="/" className="nav-link h3 text-dark my-2"> <i className="fa fa-dollar"/> Fundsho</Link>
 
-          <div className="left-pane-setting-options">
-            
-            <NavLink exact to="/settings/profile" activeClassName="active-pane-link">
-              <span className="left-pane-setting-options-btn">                
-                  <i className="fa fa-user"></i>
-                  Edit Profile
-              </span>
+
+            <NavLink to="/settings/profile"activeClassName="active-pane-link" className="nav-link text-dark fs-6 mb-3">
+              <i className="fa fa-user m-2"></i>
+              <span className="mx-2">Profile</span>
             </NavLink>
 
-            <NavLink to="/settings/wallet" activeClassName="active-pane-link">
-              <span className="left-pane-setting-options-btn">                  
-                  <i className="fa fa-credit-card-alt" aria-hidden="true"></i>
-                  Wallet
-              </span>
+            <NavLink to="/settings/wallet"activeClassName="active-pane-link" className="nav-link text-dark fs-6 mb-3">
+              <i className="fa fa-wallet m-2"></i>
+              <span className="mx-2">Wallet</span>
             </NavLink>
-
-            <NavLink to="/settings/security" activeClassName="active-pane-link">
-              <span className="left-pane-setting-options-btn">
-                <i className="fa fa-lock"></i>
-                Security and Privacy
-              </span>
+            <NavLink to="/settings/security" activeClassName="active-pane-link" className="nav-link text-dark fs-6 mb-3">
+              <i className="fa fa-lock m-2"></i>
+              <span className="mx-2">Security and Privacy</span>
             </NavLink>
-
-            <NavLink to="/settings/email" activeClassName="active-pane-link">
-              <span className="left-pane-setting-options-btn">
-                <i className="fa fa-envelope"></i>
-                Email and SMS
-              </span>                
+            <NavLink to="/settings/email" activeClassName="active-pane-link" className="nav-link  text-dark fs-6 mb-3">
+              <i className="fa fa-envelope m-2"></i>
+              <span className="mx-2">Email and Notifications</span>
             </NavLink>
-          </div>
+          </ul>
         </div>
-        <div className="settings-content">
 
-
+        {/* Main Wrapper */}
+        <div className="p-1 my-container active-cont">
+          {/* Top Nav */}
+          <nav className="navbar top-navbar navbar-light bg-light px-5">
+            <span className="btn border-0" id="menu-btn"><i class="fa fa-bars" aria-hidden="true"></i></span>
+          </nav>
+          <div className="settings-content">
           <Route path="/settings/email">
             <Email/>
           </Route>
@@ -68,8 +66,8 @@ const Setting = (  ) => {
           <Route path="/settings/profile">
             <Profile/>
           </Route>
-
-
+        </div>
+          {/*End Top Nav */}
         </div>
       </div>
     </>
