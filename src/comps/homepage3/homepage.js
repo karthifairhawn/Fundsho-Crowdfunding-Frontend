@@ -1,11 +1,13 @@
+import SpinLoader from '../homepage3/SpinLoader';
 import RequestCard from "./userRequestCard";
 import DonateMore from "./donateMoreModal";
 import { Link } from 'react-router-dom';
-import {useEffect,useState} from 'react';
+import {useEffect,useState,useLayoutEffect} from 'react';
 import {APIIP} from '../settings/config';
 import CardSkeleton from "./cardSkeleton";
 import Navbar from "../footer_header/navbar";
 import Footer from "../footer_header/footer";
+import { Spinner } from "react-bootstrap";
 
 
 const MainHomepage = () => {
@@ -15,7 +17,15 @@ const MainHomepage = () => {
     const [moreDataAvailable,setMoreDataAvailable] = useState(true);
     const [currentPage,setCurrentPage] = useState(1);
 
+    useLayoutEffect(() => {
+        var ele = document.getElementById("spinloader");
+        ele.classList.add("invisible");    
+    });
+    
     useEffect(() => {
+        var ele = document.getElementById("spinloader");
+        if(allFundraisers.length>0) ele.classList.remove("invisible");        
+
         fetch(APIIP.ip+"/requests?page=1&size=3&featured=true",{
             method:"GET",
             mode: 'cors',
@@ -23,29 +33,12 @@ const MainHomepage = () => {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            response.json().then(response => {
-                // console.log(response);
+            response.json().then(response => {                
                 setFeaturedData(response);
             })
         })
 
-        fetch(APIIP.ip+"/requests?page=1&size=8&featured=false",{
-            method:"GET",
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            response.json().then(response => {                
-                setAllFundraiser(response);
-            })
-        })
-
-
-    },[]);
-
-    function updateFundraisers(){
-        fetch(APIIP.ip+"/requests?page="+currentPage+"&size=8&featured=false",{
+        fetch(APIIP.ip+"/requests?page="+currentPage+"&size=9&featured=false",{
             method:"GET",
             mode: 'cors',
             headers: {
@@ -54,13 +47,17 @@ const MainHomepage = () => {
         }).then(response => {
             response.json().then(response => {                
                 setAllFundraiser(allFundraisers.concat(response));
-                setCurrentPage(currentPage+1);
-                setMoreDataAvailable(response.length>0);
+                if(response.length<9){
+                    setMoreDataAvailable(false);
+                }
             })
         })
 
-        
-    }
+    },[currentPage]);
+
+    const handleLoad = () => {  
+
+    };
 
     function scrollToDonate(){
         window.scrollTo(0, window.scrollY+450);
@@ -68,8 +65,9 @@ const MainHomepage = () => {
     
     return ( 
         <>
-        <Navbar>
-            </Navbar>            
+        <Navbar/>
+            
+            <SpinLoader/>
                 <div className="conatiner">
 
                 <div className="hero-banner">   
@@ -106,7 +104,7 @@ const MainHomepage = () => {
                     <br />
 
                     <div className="card">                        
-                        <div className="card-body d-flex flex-wrap">  
+                        <div className="card-body d-flex flex-wrap justify-content-center">  
 
                         { allFundraisers.length<1 &&   <> {Array(8).fill(1).map((el, i) => <CardSkeleton key={i} /> )} </>}                          
                         { allFundraisers.map(function (arrayItem,idx) { return <RequestCard key={idx} idx={idx} data={arrayItem}/> }) }                       
@@ -119,7 +117,7 @@ const MainHomepage = () => {
                 <div className="center load-more-btn">
                     {
                         moreDataAvailable &&                        
-                        <button  className="center" onClick={() => updateFundraisers(allFundraisers.length)}>
+                        <button  className="center" onClick={() => {setCurrentPage(currentPage + 1);handleLoad()}}>
                             Load More Fundraisers &nbsp;
                             <i className="fa fa-angle-double-down" aria-hidden="true"></i>
                         </button>       

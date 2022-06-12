@@ -33,11 +33,16 @@ const style = {
 export default function DonateModal({req,updateFunction}) {
 
   useEffect(() => {    
-      var url = APIIP.ip+"/users/"+localStorage.getItem("userId")+"/wallet?sessionKey="+localStorage.getItem("sessionKey");
-        
-        fetch(url)
-        .then((response)=> response.json())
-        .then((response => {                        
+      var url = APIIP.ip+"/users/"+localStorage.getItem("userId")+"/wallet?sessionKey="+localStorage.getItem("sessionKey");        
+        if(localStorage.getItem("sessionKey")!==null) fetch(url)
+        .then((response)=> {
+          console.log(response); 
+          if(response.status === 200){
+            return response.json();
+          }
+          else{
+            return null;
+          }}).then((response => {                 
           setWalletBalance(response.balance);            
         }));
     

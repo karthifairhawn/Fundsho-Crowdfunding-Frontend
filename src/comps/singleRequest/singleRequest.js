@@ -107,6 +107,7 @@ const SingleRequest = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         var ele = document.getElementById("spinloader");
         setTimeout(() => {
             ele.classList.add("invisible");    
@@ -125,7 +126,7 @@ const SingleRequest = () => {
         .then((response) => response.json())
         .then((response) => {setDonations(response); })    
 
-    },[])
+    },[reqId])
 
    
     return ( 

@@ -19,7 +19,7 @@ const RequestCard = ({idx,data}) => {
     return ( 
         <>
         {console.log(idx)}
-        { idx % 8!=0 || idx==0 ? 
+        { idx % 9!=0 ? 
         
         <Link className="card-main-link" to={`/fundraiser/${data.requestId}`}>            
             <div className="home-card">
@@ -52,11 +52,11 @@ const RequestCard = ({idx,data}) => {
         </Link>
 
         :
-        <Link className="card-main-link" to={`/fundraiser/${data.requestId}`}>            
-        <div class="card mb-3 mt-3" style={{width: '100%'}}>
+        <Link className="card-main-link d-flex align-center justify-content-center" to={`/fundraiser/${data.requestId}`}>            
+        <div class="card mb-3 mt-3" style={{width: '90%'}}>
             <div class="row g-0">
                 <div class="col-5 col-sm-4">
-                    <img src={data.eventImageUrl} class="img-fluid w-100" alt="card-horizontal-image"/>
+                    <img src={data.eventImageUrl} class="img-fluid" style={{width: '100%', height: '330px'}}alt="card-horizontal-image"/>
                 </div>
                 <div class="col-7 col-sm-8">
                     <div class="card-body">
