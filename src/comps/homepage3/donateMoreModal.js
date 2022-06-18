@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 const DonateMore = () => {
     return (
         <div className="d-flex justify-content-center">
-            <div className="card w-75 mt-4" >
+            <div className="card mt-4" >
                 <div className="card-body d-flex flex-wrap ">
                     
-                    <div className="donate-more-main-container w-50">
+                    <div className="donate-more-main-container d-xxl-flex" style={{width:'550px'}}>
                         <div className="book-image-parent"><img src="https://i.ibb.co/Kwy4t83/book.png" className="book-image" alt="donate-more"/></div>
                         <div className="donate-more-right-container">
                             <span className="donate-more-content">What's more than educating one student</span>                        

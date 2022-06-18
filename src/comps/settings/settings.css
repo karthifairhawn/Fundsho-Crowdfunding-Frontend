@@ -29,10 +29,12 @@
   
   #menu-btn {
     background-color: #a7a7a7;
-    color: #fff;
-    margin-left: -62px;
+    color: #fff;    
   }
-  
+  .inside-btn{
+    margin-right: -50px;
+  }
+
   .my-container input {
     border-radius: 2rem;
     padding: 2px 20px;

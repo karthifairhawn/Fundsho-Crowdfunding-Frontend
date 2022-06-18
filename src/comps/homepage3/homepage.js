@@ -8,6 +8,7 @@ import CardSkeleton from "./cardSkeleton";
 import Navbar from "../footer_header/navbar";
 import Footer from "../footer_header/footer";
 import { Spinner } from "react-bootstrap";
+import Banner from './Banner';
 
 
 const MainHomepage = () => {
@@ -55,9 +56,7 @@ const MainHomepage = () => {
 
     },[currentPage]);
 
-    const handleLoad = () => {  
 
-    };
 
     function scrollToDonate(){
         window.scrollTo(0, window.scrollY+450);
@@ -70,20 +69,7 @@ const MainHomepage = () => {
             <SpinLoader/>
                 <div className="conatiner">
 
-                <div className="hero-banner">   
-                    <div className="hero-banner-text">
-                        <span className="bold">COME, LAY THE FOUNDATION OF EDUCATION</span>                    
-                        <span>Let us build a educated nation, together</span>
-                        <br />
-                        <br />
-                        <div>
-                            <button onClick={scrollToDonate} className="donate-btn">Donate Now</button>     
-                            <Link to="/newrequest">
-                                <button className="fundraiser-btn">Became a Fundraiser</button>         
-                            </Link>       
-                        </div>
-                    </div>
-                </div>
+                <Banner/>
 
 
 
@@ -92,7 +78,7 @@ const MainHomepage = () => {
                     <div className="card">  
                     <div className="card-header h4 fst-italic">Featured Fundraisers</div>   
                         <div className="card-body">                                                    
-                            <div className="home-card-container">        
+                            <div className="home-card-container" fallback={<h1>Hello</h1>}>        
                                 { featuredData.length<1 && <> <CardSkeleton/> <CardSkeleton/> <CardSkeleton/> </> }
                                 { featuredData.map(function (arrayItem,idx) { return <RequestCard key={idx} data={arrayItem}/> })  }                      
                             </div>                        
@@ -117,7 +103,7 @@ const MainHomepage = () => {
                 <div className="center load-more-btn">
                     {
                         moreDataAvailable &&                        
-                        <button  className="center" onClick={() => {setCurrentPage(currentPage + 1);handleLoad()}}>
+                        <button  className="center" onClick={() => {setCurrentPage(currentPage + 1);}}>
                             Load More Fundraisers &nbsp;
                             <i className="fa fa-angle-double-down" aria-hidden="true"></i>
                         </button>       

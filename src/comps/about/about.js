@@ -8,9 +8,11 @@ class about extends React.Component{
         return(
             <>
             <Navbar/>
-            <div className="about-content">
+            <>
+            <div className="container">                
+                <div className="about-content card">
                 
-                <div className="all-about-info">
+                <div className="all-about-info card-body">
                     <div className="brief-about-us">
                         <p>Fundsho is one-stop solution through which various services starting from student application, application receipt, processing, sanction and disbursal of various scholarships to Students are enabled. National Scholarships Portal is taken as Mission Mode Project under National e-Governance Plan (NeGP)</p>
                     </div>
@@ -72,6 +74,9 @@ class about extends React.Component{
                     </div>
                 </div>
             </div>    
+                </div>            
+            </>
+            
             </>        
         );
     }

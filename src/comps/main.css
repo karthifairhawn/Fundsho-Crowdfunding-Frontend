@@ -86,7 +86,7 @@ input:active{
 .all-about-info{
   background-color: #fff;
   padding: 0 1rem;
-  width: 60%;  
+  
 }
 
 .all-about-info ul{
@@ -740,7 +740,6 @@ top: 0;
 left: 50%;
 width: 50%;
 height: 100%;
-overflow: hidden;
 transition: transform 0.6s ease-in-out;
 z-index: 100;
 }
@@ -1510,8 +1509,7 @@ html {
 }
 .transaction-table{
   max-height: 40vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow-y: auto;  
   width: 100%;
   border-bottom: 1px solid black;
 }
@@ -1638,8 +1636,7 @@ html {
 .sub-element{
   display: flex;
   justify-content: center;  
-  flex-direction: column;  
-  width: 40%;
+  flex-direction: column;    
   padding:1rem;
 }
 .sub-element1{
@@ -1647,16 +1644,8 @@ html {
   align-items: center;
 }
 
-.sub-element1 input{
-  margin-right: 1%;
-  width: 5%;
-}
-.sub-element1 span{
-  font-size:1rem;
-}
-.sub-element2 {
-  font-size:0.9rem;
-}
+
+
 /* Single Request Page */
 
 .single-page-container p,span,div,h1,h2,h3,h4,h5,h6{
@@ -1960,8 +1949,7 @@ html {
 /* Homepage New CSS */
 
 
-.fundraiser-btn{
-    margin-left: 10px;
+.fundraiser-btn{    
     width: 300px;
     /* margin: 0 100px; */
     background-color: #fff;
@@ -2042,8 +2030,7 @@ html {
   margin: 10px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);  
   width: 300px;
   transition: box-shadow .5s;  
 }
@@ -2160,6 +2147,7 @@ html {
 .donate-more-main-container{
   background-color:#ebfaff;
   width:60%;
+  height: 150px;
   margin:1rem;
   border-radius: 8px;  
   box-shadow: 0 6px 40px rgba(0,0,0,.1);    
@@ -2168,8 +2156,7 @@ html {
 }
 
 .donate-more-main-contact-us{
-  background-color:#f5f5f5;
-  width:40%;
+  background-color:#f5f5f5;  
   margin:1rem;
 }
 
