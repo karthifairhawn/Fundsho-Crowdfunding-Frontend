@@ -73,7 +73,7 @@ const MainHomepage = () => {
 
 
 
-                <div className="d-flex align-center justify-center flex-column width-100 m-5">                
+                <div className="d-flex align-center justify-center flex-column width-100 ">                
 
                     <div className="card">  
                     <div className="card-header h4 fst-italic">Featured Fundraisers</div>   

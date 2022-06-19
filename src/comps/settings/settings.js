@@ -1,19 +1,15 @@
-import {Route, NavLink,Link} from 'react-router-dom';
-import {useEffect,useState} from 'react';
+import { useEffect } from 'react';
+import { Link, NavLink, Route } from 'react-router-dom';
+import Navbar from '../footer_header/navbar.js';
 import Email from './comps/Email/Email.js';
+import Profile from './comps/Profile/Profile.js';
 import Security from './comps/security.js';
 import Wallet from './comps/Wallet/Wallet.js';
-import Profile from './comps/Profile/Profile.js';
-import Navbar from '../footer_header/navbar.js';
 import './settings.css';
 
 
 
-const Setting = (  ) => {      
-  
-  const [userData,setUserData] = useState({});
-
-
+const Setting = (  ) => {          
 
     useEffect(() => {
       var menu_btn = document.querySelector("#menu-btn");

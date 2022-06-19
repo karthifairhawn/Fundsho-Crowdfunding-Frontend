@@ -13,7 +13,7 @@ const Banner = () => {
             <br />
             <div className="d-flex flex-wrap">
                 <button onClick={scrollToDonate} className="donate-btn m-1">Donate Now</button>     
-                <Link to="/newrequest">
+                <Link to="/fundraiser/new">
                     <button className="fundraiser-btn m-1">Became a Fundraiser</button>         
                 </Link>       
             </div>

@@ -1,8 +1,8 @@
-import { useState,useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SpinLoader from '../../../homepage3/SpinLoader';
 import { APIIP } from '../../config';
-import TransactionTable from './Transactions';
 import BalanceContainer from './BalanceContainer';
+import TransactionTable from './Transactions';
 
 
 const Wallet = () => {

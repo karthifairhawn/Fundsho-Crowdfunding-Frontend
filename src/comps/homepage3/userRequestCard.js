@@ -17,11 +17,10 @@ const RequestCard = ({idx,data}) => {
 
 
     return ( 
-        <>
-        {console.log(idx)}
+        <>        
         { idx % 9!=0 ? 
         
-        <Link className="card-main-link" to={`/fundraiser/${data.requestId}`}>            
+        <Link className="card-main-link  col-xl-3 col-lg-4 col-md-6" to={`/fundraiser/${data.requestId}`}>            
             <div className="home-card">
                 <img className="card-image" src={data.eventImageUrl} alt="" />
 
@@ -55,10 +54,10 @@ const RequestCard = ({idx,data}) => {
         <Link className="card-main-link d-flex align-center justify-content-center" to={`/fundraiser/${data.requestId}`}>            
         <div class="card mb-3 mt-3" style={{width: '90%'}}>
             <div class="row g-0">
-                <div class="col-5 col-sm-4">
+                <div class="col-xl-4 col-md-12 ">
                     <img src={data.eventImageUrl} class="img-fluid" style={{width: '100%', height: '330px'}}alt="card-horizontal-image"/>
                 </div>
-                <div class="col-7 col-sm-8">
+                <div class="col-xl-7 col-md-12">
                     <div class="card-body">
                         <h5 class="card-title"> {data.eventTitle.substring(0,60)} {data.eventTitle.length >=60 ? "..." : ""}</h5>
                         <p class="card-text">{data.eventDescription.substring(0, 210)}  {data.eventDescription.length >210 ? "..." : ""}</p>

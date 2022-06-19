@@ -32,20 +32,12 @@ a{
   text-decoration: none !important;
 }
 
-input{
-  padding: 1.1rem 0.2rem;
-  margin: 0.1rem;
-  border: none;
-  background-color: #e6e6e6 ;
+input{  
+  margin: 0.1rem;  
   color: black;
-  border-bottom: 1px solid black;
-  outline: none;
+  border: 1px solid rgb(151, 151, 151);  
 }
 
-input:active{
-  border: none;
-  
-}
 
 .content{
   height: 100%;
@@ -2031,7 +2023,6 @@ html {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);  
-  width: 300px;
   transition: box-shadow .5s;  
 }
 

@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 export default function DonationInfo() {
   return (
-    <div style={{overflow: 'hidden'}}>
+    <div style={{overflow: 'hidden',width: '100%'}}>
       <Box sx={{m: 3}}>
           <Card variant="outlined">
           <CardContent>

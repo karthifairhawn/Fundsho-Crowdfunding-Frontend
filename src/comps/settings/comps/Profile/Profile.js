@@ -1,15 +1,12 @@
-import { useState,useEffect } from "react";
+import Grid from '@mui/material/Grid';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import SpinLoader from "../../../homepage3/SpinLoader";
-import {APIIP} from '../../config';
 import DonationInfo from "./DonationInfo";
 import ProfileInformation from "./ProfileInformation";
 import ProfileLevel from "./ProfileLevel";
-import Grid from '@mui/material/Grid';
+import Stats from "./Stats";
 
 toast.configure();
-
 const Profile = () => {
 
     const notify = (msg,Type) => { toast(msg,{ type: Type, theme: 'dark' }) }   
@@ -23,15 +20,14 @@ const Profile = () => {
                 <Grid item xl={5}>
                     <ProfileInformation/>
                 </Grid>
-                <Grid item xl={4} sm={12} xs={12}>
-                    <DonationInfo/>
+                <Grid item xl={7} md={12} xs={12} >        
+                    <div className="d-lg-flex">
+                        <DonationInfo/>
+                        <ProfileLevel/>
+                    </div>
+                    <Stats/>                                                             
                 </Grid>
-                <Grid item xl={3} sm={12} xs={12}>
-                    <ProfileLevel/>
-                </Grid>
-                <Grid item xxl={4}>
-                    <DonationInfo/>                    
-                </Grid>
+                
             </Grid>
                 
             {/* </div> */}
