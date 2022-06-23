@@ -139,7 +139,7 @@ const SingleRequest = () => {
             <Navbar/>
             <div className="single-page-container">
                 <div className="single-page-header d-flex justify-content-between align-items-center">
-                    <i class="fa-solid fa-circle-arrow-left fs-2 p-2" style={{color:"#cecfd0"}}></i>
+                    <i className="fa-solid fa-circle-arrow-left fs-2 p-2" style={{color:"#cecfd0"}}></i>
                     <h2>{requestInformations.eventTitle}</h2>
                     <div></div>                
                 </div>

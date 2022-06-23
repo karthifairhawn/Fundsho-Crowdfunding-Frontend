@@ -52,16 +52,16 @@ const RequestCard = ({idx,data}) => {
 
         :
         <Link className="card-main-link d-flex align-center justify-content-center" to={`/fundraiser/${data.requestId}`}>            
-        <div class="card mb-3 mt-3" style={{width: '90%'}}>
-            <div class="row g-0">
-                <div class="col-xl-4 col-md-12 ">
-                    <img src={data.eventImageUrl} class="img-fluid" style={{width: '100%', height: '330px'}}alt="card-horizontal-image"/>
+        <div className="card mb-3 mt-3" style={{width: '90%'}}>
+            <div className="row g-0">
+                <div className="col-xl-4 col-md-12 ">
+                    <img src={data.eventImageUrl} className="img-fluid" style={{width: '100%', height: '330px'}}alt="card-horizontal-image"/>
                 </div>
-                <div class="col-xl-7 col-md-12">
-                    <div class="card-body">
-                        <h5 class="card-title"> {data.eventTitle.substring(0,60)} {data.eventTitle.length >=60 ? "..." : ""}</h5>
-                        <p class="card-text">{data.eventDescription.substring(0, 210)}  {data.eventDescription.length >210 ? "..." : ""}</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div className="col-xl-7 col-md-12">
+                    <div className="card-body">
+                        <h5 className="card-title"> {data.eventTitle.substring(0,60)} {data.eventTitle.length >=60 ? "..." : ""}</h5>
+                        <p className="card-text">{data.eventDescription.substring(0, 210)}  {data.eventDescription.length >210 ? "..." : ""}</p>
+                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
 
                         <div className="donation-info">
                             <div className="raise-donation"><b className="donated-amount">₹ {data.amountRecieved}</b> raised</div>                    
