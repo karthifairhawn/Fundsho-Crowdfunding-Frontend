@@ -37,6 +37,7 @@ const LoginPage = () => {
         response.json().then(response => {        
           localStorage.setItem('sessionKey', response.sessionKey)
           localStorage.setItem('userId', response.userId)
+          localStorage.setItem('role', response.role)
           // console.log(response);    
           history.push('/home');        
         })
@@ -72,7 +73,7 @@ const LoginPage = () => {
               <input type="password" name="password"className="form-control" id="exampleInputPassword1"/>
             </div>            
             
-            <input type="submit" className="btn btn-primary"/>
+            <input type="submit" className="btn btn-primary" value="Login"/>
             <br />
 
             <Link to="/register">Create a new account</Link>

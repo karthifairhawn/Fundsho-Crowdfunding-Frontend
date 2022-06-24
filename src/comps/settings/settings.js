@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, NavLink, Route } from 'react-router-dom';
 import Navbar from '../footer_header/navbar.js';
+import AdminPanel from './comps/Admin/Admin.js';
 import Email from './comps/Email/Email.js';
 import Profile from './comps/Profile/Profile.js';
 import Security from './comps/security.js';
@@ -54,6 +55,14 @@ const Setting = (  ) => {
               <i className="fa fa-envelope m-2"></i>
               <span className="mx-2">Email and Notifications</span>
             </NavLink>
+            {
+              localStorage.getItem('role')==="0"
+              && 
+              <NavLink to="/settings/admin/users" activeClassName="active-pane-link" className="nav-link  text-dark fs-6 mb-3">
+                <i className="fa fa-gear m-2"></i>
+                <span className="mx-2">Admin Panel</span>
+              </NavLink>
+            }
             
           </ul>
         </div>
@@ -75,6 +84,9 @@ const Setting = (  ) => {
           </Route>
           <Route path="/settings/profile">
             <Profile/>
+          </Route>
+          <Route path="/settings/admin">
+            <AdminPanel/>
           </Route>
         </div>
           {/*End Top Nav */}

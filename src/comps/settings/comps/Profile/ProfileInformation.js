@@ -7,19 +7,75 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {APIIP} from '../../config';
 import { useState,useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
+import WalletModel from '../Admin/Users/WalletModel';
+import TransactionsModel from '../Admin/Users/TransactionsModel';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function ProfileInformation() {
+
+toast.configure();
+const notify = (msg,Type) => {
+  toast(msg,{
+      type: Type,
+      theme: ''
+  })
+}
+
+
+
+export default function ProfileInformation({userId}) {
   
   const [userData,setUserData] = useState({});
-  useEffect(() => {
-    fetch(APIIP.ip+"/users/"+localStorage.getItem('userId')+"/profile?sessionKey="+localStorage.getItem('sessionKey'))
+  const [reRender,setReRender] = useState(1);
+
+
+  useEffect(() => {        
+    var ipTofetch="";
+    if(userId==undefined) {      
+      ipTofetch= APIIP.ip+"/users/"+localStorage.getItem('userId')+"/profile?sessionKey="+localStorage.getItem('sessionKey');
+    }else{
+      ipTofetch=APIIP.ip+"/admin/users/"+userId+"?sessionKey="+localStorage.getItem('sessionKey');
+    }
+
+    fetch(ipTofetch)
     .then( (response)=> response.json())
     .then( (response => { setUserData(response) } )
     )
     .catch( (error)=> { console.log(error); } )
-  }, []);
+  }, [reRender]);
+
+  // Balance Fetch
+  const [transaction,setTransaction] = useState({});
+  const [balance,setBalance] = useState(0);
+
+  useEffect(() => {        
+      var url = APIIP.ip+"/admin/users/"+userId+"/wallet?sessionKey="+localStorage.getItem("sessionKey");
+      // console.log(url);
+      if(userId!==undefined){
+      fetch(url)
+      .then((response)=> response.json())
+      .then((response => {            
+          setTransaction(response.transaction);            
+          setBalance(response.balance);                                        
+      }));
+    }
+  },[])
+
+  function blockToggle(toggleValue){
+    var url = APIIP.ip+"/admin/users/"+userId+"/blocked?blockStatus="+toggleValue+"&sessionKey="+localStorage.getItem("sessionKey");
+    console.log(url);
+    fetch(url,{
+      method: "PUT"      
+    }).then((response)=> {
+      if(response.status == 200) {        
+        document.elementFromPoint(1, 1).click();
+        notify("User status updated successfully.","success");
+      }
+    }
+    )
+
+  }
 
   return (
     <Box sx={{  m:3 }}>
@@ -51,10 +107,35 @@ export default function ProfileInformation() {
           }
 
 
-
-          <CardActions>
+          {
+            userId===undefined ?
+            <CardActions>
               <Button size="small">Edit</Button>
-          </CardActions>      
+            </CardActions>  
+            :
+            <>
+            <CardActions>
+              <Button size="small">Fundraises</Button>
+              <WalletModel balance={balance}/>
+              <TransactionsModel transaction={transaction} />          
+            </CardActions>
+            <CardActions>
+              {
+                userData.blocked==0 &&
+                <Button style={{color:'red'}} onClick={() => blockToggle(1)} type="button" >Block user</Button>  
+              }
+              {
+                userData.blocked==1 &&
+                <Button style={{color:'orange'}} onClick={() => blockToggle(0)}>Unblock user</Button>
+              }
+
+            </CardActions>            
+            </>
+
+          }
+          
+
+
         </React.Fragment>
       </Card>
     </Box>

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { useState,useEffect } from "react";
 import { ProgressBar } from "react-bootstrap";
 import { APIIP } from "../settings/config";
-import { useParams } from "react-router-dom";
+import { useParams,useHistory } from "react-router-dom";
 import DonateModal from "../homepage3/DonateModel";
 
 import * as React from 'react';
@@ -65,7 +65,7 @@ const SingleRequest = () => {
     const [requestInformations, setRequestInformations] = useState('');
     const [donations, setDonations] = useState([]);
     
-
+    const history = useHistory()
     const {reqId}  = useParams();
 
 
@@ -139,7 +139,8 @@ const SingleRequest = () => {
             <Navbar/>
             <div className="single-page-container">
                 <div className="single-page-header d-flex justify-content-between align-items-center">
-                    <i className="fa-solid fa-circle-arrow-left fs-2 p-2" style={{color:"#cecfd0"}}></i>
+                    
+                    <i onClick={(() => history.goBack())} style={{color: "#01bfbd",cursor: "pointer"}}className="fa-solid fa-circle-arrow-left fs-2 p-2" ></i>
                     <h2>{requestInformations.eventTitle}</h2>
                     <div></div>                
                 </div>

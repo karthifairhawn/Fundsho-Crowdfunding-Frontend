@@ -30,6 +30,7 @@
   #menu-btn {
     background-color: #a7a7a7;
     color: #fff;    
+    z-index: 1 !important;
   }
   .inside-btn{
     margin-right: -50px;
