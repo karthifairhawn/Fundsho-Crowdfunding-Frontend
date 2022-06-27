@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import { useState,useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import SpinLoader from '../../homepage3/SpinLoader';
+import SpinLoader from '../../Homepage/SpinLoader';
 import {APIIP} from '../config';
 const Security = () => {
 

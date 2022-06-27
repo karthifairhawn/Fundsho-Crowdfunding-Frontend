@@ -1,6 +1,6 @@
 import { Link, useHistory } from 'react-router-dom';
-import Navbar from "../footer_header/navbar";
-import {APIIP} from '../settings/config';
+import Navbar from "../Footers_Header/navbar";
+import {APIIP} from '../Settings/config';
 import { useEffect } from 'react';
 
 

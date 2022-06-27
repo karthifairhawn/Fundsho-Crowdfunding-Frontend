@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import SpinLoader from '../../../homepage3/SpinLoader';
+import SpinLoader from '../../../Homepage/SpinLoader';
 import { APIIP } from '../../config';
 import BalanceContainer from './BalanceContainer';
 import TransactionTable from './Transactions';

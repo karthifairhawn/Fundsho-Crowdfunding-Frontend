@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useEffect,useState } from 'react';
 import Slider from '@mui/material/Slider';
-import { APIIP } from '../settings/config';
+import { APIIP } from '../Settings/config';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { toast } from "react-toastify";
@@ -35,8 +35,7 @@ export default function DonateModal({req,updateFunction}) {
   useEffect(() => {    
       var url = APIIP.ip+"/users/"+localStorage.getItem("userId")+"/wallet?sessionKey="+localStorage.getItem("sessionKey");        
         if(localStorage.getItem("sessionKey")!==null) fetch(url)
-        .then((response)=> {
-          console.log(response); 
+        .then((response)=> {          
           if(response.status === 200){
             return response.json();
           }

@@ -1,11 +1,11 @@
 import { Container,Row,Col } from "react-bootstrap";
-import Navbar from "../footer_header/navbar";
+import Navbar from "../Footers_Header/navbar";
 import { Box } from '@mui/material';
 import { useState,useEffect } from "react";
 import { ProgressBar } from "react-bootstrap";
-import { APIIP } from "../settings/config";
+import { APIIP } from "../Settings/config";
 import { useParams,useHistory } from "react-router-dom";
-import DonateModal from "../homepage3/DonateModel";
+import DonateModal from "../Homepage/DonateModel";
 
 import * as React from 'react';
 
@@ -16,7 +16,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import confetti from "canvas-confetti";
-import SpinLoader from "../homepage3/SpinLoader";
+import SpinLoader from "../Homepage/SpinLoader";
+import FundraiseAdminPanel from "./FundraiseAdminPanel";
 
 
 
@@ -69,7 +70,7 @@ const SingleRequest = () => {
     const {reqId}  = useParams();
 
 
-    function reloadRequest(){
+    function reloadRequest(nodonation){
         fetch(APIIP.ip+"/requests/"+reqId)
         .then((response) => response.json())
         .then((response) => {setRequestInformations(response); })   
@@ -83,29 +84,30 @@ const SingleRequest = () => {
 
         // go Buckeyes!
         var colors = ['#bb0000', '#ffffff'];
-        
-        (function frame() {
-          confetti({
-            particleCount: 2,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: colors
-          });
-          confetti({
-            particleCount: 2,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: colors
-          });
-        
-          if (Date.now() < end) {
-            requestAnimationFrame(frame);
-          }
-        }());    
+        if(nodonation!==true){
+            (function frame() {
+              confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: colors
+              });
+              confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: colors
+              });
+            
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            }());    
+        }
     }
-
+    
     useEffect(() => {
         window.scrollTo(0, 0);
         var ele = document.getElementById("spinloader");
@@ -163,7 +165,7 @@ const SingleRequest = () => {
 
                                 <button className="share-fundraiser">
                                     <i className="fa fa-share-alt" aria-hidden="true"></i>                                    
-                                    <span on>Share Fundraiser</span>                                                                         
+                                    <span>Share Fundraiser</span>                                                                         
                                 </button>
                             </div>
 
@@ -261,8 +263,14 @@ const SingleRequest = () => {
                         </Col>
 
                         <Col md={4} lg={4} sm={12} xs={12} >
+                            {
+                                requestInformations
+                                &&
+                                <FundraiseAdminPanel reloadRequest={reloadRequest} requestId={reqId} reqStatus={requestInformations.reqStatus}/>
+                            }
                             
-                            { (requestInformations.amountRequired-requestInformations.amountRecieved)>0 ? <DonateModal req={requestInformations} updateFunction={reloadRequest}/> : 
+                            
+                            { ((requestInformations.amountRequired-requestInformations.amountRecieved)>0 && requestInformations.reqStatus === 1)? <DonateModal req={requestInformations} updateFunction={reloadRequest}/> : 
                             <div className="card">
                                 <div className="card-body">
                                 <div className="donate-btn">
@@ -270,8 +278,16 @@ const SingleRequest = () => {
                                     <div className="btn-content">
                                         <div className="btn-text">
                                             <span className="bold">{
-                                                (requestInformations.amountRequired-requestInformations.amountRecieved)===0 ? 'Fundraising Closed - recieved required amount' : 'Fundraising Closed'
-                                            }</span>
+                                                (requestInformations.amountRequired-requestInformations.amountRecieved)===0 
+                                                ? 
+                                                'Fundraising Closed recieved amount required'
+                                                : 
+                                                ''                                                                                                                                                                                        
+                                            }
+                                            {(requestInformations.reqStatus==0 ? 'Fundraising closed by administrator' :'')}
+                                            {(requestInformations.reqStatus==4 ? 'Fundraising expired' :'')}
+                                            {(requestInformations.reqStatus==3 ? 'Fundraising stopped by fundraiser':'')}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -320,7 +336,7 @@ const SingleRequest = () => {
 
                                 {donations.map(function(donation, index){
                                         
-                                        return  <DonorBox index={index} donor={donation}/>
+                                        return  <DonorBox key={index} donor={donation}/>
                                     
                                 })}
 

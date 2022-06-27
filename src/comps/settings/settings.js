@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, NavLink, Route } from 'react-router-dom';
-import Navbar from '../footer_header/navbar.js';
+import Navbar from '../Footers_Header/navbar.js';
 import AdminPanel from './comps/Admin/Admin.js';
 import Email from './comps/Email/Email.js';
 import Profile from './comps/Profile/Profile.js';

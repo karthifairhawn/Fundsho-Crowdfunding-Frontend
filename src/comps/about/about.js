@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../footer_header/navbar';
+import Navbar from '../Footers_Header/navbar';
 class about extends React.Component{
     componentDidMount(){
 

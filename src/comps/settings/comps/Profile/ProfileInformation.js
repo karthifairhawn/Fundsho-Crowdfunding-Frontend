@@ -26,13 +26,12 @@ const notify = (msg,Type) => {
 
 export default function ProfileInformation({userId}) {
   
-  const [userData,setUserData] = useState({});
-  const [reRender,setReRender] = useState(1);
+  const [userData,setUserData] = useState({});  
 
 
   useEffect(() => {        
     var ipTofetch="";
-    if(userId==undefined) {      
+    if(userId===undefined) {      
       ipTofetch= APIIP.ip+"/users/"+localStorage.getItem('userId')+"/profile?sessionKey="+localStorage.getItem('sessionKey');
     }else{
       ipTofetch=APIIP.ip+"/admin/users/"+userId+"?sessionKey="+localStorage.getItem('sessionKey');
@@ -43,7 +42,7 @@ export default function ProfileInformation({userId}) {
     .then( (response => { setUserData(response) } )
     )
     .catch( (error)=> { console.log(error); } )
-  }, [reRender]);
+  }, [userId]);
 
   // Balance Fetch
   const [transaction,setTransaction] = useState({});
@@ -60,15 +59,15 @@ export default function ProfileInformation({userId}) {
           setBalance(response.balance);                                        
       }));
     }
-  },[])
+  },[userId])
 
   function blockToggle(toggleValue){
-    var url = APIIP.ip+"/admin/users/"+userId+"/blocked?blockStatus="+toggleValue+"&sessionKey="+localStorage.getItem("sessionKey");
+    var url = APIIP.ip+"/admin/users/"+userId+"/status?blockStatus="+toggleValue+"&sessionKey="+localStorage.getItem("sessionKey");
     console.log(url);
     fetch(url,{
       method: "PUT"      
     }).then((response)=> {
-      if(response.status == 200) {        
+      if(response.status === 200) {        
         document.elementFromPoint(1, 1).click();
         notify("User status updated successfully.","success");
       }
@@ -82,7 +81,7 @@ export default function ProfileInformation({userId}) {
       <Card variant="outlined">
         <React.Fragment>
           {
-            userData.fname!=null && userData.fname!=undefined && userData.fname!="" ?
+            userData.fname!==null && userData.fname!==undefined && userData.fname!=="" ?
           <CardContent>
               
               <Typography variant='h5'   color="text.secondary" gutterBottom>Personal Information</Typography>
@@ -94,7 +93,7 @@ export default function ProfileInformation({userId}) {
               <Typography variant='h6' color="text.secondary" gutterBottom>Bio</Typography>
               
               <Typography variant="body2" gutterBottom>
-                  I am a software engineer and a full-stack developer. I have a passion for building web applications and I love to learn new technologies. I am currently working as a software engineer at <a href="https://www.linkedin.com/company/microsoft/">Microsoft</a>.
+                  {userData.bio}
               </Typography>
 
               <Typography variant='h6'  color="text.secondary" >Contact Information            </Typography>
@@ -121,11 +120,11 @@ export default function ProfileInformation({userId}) {
             </CardActions>
             <CardActions>
               {
-                userData.blocked==0 &&
+                userData.blocked===0 &&
                 <Button style={{color:'red'}} onClick={() => blockToggle(1)} type="button" >Block user</Button>  
               }
               {
-                userData.blocked==1 &&
+                userData.blocked===1 &&
                 <Button style={{color:'orange'}} onClick={() => blockToggle(0)}>Unblock user</Button>
               }
 

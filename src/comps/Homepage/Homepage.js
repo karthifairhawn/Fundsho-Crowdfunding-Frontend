@@ -1,12 +1,12 @@
-import SpinLoader from '../homepage3/SpinLoader';
+import SpinLoader from './SpinLoader';
 import RequestCard from "./userRequestCard";
 import DonateMore from "./donateMoreModal";
 import { Link } from 'react-router-dom';
 import {useEffect,useState,useLayoutEffect} from 'react';
-import {APIIP} from '../settings/config';
+import {APIIP} from '../Settings/config';
 import CardSkeleton from "./cardSkeleton";
-import Navbar from "../footer_header/navbar";
-import Footer from "../footer_header/footer";
+import Navbar from "../Footers_Header/navbar";
+import Footer from "../Footers_Header/footer";
 import { Spinner } from "react-bootstrap";
 import Banner from './Banner';
 

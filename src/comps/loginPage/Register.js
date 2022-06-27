@@ -1,8 +1,8 @@
 import { Link,useHistory } from 'react-router-dom';
-import {APIIP} from '../settings/config';
+import {APIIP} from '../Settings/config';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from "../footer_header/navbar";
+import Navbar from "../Footers_Header/navbar";
 
 toast.configure();
 const notify = (msg,Type) => {
