@@ -9,6 +9,7 @@ import Navbar from '../Footers_Header/navbar';
 import EducationInformation from './EducationInformation';
 import EventInformation from './EventInformation';
 import PersonalInformation from './PersonalInformationForm';
+import {APIIP} from '../Settings/config';
 
 const steps = ['Fundraiser Information', 'Education Information', 'Event Information'];
 var raisingData = {
@@ -44,9 +45,27 @@ export default function NewFundraiser() {
     console.log(raisingData);
   }
 
+  function raiseEvent(){
+    fetch(APIIP.ip+"/requests",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(raisingData)
+    }).then(res => res.json())
+    .then(data => { 
+        console.log(data);
+    });
+  }
 
 
-  const handleNext = () => {    setActiveStep((prevActiveStep) => prevActiveStep + 1);    };
+
+  const handleNext = () => {    
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if(activeStep+1===steps.length){
+      raiseEvent();
+    }
+};
 
   const handleBack = () => {setActiveStep((prevActiveStep) => prevActiveStep - 1);};
 
@@ -73,7 +92,7 @@ export default function NewFundraiser() {
             {
             activeStep === steps.length ?    
             <>
-                <Typography sx={{ mt: 2, mb: 1 }}> All steps completed - you&apos;re finished</Typography> 
+                <Typography sx={{ mt: 2, mb: 1 }}> All steps completed - you&apos;re finished </Typography> 
                 <span></span>
                 </>  
                                            

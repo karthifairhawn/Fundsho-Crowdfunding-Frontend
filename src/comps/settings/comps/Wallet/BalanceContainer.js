@@ -1,3 +1,5 @@
+import AddMoneyMondel from "./AddMoneyModel";
+
 const BalanceContainer = ({balance,admin}) => {
     return (         
     <div className="balance-container mb-5 flex-wrap d-flex align-center justify-content-between">
@@ -8,7 +10,8 @@ const BalanceContainer = ({balance,admin}) => {
         {
             admin!=="true" &&
             <span>
-            <button onClick={ (e) =>{ alert('Payment gateway is under maintenance') }}> + Add Money to Wallet</button>
+            {/* <button onClick={ (e) =>{ alert('Payment gateway is under maintenance') }}> + Add Money to Wallet</button> */}
+            <AddMoneyMondel/>
             <div></div>
             <button style={{margin:"10px 0px"}} onClick={ (e) =>{  alert('Payment gateway is under maintenance') }}> Withdraw</button>                                                     
         </span>  

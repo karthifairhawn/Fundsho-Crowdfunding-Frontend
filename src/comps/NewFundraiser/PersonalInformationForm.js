@@ -5,15 +5,27 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-
+import {APIIP} from '../Settings/config';
 
 
 const PersonalInformation = ({alterValues}) => {
 
     function loginUser(e,key,value){
-        e.preventDefault();  
+        if(e!==null) e.preventDefault();  
         alterValues(key,value)  
     }
+
+    function uploadFiles(e){
+        const formData  = new FormData();
+        formData.append('file',e.target.files[0]);        
+        
+        fetch(APIIP.ip+"/images",{
+         method: 'POST',
+         body: formData
+        }).then(res => res.json())
+        .then(data => { loginUser(null,'addtionalFilesUrl',data.url)})
+    
+        }      
 
 
     return ( 
@@ -55,11 +67,18 @@ const PersonalInformation = ({alterValues}) => {
                 </div>
                 
                 <div className="form-group">
-                    <label htmlFor="gender">Gender</label>
-                    <div></div>
-                    <input type="radio" id="gender"/>Male                    
-                    <span style={{marginRight:"10px"}}></span>
-                    <input type="radio"  id="gender"/>Female
+                    <label>Gender</label>
+                    <div onChange={(e) =>{ loginUser(e,"gender",e.target.value)}}>
+                        <input  value="Male" name="gender" id="male" type="radio" />
+                        <label htmlFor="male">Male</label>                                                    
+                        <span style={{marginRight:"10px"}}></span>
+                        <input  name="gender" value="Female" id="female" type="radio"/>                    
+                        <label htmlFor="female">Female</label>                                                   
+                    </div>
+                    <div>
+                        <label htmlFor="additionalFiles" className=" mt-2">Upload Aadhar Card of fundraiser.</label>
+                        <input type="file" accept="application/pdf,application/vnd.ms-excel" onChange={(e) =>{ uploadFiles(e)}} name="additionalFiles" id="additionalFiles" className="form-control"/>
+                    </div>
                 </div>
                 
                 <div className="form-group mt-2">

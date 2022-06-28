@@ -1,9 +1,24 @@
+import { APIIP } from "../Settings/config";
 const EventInformation = ({alterValues}) => {
 
     function loginUser(e,key,value){
-        e.preventDefault();  
+        if(e!==null) e.preventDefault();  
         alterValues(key,value)  
     }
+
+    function uploadFiles(e){
+        const formData  = new FormData();
+        formData.append('file',e.target.files[0]);        
+        
+        fetch(APIIP.ip+"/images",{
+         method: 'POST',
+         body: formData
+        }).then(res => res.json())
+        .then(data => { loginUser(null,'eventImageUrl',data.url)})
+    
+        }      
+
+
     return ( 
         <div className="d-flex justify-content-center col-sm-12">
             <div className="card mt-2 col-xl-6 col-sm-12" style={{overflow: 'auto',width: '100%'}}>
@@ -22,7 +37,7 @@ const EventInformation = ({alterValues}) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="schoolName">Event Title Card Image</label>
-                        <input type="file" onChange={(e) =>{ loginUser(e,"eventImageUrl","https://jpeg.org/images/jpeg2000-home.jpg")}}  className="form-control" name="eventTitleCardImage" placeholder="Event Title Card Image" />
+                        <input type="file" onChange={(e) =>{ uploadFiles(e)}} className="form-control" name="eventTitleCardImage" placeholder="Event Title Card Image" />
                     </div>
 
                 </form>
