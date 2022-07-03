@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import About from './comps/AboutPage/AboutPage.js';
 import Contact from './comps/Contact/ContactPage.js';
 import MainHomepage from './comps/Homepage/Homepage';
-import LoginPage from './comps/LoginPage/LoginPageUpdated.js';
+import LoginPage from './comps/LoginPage/LoginPage.js';
 import Register from './comps/LoginPage/Register.js';
 import './comps/main.css';
 import NewFundraiser from './comps/NewFundraiser/NewFundraise.js';
