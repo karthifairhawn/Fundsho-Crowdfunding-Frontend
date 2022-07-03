@@ -16,6 +16,9 @@ const AdminPanelNavigation = () => {
         <li className="nav-item">
           <Link to="/settings/admin/fundraisers" className="nav-link" >Fundraises</Link>
         </li>
+        <li className="nav-item">
+          <Link to="/settings/admin/contact" className="nav-link" >Contact</Link>
+        </li>
       </ul>
       <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
