@@ -284,7 +284,7 @@ const SingleRequest = () => {
                                                 : 
                                                 ''                                                                                                                                                                                        
                                             }
-                                            {(requestInformations.reqStatus==0 ? 'Fundraising closed by administrator' :'')}
+                                            {(requestInformations.reqStatus==0 ? 'Fundraising Blocked or Pending' :'')}
                                             {(requestInformations.reqStatus==4 ? 'Fundraising expired' :'')}
                                             {(requestInformations.reqStatus==3 ? 'Fundraising stopped by fundraiser':'')}
                                             </span>

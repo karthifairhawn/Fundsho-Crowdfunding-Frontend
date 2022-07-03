@@ -1,7 +1,11 @@
+import AdminContactTable from "./AdminContactTable.js";
+
 const ContactListing = () => {
     return ( 
-        <h1>Hello</h1>
+        <div>
+            <AdminContactTable/>
+        </div>
      );
 }
  
-export default ContactListing
+export default ContactListing;

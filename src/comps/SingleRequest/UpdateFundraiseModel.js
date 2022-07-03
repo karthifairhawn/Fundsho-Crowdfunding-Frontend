@@ -51,13 +51,13 @@ const UpdateFundraiseModel = ({requestId,reloadRequest}) => {
                          labelId="demo-simple-select-label"
                          id="demo-simple-select"                         
                          label="Age"    
-                         sx={{width:"100%"}}      
+                         sx={{width:"100%",height:30}}      
                          value={newStatusValue}
                          onChange={updateRequestStatus}               
                         >
-                            <MenuItem value={0}>Block/Hold</MenuItem>
-                            <MenuItem value={1}>Active</MenuItem>                            
-                            <MenuItem value={5}>Update new status</MenuItem>                            
+                            <MenuItem value={0}>Pending</MenuItem>
+                            <MenuItem value={1}>Active</MenuItem>                                                        
+                            <MenuItem value={6}>Admin Closed</MenuItem>                                                        
                         </Select>          
                         <Button onClick={handleClose} variant="contained" sx={{mt:1}}>Update</Button>
                     </CardContent>
