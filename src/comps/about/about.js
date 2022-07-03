@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../Footers_Header/navbar';
-class about extends React.Component{
+class About extends React.Component{
     componentDidMount(){
 
     }
@@ -82,4 +82,4 @@ class about extends React.Component{
     }
 }
 
-export default about;
+export default About;
