@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, NavLink, Route } from 'react-router-dom';
 import Navbar from '../Footers_Header/navbar.js';
 import AdminPanel from './comps/Admin/Admin.js';
+import FundraisesTable from './comps/Admin/Fundraises/FundraisesTable.js';
 import Email from './comps/Email/Email.js';
 import Profile from './comps/Profile/Profile.js';
 import Security from './comps/security.js';
@@ -51,10 +52,14 @@ const Setting = (  ) => {
               <i className="fa fa-lock m-2"></i>
               <span className="mx-2">Security and Privacy</span>
             </NavLink>
-            <NavLink to="/settings/email" activeClassName="active-pane-link" className="nav-link  text-dark fs-6 mb-3">
+            <NavLink to="/settings/fundraises" activeClassName="active-pane-link" className="nav-link text-dark fs-6 mb-3">
+              <i className="fa fa-donate m-2"></i>
+              <span className="mx-2">Fundraises</span>
+            </NavLink>
+            {/* <NavLink to="/settings/email" activeClassName="active-pane-link" className="nav-link  text-dark fs-6 mb-3">
               <i className="fa fa-envelope m-2"></i>
               <span className="mx-2">Email and Notifications</span>
-            </NavLink>
+            </NavLink> */}
             {
               localStorage.getItem('role')==="0"
               && 
@@ -87,6 +92,9 @@ const Setting = (  ) => {
           </Route>
           <Route path="/settings/admin">
             <AdminPanel/>
+          </Route>
+          <Route path="/settings/fundraises">
+            <FundraisesTable admin="false"/>
           </Route>
         </div>
           {/*End Top Nav */}

@@ -4,7 +4,7 @@ import {APIIP} from '../../../config'
 import FundraiserStatusBased from './FundraiserStatusBased';
 import FundraisesTableRow from './FundraisesTableRow';
 
-const FundraisesTable = () => {
+const FundraisesTable = ({admin}) => {
 
     const [allFundraisers,setAllFundraiser] = useState([]);    
     const [pendingFundraiser,setPendingFundraiser] = useState([]);    
@@ -19,7 +19,11 @@ const FundraisesTable = () => {
         }else{
             setPrevDisabled("");
         }
-        fetch(APIIP.ip+"/admin/requests?page="+currentPage+"&size=10&status="+fetchStatus+"&sessionKey="+localStorage.getItem("sessionKey"),{
+        var fetchIp = APIIP.ip+"/admin/requests?page="+currentPage+"&size=10&status="+fetchStatus+"&sessionKey="+localStorage.getItem("sessionKey");
+        if(admin!=="false"){
+
+        }
+        fetch(fetchIp,{
             method:"GET",
             mode: 'cors',
             headers: {

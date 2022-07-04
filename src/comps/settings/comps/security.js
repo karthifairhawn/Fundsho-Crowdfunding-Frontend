@@ -32,8 +32,7 @@ const Security = () => {
 
     const [currInfo,setCurrInfo] = useState("");
     const [prevInfo,setPrevInfo] = useState("");
-    const [oldInfo,setOldInfo] = useState("");
-    const [layoutRendered,setLayoutRendered] = useState(false);
+    const [oldInfo,setOldInfo] = useState("");    
 
     const changePassword = () => {
         
@@ -83,8 +82,7 @@ const Security = () => {
         .then( (response) => {                          
             setCurrInfo(loginInfo(response.currentLogin));
             setPrevInfo(loginInfo(response.previousLogin));
-            setOldInfo(loginInfo(response.oldLogin));  
-            setLayoutRendered(true);          
+            setOldInfo(loginInfo(response.oldLogin));                      
         });
         var ele = document.getElementById("spinloader");
         setTimeout(() => {
@@ -99,8 +97,8 @@ const Security = () => {
                 <SpinLoader/>
                 <div className="title">Security and Privacy</div>
 
-                <div className="sub-container-sec">
-                    <div className="sub-title">Previous logins of your account</div>
+                {/* <div className="sub-container-sec">
+                    <div className="sub-title ">Previous logins of your account</div>
                     <div className="all-login-container">
                         <div className="login-info">
                             <span className="location-symbol">
@@ -111,8 +109,8 @@ const Security = () => {
                                     currInfo!=null
                                     ?
                                     <span className="login-place-time">                                    
-                                        <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{layoutRendered && currInfo.place}</span>
-                                        <span className="login-time-device">Active - Now  {layoutRendered && currInfo.device }</span>
+                                        <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{currInfo.place}</span>
+                                        <span className="login-time-device">Active - Now  {currInfo.device }</span>
                                     </span>
                                     : <h3>Login history sync failed sorry for inconvinence.</h3>
                                 }
@@ -121,8 +119,8 @@ const Security = () => {
                                     prevInfo!=null
                                     ?     
                                     <span className="login-place-time">
-                                        <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{layoutRendered && prevInfo.place}</span>
-                                        <span className="login-time-device">{layoutRendered && prevInfo.time} · {layoutRendered && prevInfo.device}</span>
+                                        <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{prevInfo.place}</span>
+                                        <span className="login-time-device">{prevInfo.time} · {prevInfo.device}</span>
                                     </span>
                                     : ''
                                 }
@@ -131,30 +129,32 @@ const Security = () => {
                                     oldInfo!=null
                                     ?
                                     <span className="login-place-time">
-                                        <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{layoutRendered && oldInfo.place}</span>
-                                        <span className="login-time-device">{layoutRendered && oldInfo.time} ·{layoutRendered && oldInfo.device}</span>
+                                        <span className="login-place"><i className="fa fa-location-arrow" aria-hidden="true"></i>{oldInfo.place}</span>
+                                        <span className="login-time-device">{oldInfo.time} ·{oldInfo.device}</span>
                                     </span>
                                     : ''
                                 }
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <br />
                 <br />
                 <div className="sub-container-sec">
                     <div className="sub-title">Change Password</div>
 
-                    <form className="change-password-form">
+                    <form className="change-password-form" style={{width: "600px"}}>
                         <span className="change-pass-row">                            
-                            <TextField label="Old Password" name="old_password" onChange={(e) => { setPassword(e.target.value);}} variant="filled" color="info" focused />
+                            <TextField label="Old Password" name="old_password" onChange={(e) => { setPassword(e.target.value);}} variant="standard" color="info" focused />
+                            {/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
+                            {/* <input type="password" name="new_password" onChange={(e) => { setPassword(e.target.value);}} /> */}
                         </span>
                         <span className="change-pass-row">                                              
-                            <TextField label="New Password"  onChange={ (e) => { setNewPassword1(e.target.value); }} variant="filled" color="secondary" focused />
+                            <TextField label="New Password"  onChange={ (e) => { setNewPassword1(e.target.value); }} variant="standard" color="secondary" focused />
                         </span>
                         <span className="change-pass-row">                            
-                            <TextField label="Retype New Password" onChange={ (e) => { setNewPassword2(e.target.value); }} variant="filled" color="secondary" focused />
+                            <TextField label="Retype Password" onChange={ (e) => { setNewPassword2(e.target.value); }} variant="standard" color="secondary" focused />
                         </span>                                   
                         <Button onClick={ (e) => { e.preventDefault(); changePassword(); }} variant="danger">Change Password</Button>
                     </form>

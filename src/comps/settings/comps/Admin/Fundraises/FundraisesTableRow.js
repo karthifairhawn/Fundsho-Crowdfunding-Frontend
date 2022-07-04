@@ -11,13 +11,7 @@ const FundraisesTableRow = ({reqId,title,raisedBy,status,fund}) => {
         <th scope="row">{reqId}</th>
         <td>{title}</td>       
         <td>{fund}</td>       
-        <td>            
-            { status===0 && "Pending" }
-            { status===1 && "Active" }
-            { status===2 && "Successfully Closed" }
-            { status===3 && "User Withdraw in between / Rejected" }
-            { status===4 && "Fundraising expired" }
-            </td> 
+
         <td>
             <Link to={`/fundraiser/${reqId}`}>
                 <Button>{"Open"}</Button>
